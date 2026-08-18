@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>metacellspy.analyze_genes &mdash; Metacells 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Metacells
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Metacells</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">metacellspy.analyze_genes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for metacellspy.analyze_genes</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Compute per-gene data. See the Julia</span>
+<span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html&gt;`__ for details.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Some computations here take the same keywords as ones in ``analyze_blocks.py``, which makes the shared wrapping idiom</span>
+<span class="c1"># look like duplicated code. The same disable is in that file, since the check needs both sides to report it.</span>
+<span class="c1"># pylint: disable=duplicate-code</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_from_julia_frame</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_array</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;compute_gene_report&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_skeleton_report&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_vector_of_is_correlated_with_skeleton_per_gene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_vector_of_is_marker_per_gene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_vector_of_is_skeleton_per_gene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_vector_of_marker_rank_per_gene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fetch_gmara_vector_of_is_regulator_per_gene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fetch_gmara_vector_of_is_transcription_factor_per_gene&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rank_variables&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="compute_gene_report">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.compute_gene_report">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_gene_report</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">base_daf</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DafReader</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a per-marker-gene report as a ``DataFrame``, one row per marker gene, sorted by ``rank``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.compute_gene_report&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_gene_report</span><span class="p">(</span>
+        <span class="n">daf</span><span class="o">=</span><span class="n">daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_from_julia_frame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_skeleton_report">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.compute_skeleton_report">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_skeleton_report</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">base_daf</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DafReader</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a per-skeleton-gene report as a ``DataFrame``, one row per skeleton gene, sorted by the total number of</span>
+<span class="sd">    markers most correlated with it (descending). See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.compute_skeleton_report&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_skeleton_report</span><span class="p">(</span>
+        <span class="n">daf</span><span class="o">=</span><span class="n">daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_from_julia_frame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_vector_of_is_correlated_with_skeleton_per_gene">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_is_correlated_with_skeleton_per_gene">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_is_correlated_with_skeleton_per_gene</span><span class="p">(</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">min_gene_correlation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_gene_correlation_quantile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">genes_correlation_window</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``vector_of_is_correlated_with_skeleton_per_gene``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.compute_vector_of_is_correlated_with_skeleton_per_gene!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_vector_of_is_correlated_with_skeleton_per_gene_b</span><span class="p">(</span>
+        <span class="n">daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">min_gene_correlation</span><span class="o">=</span><span class="n">min_gene_correlation</span><span class="p">,</span>
+            <span class="n">min_gene_correlation_quantile</span><span class="o">=</span><span class="n">min_gene_correlation_quantile</span><span class="p">,</span>
+            <span class="n">genes_correlation_window</span><span class="o">=</span><span class="n">genes_correlation_window</span><span class="p">,</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_vector_of_is_marker_per_gene">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_is_marker_per_gene">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_is_marker_per_gene</span><span class="p">(</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">min_marker_gene_max_fraction</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_marker_gene_range_fold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_marker_quantile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``vector_of_is_marker_per_gene``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.compute_vector_of_is_marker_per_gene!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_vector_of_is_marker_per_gene_b</span><span class="p">(</span>
+        <span class="n">daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">min_marker_gene_max_fraction</span><span class="o">=</span><span class="n">min_marker_gene_max_fraction</span><span class="p">,</span>
+            <span class="n">min_marker_gene_range_fold</span><span class="o">=</span><span class="n">min_marker_gene_range_fold</span><span class="p">,</span>
+            <span class="n">min_marker_quantile</span><span class="o">=</span><span class="n">min_marker_quantile</span><span class="p">,</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_vector_of_is_skeleton_per_gene">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_is_skeleton_per_gene">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_is_skeleton_per_gene</span><span class="p">(</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``vector_of_is_skeleton_per_gene``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.compute_vector_of_is_skeleton_per_gene!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_vector_of_is_skeleton_per_gene_b</span><span class="p">(</span>
+        <span class="n">daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_vector_of_marker_rank_per_gene">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_marker_rank_per_gene">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_marker_rank_per_gene</span><span class="p">(</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``vector_of_marker_rank_per_gene``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.compute_vector_of_marker_rank_per_gene!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_vector_of_marker_rank_per_gene_b</span><span class="p">(</span>
+        <span class="n">daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fetch_gmara_vector_of_is_regulator_per_gene">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.fetch_gmara_vector_of_is_regulator_per_gene">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_gmara_vector_of_is_regulator_per_gene</span><span class="p">(</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">species</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cache_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetch and set ``vector_of_is_transcription_factor_per_gene`` from ``Gmara``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.fetch_gmara_vector_of_is_regulator_per_gene!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">fetch_gmara_vector_of_is_regulator_per_gene_b</span><span class="p">(</span>
+        <span class="n">daf</span><span class="p">,</span>
+        <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="fetch_gmara_vector_of_is_transcription_factor_per_gene">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.fetch_gmara_vector_of_is_transcription_factor_per_gene">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_gmara_vector_of_is_transcription_factor_per_gene</span><span class="p">(</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">species</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cache_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetch and set ``vector_of_is_transcription_factor_per_gene`` from ``Gmara``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.fetch_gmara_vector_of_is_transcription_factor_per_gene!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">fetch_gmara_vector_of_is_transcription_factor_per_gene_b</span><span class="p">(</span>
+        <span class="n">daf</span><span class="p">,</span>
+        <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="rank_variables">
+<a class="viewcode-back" href="../../analyze_genes.html#metacellspy.analyze_genes.rank_variables">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rank_variables</span><span class="p">(</span>
+    <span class="n">score_per_variable_per_observation</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given some ``score_per_variable_per_observation`` matrix, return a vector of the rank of each variable such that the</span>
+<span class="sd">    &quot;most significant&quot; variables are first. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.rank_variables&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">rank_variables</span><span class="p">(</span>
+        <span class="n">_to_julia_array</span><span class="p">(</span><span class="n">score_per_variable_per_observation</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 Weizmann Institute of Science.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

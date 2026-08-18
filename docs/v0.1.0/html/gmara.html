@@ -1,0 +1,1296 @@
+
+
+
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en" data-content_root="./">
+
+<head>
+  
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<title>gmara &mdash; Metacells 0.1.0 documentation
+</title>
+      
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      
+<link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      
+<script src="_static/jquery.js?v=5d32c60e">
+</script>
+      
+<script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c">
+</script>
+      
+<script src="_static/documentation_options.js?v=01f34227">
+</script>
+      
+<script src="_static/doctools.js?v=fd6eb6e6">
+</script>
+      
+<script src="_static/sphinx_highlight.js?v=6ffebe34">
+</script>
+    
+<script src="_static/js/theme.js">
+</script>
+    
+<link rel="index" title="Index" href="genindex.html" />
+    
+<link rel="search" title="Search" href="search.html" />
+    
+<link rel="next" title="anndata_format" href="anndata_format.html" />
+    
+<link rel="prev" title="defaults" href="defaults.html" /> 
+
+</head>
+
+
+<body class="wy-body-for-nav"> 
+  
+<div class="wy-grid-for-nav">
+    
+<nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      
+<div class="wy-side-scroll">
+        
+<div class="wy-side-nav-search" >
+
+          
+          
+          
+<a href="index.html" class="icon icon-home">
+            Metacells
+          
+</a>
+
+<div role="search">
+  
+<form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    
+<input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    
+<input type="hidden" name="check_keywords" value="yes" />
+    
+<input type="hidden" name="area" value="default" />
+  
+</form>
+
+</div>
+        
+</div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              
+<ul>
+
+<li class="toctree-l1">
+<a class="reference internal" href="readme.html">README
+</a>
+</li>
+
+</ul>
+
+<ul class="current">
+
+<li class="toctree-l1 current">
+<a class="reference internal" href="API.html">API
+</a>
+<ul class="current">
+
+<li class="toctree-l2">
+<a class="reference internal" href="julia_import.html">julia_import
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="defaults.html">defaults
+</a>
+</li>
+
+<li class="toctree-l2 current">
+<a class="current reference internal" href="#">gmara
+</a>
+<ul>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.CACHE_DIR">
+<code class="docutils literal notranslate">
+<span class="pre">CACHE_DIR
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.TIMEOUT">
+<code class="docutils literal notranslate">
+<span class="pre">TIMEOUT
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.empty_gmara_cache">
+<code class="docutils literal notranslate">
+<span class="pre">empty_gmara_cache()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.gmara_genes">
+<code class="docutils literal notranslate">
+<span class="pre">gmara_genes()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.normalize_gene_name">
+<code class="docutils literal notranslate">
+<span class="pre">normalize_gene_name()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.set_gmara_genes_mask">
+<code class="docutils literal notranslate">
+<span class="pre">set_gmara_genes_mask()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="anndata_format.html">anndata_format
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_cells.html">analyze_cells
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html">analyze_metacells
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html">analyze_genes
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="compute_blocks.html">compute_blocks
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html">analyze_blocks
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="compute_modules.html">compute_modules
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html">analyze_modules
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="sharpen_metacells.html">sharpen_metacells
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="project_cells.html">project_cells
+</a>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+        
+</div>
+      
+</div>
+    
+</nav>
+
+    
+<section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+<nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          
+<i data-toggle="wy-nav-top" class="fa fa-bars">
+</i>
+          
+<a href="index.html">Metacells
+</a>
+      
+</nav>
+
+      
+<div class="wy-nav-content">
+        
+<div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  
+<ul class="wy-breadcrumbs">
+      
+<li>
+<a href="index.html" class="icon icon-home" aria-label="Home">
+</a>
+</li>
+          
+<li class="breadcrumb-item">
+<a href="API.html">API
+</a>
+</li>
+      
+<li class="breadcrumb-item active">gmara
+</li>
+      
+<li class="wy-breadcrumbs-aside">
+            
+<a href="_sources/gmara.rst.txt" rel="nofollow"> View page source
+</a>
+      
+</li>
+  
+</ul>
+  
+<hr/>
+
+</div>
+          
+<div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           
+<div itemprop="articleBody">
+             
+  
+<section id="module-metacellspy.gmara">
+
+<span id="gmara">
+</span>
+<h1>gmara
+<a class="headerlink" href="#module-metacellspy.gmara" title="Link to this heading">
+</a>
+</h1>
+
+<p>Fetch gene lists from the Gmara service. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html">documentation
+</a> for details.
+</p>
+
+<dl class="py data">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.CACHE_DIR">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">CACHE_DIR
+</span>
+</span>
+<span class="property">
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">str
+</span>
+</span>
+<span class="property">
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">'/home/obk/.cache/gmara'
+</span>
+</span>
+<a class="headerlink" href="#metacellspy.gmara.CACHE_DIR" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Where the fetched gene lists are cached on disk.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py data">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.TIMEOUT">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">TIMEOUT
+</span>
+</span>
+<span class="property">
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">float
+</span>
+</span>
+<span class="property">
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">10.0
+</span>
+</span>
+<a class="headerlink" href="#metacellspy.gmara.TIMEOUT" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>How long to wait for the Gmara service, in seconds.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.empty_gmara_cache">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">empty_gmara_cache
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">None
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#empty_gmara_cache">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.empty_gmara_cache" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>All requests are cached in-memory. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.empty_gmara_cache!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.gmara_genes">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">gmara_genes
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">species
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">namespace
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">list
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">version
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">cache_dir
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">timeout
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">float
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">AbstractSet
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#gmara_genes">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.gmara_genes" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Return the set of names of a 
+<code class="docutils literal notranslate">
+<span class="pre">version
+</span>
+</code> of a 
+<code class="docutils literal notranslate">
+<span class="pre">list
+</span>
+</code> in a 
+<code class="docutils literal notranslate">
+<span class="pre">namespace
+</span>
+</code> of genes of some 
+<code class="docutils literal notranslate">
+<span class="pre">species
+</span>
+</code>. See the
+Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.gmara_genes">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.normalize_gene_name">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">normalize_gene_name
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">name
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">namespace
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">str
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#normalize_gene_name">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.normalize_gene_name" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Normalize a gene name in some namespace. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.normalize_gene_name">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.set_gmara_genes_mask">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">set_gmara_genes_mask
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafWriter
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">species
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">namespace
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">list
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">version
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">gene_name_property
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">property
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">cache_dir
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">timeout
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">float
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">overwrite
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">int
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#set_gmara_genes_mask">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.set_gmara_genes_mask" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Set a gene property mask in 
+<code class="docutils literal notranslate">
+<span class="pre">daf
+</span>
+</code> based on some 
+<code class="docutils literal notranslate">
+<span class="pre">version
+</span>
+</code> of a Gmara 
+<code class="docutils literal notranslate">
+<span class="pre">list
+</span>
+</code> of some 
+<code class="docutils literal notranslate">
+<span class="pre">namespace
+</span>
+</code> for some
+
+<code class="docutils literal notranslate">
+<span class="pre">species
+</span>
+</code>. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.set_gmara_genes_mask!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+</section>
+
+
+           
+</div>
+          
+</div>
+          
+<footer>
+<div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        
+<a href="defaults.html" class="btn btn-neutral float-left" title="defaults" accesskey="p" rel="prev">
+<span class="fa fa-arrow-circle-left" aria-hidden="true">
+</span> Previous
+</a>
+        
+<a href="anndata_format.html" class="btn btn-neutral float-right" title="anndata_format" accesskey="n" rel="next">Next 
+<span class="fa fa-arrow-circle-right" aria-hidden="true">
+</span>
+</a>
+    
+</div>
+
+  
+<hr/>
+
+  
+<div role="contentinfo">
+    
+<p>&#169; Copyright 2025 Weizmann Institute of Science.
+</p>
+  
+</div>
+
+  Built with 
+<a href="https://www.sphinx-doc.org/">Sphinx
+</a> using a
+    
+<a href="https://github.com/readthedocs/sphinx_rtd_theme">theme
+</a>
+    provided by 
+<a href="https://readthedocs.org">Read the Docs
+</a>.
+   
+
+
+</footer>
+        
+</div>
+      
+</div>
+    
+</section>
+  
+</div>
+  
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  
+</script> 
+
+
+</body>
+
+</html>

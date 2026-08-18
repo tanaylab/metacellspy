@@ -29,14 +29,12 @@ CopyAnnData = Mapping[str, Optional[Tuple[str, Optional[StorageScalar]]]]
 
 
 def _copy_anndata(copy_data: Optional[CopyAnnData]) -> Any:
-    # A Python tuple in a dictionary value does not convert to the Julia tuple the computation
-    # expects, so the pairs are handed to Julia as parallel vectors for it to assemble.
+    # A Python dictionary reaches Julia as a ``PyDict``, and the keyword it is passed to is declared
+    # as a ``Union``, which Julia type-asserts rather than converts. Converting it here does work,
+    # tuples and ``None`` included.
     if copy_data is None:
         return None
-    names = list(copy_data.keys())
-    renames = [None if entry is None else entry[0] for entry in copy_data.values()]
-    defaults = [None if entry is None else entry[1] for entry in copy_data.values()]
-    return jl.MetacellsPy._copy_anndata(names, renames, defaults)
+    return jl.convert(jl.Metacells.AnnDataFormat.CopyAnnData, copy_data)
 
 
 def import_cells_h5ad(

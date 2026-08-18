@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>metacellspy.sharpen_metacells &mdash; Metacells 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Metacells
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Metacells</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">metacellspy.sharpen_metacells</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for metacellspy.sharpen_metacells</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Sharpen the metacells by re-grouping the cells. See the Julia</span>
+<span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html&gt;`__ for details.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_rng</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;compute_matrix_of_n_cells_per_prev_block_per_block&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_matrix_of_n_cells_per_prev_block_type_per_block_type&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_vector_of_global_flow_order_per_type&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sharpen_metacells&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="compute_matrix_of_n_cells_per_prev_block_per_block">
+<a class="viewcode-back" href="../../sharpen_metacells.html#metacellspy.sharpen_metacells.compute_matrix_of_n_cells_per_prev_block_per_block">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_n_cells_per_prev_block_per_block</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">other_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``matrix_of_n_cells_per_prev_block_per_block``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_matrix_of_n_cells_per_prev_block_per_block!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_n_cells_per_prev_block_per_block_b</span><span class="p">(</span>
+        <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
+        <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_matrix_of_n_cells_per_prev_block_type_per_block_type">
+<a class="viewcode-back" href="../../sharpen_metacells.html#metacellspy.sharpen_metacells.compute_matrix_of_n_cells_per_prev_block_type_per_block_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_n_cells_per_prev_block_type_per_block_type</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">other_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``matrix_of_n_cells_per_prev_block_type_per_block_type``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_matrix_of_n_cells_per_prev_block_type_per_block_type!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_n_cells_per_prev_block_type_per_block_type_b</span><span class="p">(</span>
+        <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
+        <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type">
+<a class="viewcode-back" href="../../sharpen_metacells.html#metacellspy.sharpen_metacells.compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">other_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``matrix_of_n_cells_per_prev_metacell_type_per_metacell_type``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type_b</span><span class="p">(</span>
+        <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
+        <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_vector_of_global_flow_order_per_type">
+<a class="viewcode-back" href="../../sharpen_metacells.html#metacellspy.sharpen_metacells.compute_vector_of_global_flow_order_per_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_global_flow_order_per_type</span><span class="p">(</span>
+    <span class="n">final_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">base_daf_per_round</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">DafReader</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">output_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="n">restarts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``vector_of_global_flow_order_per_type``, a global order of the types minimizing the total weighted</span>
+<span class="sd">    crossings of the type flow across the sharpening rounds. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_vector_of_global_flow_order_per_type!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_vector_of_global_flow_order_per_type_b</span><span class="p">(</span>
+        <span class="n">final_daf</span><span class="p">,</span>
+        <span class="n">jl</span><span class="o">.</span><span class="n">DafPy</span><span class="o">.</span><span class="n">_to_daf_readers</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">base_daf_per_round</span><span class="p">)),</span>
+        <span class="n">output_daf</span><span class="o">=</span><span class="n">output_daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">restarts</span><span class="o">=</span><span class="n">restarts</span><span class="p">,</span>
+            <span class="n">rng</span><span class="o">=</span><span class="n">_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">),</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="sharpen_metacells">
+<a class="viewcode-back" href="../../sharpen_metacells.html#metacellspy.sharpen_metacells.sharpen_metacells">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sharpen_metacells</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">sharp_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="n">base_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_cells_in_metacell</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_cells_in_metacell</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">target_cell_total_UMIs_quantile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_metacell_total_UMIs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_migration_likelihood</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_cells_dispersion_in_metacell</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_cells_dispersion_in_metacell</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">normalized_UMIs_quantile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_module_UMIs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">kmeans_rounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sharpening_round</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">improvement_half_life</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">std_UMIs_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_outlier_fold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">outlier_UMIs_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an ``base_daf`` metacells repository with a blocks structure and local gene modules that describe the cell</span>
+<span class="sd">    state manifold, compute a ``sharp_daf`` metacells repository, which hopefully more faithfully captures this</span>
+<span class="sd">    manifold. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.sharpen_metacells!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">sharpen_metacells_b</span><span class="p">(</span>
+        <span class="n">sharp_daf</span><span class="o">=</span><span class="n">sharp_daf</span><span class="p">,</span>
+        <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
+        <span class="n">sharpening_round</span><span class="o">=</span><span class="n">sharpening_round</span><span class="p">,</span>
+        <span class="n">improvement_half_life</span><span class="o">=</span><span class="n">improvement_half_life</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">prefix</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span>
+            <span class="n">min_cells_in_metacell</span><span class="o">=</span><span class="n">min_cells_in_metacell</span><span class="p">,</span>
+            <span class="n">max_cells_in_metacell</span><span class="o">=</span><span class="n">max_cells_in_metacell</span><span class="p">,</span>
+            <span class="n">target_cell_total_UMIs_quantile</span><span class="o">=</span><span class="n">target_cell_total_UMIs_quantile</span><span class="p">,</span>
+            <span class="n">min_metacell_total_UMIs</span><span class="o">=</span><span class="n">min_metacell_total_UMIs</span><span class="p">,</span>
+            <span class="n">min_migration_likelihood</span><span class="o">=</span><span class="n">min_migration_likelihood</span><span class="p">,</span>
+            <span class="n">max_cells_dispersion_in_metacell</span><span class="o">=</span><span class="n">max_cells_dispersion_in_metacell</span><span class="p">,</span>
+            <span class="n">min_cells_dispersion_in_metacell</span><span class="o">=</span><span class="n">min_cells_dispersion_in_metacell</span><span class="p">,</span>
+            <span class="n">normalized_UMIs_quantile</span><span class="o">=</span><span class="n">normalized_UMIs_quantile</span><span class="p">,</span>
+            <span class="n">min_module_UMIs</span><span class="o">=</span><span class="n">min_module_UMIs</span><span class="p">,</span>
+            <span class="n">kmeans_rounds</span><span class="o">=</span><span class="n">kmeans_rounds</span><span class="p">,</span>
+            <span class="n">gene_fraction_regularization</span><span class="o">=</span><span class="n">gene_fraction_regularization</span><span class="p">,</span>
+            <span class="n">std_UMIs_regularization</span><span class="o">=</span><span class="n">std_UMIs_regularization</span><span class="p">,</span>
+            <span class="n">min_outlier_fold</span><span class="o">=</span><span class="n">min_outlier_fold</span><span class="p">,</span>
+            <span class="n">outlier_UMIs_regularization</span><span class="o">=</span><span class="n">outlier_UMIs_regularization</span><span class="p">,</span>
+            <span class="n">rng</span><span class="o">=</span><span class="n">_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">),</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 Weizmann Institute of Science.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

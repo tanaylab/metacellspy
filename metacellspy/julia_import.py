@@ -27,28 +27,9 @@ for package in ("Metacells", "Random"):
         jl.seval('Pkg.add("' + package + '")')
     jl.seval("import " + package)
 
-# Our own Julia code lives in a module of its own, for the same reason.
-jl.seval("""
-    module MetacellsPy
-
-    using PythonCall
-
-    # Build the mapping describing which `AnnData` data to copy. A Python dictionary of tuples
-    # arrives as a `Dict` of `Py` values, which is not the `Maybe{Tuple{...}}` the Julia function
-    # expects, so the pairs are assembled here from vectors Julia can convert on its own.
-    function _copy_anndata(
-        names::AbstractVector{<:AbstractString},
-        renames::AbstractVector,
-        defaults::AbstractVector,
-    )::AbstractDict
-        return Dict{AbstractString,Any}(
-            name => rename === nothing ? nothing : (rename, default) for
-            (name, rename, default) in zip(names, renames, defaults)
-        )
-    end
-
-    end  # module MetacellsPy
-    """)
+# Unlike ``dafpy`` and ``somegraphspy``, this package needs no Julia code of its own. Every value it
+# passes on is one Julia converts by itself, including the mapping of which ``AnnData`` data to copy,
+# whose Python tuples and ``None`` become Julia tuples and ``nothing``.
 
 
 def _rng(rng: Optional[int]) -> Any:

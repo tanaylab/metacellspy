@@ -1,0 +1,1364 @@
+
+
+
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en" data-content_root="./">
+
+<head>
+  
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<title>API &mdash; Metacells 0.1.0 documentation
+</title>
+      
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      
+<link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      
+<script src="_static/jquery.js?v=5d32c60e">
+</script>
+      
+<script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c">
+</script>
+      
+<script src="_static/documentation_options.js?v=01f34227">
+</script>
+      
+<script src="_static/doctools.js?v=fd6eb6e6">
+</script>
+      
+<script src="_static/sphinx_highlight.js?v=6ffebe34">
+</script>
+    
+<script src="_static/js/theme.js">
+</script>
+    
+<link rel="index" title="Index" href="genindex.html" />
+    
+<link rel="search" title="Search" href="search.html" />
+    
+<link rel="next" title="julia_import" href="julia_import.html" />
+    
+<link rel="prev" title="metacellspy 0.1.0 - Metacell analysis" href="readme.html" /> 
+
+</head>
+
+
+<body class="wy-body-for-nav"> 
+  
+<div class="wy-grid-for-nav">
+    
+<nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      
+<div class="wy-side-scroll">
+        
+<div class="wy-side-nav-search" >
+
+          
+          
+          
+<a href="index.html" class="icon icon-home">
+            Metacells
+          
+</a>
+
+<div role="search">
+  
+<form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    
+<input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    
+<input type="hidden" name="check_keywords" value="yes" />
+    
+<input type="hidden" name="area" value="default" />
+  
+</form>
+
+</div>
+        
+</div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              
+<ul>
+
+<li class="toctree-l1">
+<a class="reference internal" href="readme.html">README
+</a>
+</li>
+
+</ul>
+
+<ul class="current">
+
+<li class="toctree-l1 current">
+<a class="current reference internal" href="#">API
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="julia_import.html">julia_import
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="defaults.html">defaults
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="gmara.html">gmara
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="anndata_format.html">anndata_format
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_cells.html">analyze_cells
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html">analyze_metacells
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html">analyze_genes
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="compute_blocks.html">compute_blocks
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html">analyze_blocks
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="compute_modules.html">compute_modules
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html">analyze_modules
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="sharpen_metacells.html">sharpen_metacells
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="project_cells.html">project_cells
+</a>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+        
+</div>
+      
+</div>
+    
+</nav>
+
+    
+<section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+<nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          
+<i data-toggle="wy-nav-top" class="fa fa-bars">
+</i>
+          
+<a href="index.html">Metacells
+</a>
+      
+</nav>
+
+      
+<div class="wy-nav-content">
+        
+<div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  
+<ul class="wy-breadcrumbs">
+      
+<li>
+<a href="index.html" class="icon icon-home" aria-label="Home">
+</a>
+</li>
+      
+<li class="breadcrumb-item active">API
+</li>
+      
+<li class="wy-breadcrumbs-aside">
+            
+<a href="_sources/API.rst.txt" rel="nofollow"> View page source
+</a>
+      
+</li>
+  
+</ul>
+  
+<hr/>
+
+</div>
+          
+<div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           
+<div itemprop="articleBody">
+             
+  
+<section id="module-metacellspy">
+
+<span id="api">
+</span>
+<h1>API
+<a class="headerlink" href="#module-metacellspy" title="Link to this heading">
+</a>
+</h1>
+
+<p>Metacell analysis, wrapping the 
+<a class="reference external" href="https://github.com/tanaylab/Metacells.jl">Metacells.jl
+</a> Julia
+package. See its 
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/index.html">documentation
+</a> for
+what each computation does.
+</p>
+
+<p>The API is the same as the Julia one, with the following adaptations:
+</p>
+
+<ul class="simple">
+
+<li>
+<p>The Julia 
+<code class="docutils literal notranslate">
+<span class="pre">!
+</span>
+</code> suffix, marking a computation which modifies its data, is dropped from the name.
+</p>
+</li>
+
+<li>
+<p>Every optional parameter defaults to 
+<code class="docutils literal notranslate">
+<span class="pre">None
+</span>
+</code>, meaning “use whatever the Julia default is”. The
+Julia defaults are therefore never restated here, which matters because some of them are computed
+from the values of the other parameters.
+</p>
+</li>
+
+<li>
+<p>The 
+<code class="docutils literal notranslate">
+<span class="pre">rng
+</span>
+</code> parameter is an 
+<code class="docutils literal notranslate">
+<span class="pre">int
+</span>
+</code> seed rather than a Julia random number generator. The default
+
+<code class="docutils literal notranslate">
+<span class="pre">0
+</span>
+</code> means “use Julia’s default generator”, that is, do not force reproducible results.
+</p>
+</li>
+
+<li>
+<p>The computations which return a data frame return a 
+<code class="docutils literal notranslate">
+<span class="pre">pandas.DataFrame
+</span>
+</code>.
+</p>
+</li>
+
+<li>
+<p>The contracts, which declare what data each computation reads and writes, are not exposed, as they
+are only usable from Julia. See the
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/contracts.html">contracts
+</a> documentation for
+the vocabulary of what lives in a repository.
+</p>
+</li>
+
+</ul>
+
+<p>This is unrelated to the 
+<a class="reference external" href="https://github.com/tanaylab/metacells">metacells
+</a> Python package, which
+is a separate and independent implementation.
+</p>
+
+<div class="toctree-wrapper compound">
+
+<ul>
+
+<li class="toctree-l1">
+<a class="reference internal" href="julia_import.html">julia_import
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="julia_import.html#metacellspy.julia_import.use_default_julia_environment">
+<code class="docutils literal notranslate">
+<span class="pre">use_default_julia_environment()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="defaults.html">defaults
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="defaults.html#metacellspy.defaults.GENE_FRACTION_REGULARIZATION_FOR_CELLS">
+<code class="docutils literal notranslate">
+<span class="pre">GENE_FRACTION_REGULARIZATION_FOR_CELLS
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="defaults.html#metacellspy.defaults.GENE_FRACTION_REGULARIZATION_FOR_METACELLS">
+<code class="docutils literal notranslate">
+<span class="pre">GENE_FRACTION_REGULARIZATION_FOR_METACELLS
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="defaults.html#metacellspy.defaults.MIN_SIGNIFICANT_GENE_UMIS">
+<code class="docutils literal notranslate">
+<span class="pre">MIN_SIGNIFICANT_GENE_UMIS
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="gmara.html">gmara
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="gmara.html#metacellspy.gmara.CACHE_DIR">
+<code class="docutils literal notranslate">
+<span class="pre">CACHE_DIR
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="gmara.html#metacellspy.gmara.TIMEOUT">
+<code class="docutils literal notranslate">
+<span class="pre">TIMEOUT
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="gmara.html#metacellspy.gmara.empty_gmara_cache">
+<code class="docutils literal notranslate">
+<span class="pre">empty_gmara_cache()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="gmara.html#metacellspy.gmara.gmara_genes">
+<code class="docutils literal notranslate">
+<span class="pre">gmara_genes()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="gmara.html#metacellspy.gmara.normalize_gene_name">
+<code class="docutils literal notranslate">
+<span class="pre">normalize_gene_name()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="gmara.html#metacellspy.gmara.set_gmara_genes_mask">
+<code class="docutils literal notranslate">
+<span class="pre">set_gmara_genes_mask()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="anndata_format.html">anndata_format
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="anndata_format.html#metacellspy.anndata_format.CopyAnnData">
+<code class="docutils literal notranslate">
+<span class="pre">CopyAnnData
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="anndata_format.html#metacellspy.anndata_format.import_cells_h5ad">
+<code class="docutils literal notranslate">
+<span class="pre">import_cells_h5ad()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="anndata_format.html#metacellspy.anndata_format.import_metacells_h5ad">
+<code class="docutils literal notranslate">
+<span class="pre">import_metacells_h5ad()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="anndata_format.html#metacellspy.anndata_format.reconstruct_type_axis">
+<code class="docutils literal notranslate">
+<span class="pre">reconstruct_type_axis()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="analyze_cells.html">analyze_cells
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_cells.html#metacellspy.analyze_cells.compute_vector_of_total_UMIs_per_cell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_total_UMIs_per_cell()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="analyze_metacells.html">analyze_metacells
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_UMIs_per_gene_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_UMIs_per_gene_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_correlation_between_markers_per_gene_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_between_markers_per_gene_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_linear_fraction_per_gene_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_linear_fraction_per_gene_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_log_linear_fraction_per_gene_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_log_linear_fraction_per_gene_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_max_skeleton_fold_distance_between_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_metacells_2d_umap">
+<code class="docutils literal notranslate">
+<span class="pre">compute_metacells_2d_umap()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_metacells_3d_umap">
+<code class="docutils literal notranslate">
+<span class="pre">compute_metacells_3d_umap()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_vector_of_n_cells_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_cells_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_vector_of_total_UMIs_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_total_UMIs_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_vector_of_type_per_cell_by_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_type_per_cell_by_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_vector_of_type_per_metacell_by_cells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_type_per_metacell_by_cells()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="analyze_genes.html">analyze_genes
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.compute_gene_report">
+<code class="docutils literal notranslate">
+<span class="pre">compute_gene_report()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.compute_skeleton_report">
+<code class="docutils literal notranslate">
+<span class="pre">compute_skeleton_report()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_is_correlated_with_skeleton_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_is_correlated_with_skeleton_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_is_marker_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_is_marker_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_is_skeleton_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_is_skeleton_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.compute_vector_of_marker_rank_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_marker_rank_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.fetch_gmara_vector_of_is_regulator_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">fetch_gmara_vector_of_is_regulator_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.fetch_gmara_vector_of_is_transcription_factor_per_gene">
+<code class="docutils literal notranslate">
+<span class="pre">fetch_gmara_vector_of_is_transcription_factor_per_gene()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_genes.html#metacellspy.analyze_genes.rank_variables">
+<code class="docutils literal notranslate">
+<span class="pre">rank_variables()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="compute_blocks.html">compute_blocks
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="compute_blocks.html#metacellspy.compute_blocks.compute_metacells_blocks">
+<code class="docutils literal notranslate">
+<span class="pre">compute_metacells_blocks()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="analyze_blocks.html">analyze_blocks
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_blocks_2d_umap_by_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_blocks_2d_umap_by_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_blocks_3d_umap_by_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_blocks_3d_umap_by_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_UMIs_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_UMIs_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_confusion_by_closest_by_pertinent_markers_per_block_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_confusion_by_closest_by_pertinent_markers_per_block_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_confusion_by_closest_by_pertinent_markers_per_metacell_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_confusion_by_closest_by_pertinent_markers_per_metacell_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_metacells_per_gene_per_base_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_metacells_per_gene_per_base_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_punctuated_metacells_per_gene_per_base_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_punctuated_metacells_per_gene_per_base_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_correlation_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_correlation_between_neighborhood_cells_and_punctuated_metacells_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_between_neighborhood_cells_and_punctuated_metacells_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_correlated_with_skeleton_in_neighborhood_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_correlated_with_skeleton_in_neighborhood_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_environment_distinct_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_environment_distinct_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_environment_marker_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_environment_marker_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_environment_specific_per_gene_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_environment_specific_per_gene_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_in_environment_per_metacell_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_in_environment_per_metacell_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_in_neighborhood_per_block_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_in_neighborhood_per_block_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_neighborhood_distinct_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_neighborhood_distinct_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_neighborhood_marker_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_neighborhood_marker_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_strong_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_is_strong_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_linear_fraction_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_linear_fraction_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_log_linear_fraction_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_log_linear_fraction_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_block_closest_by_pertinent_markers_per_cell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_block_closest_by_pertinent_markers_per_cell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_n_cells_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_cells_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_n_environment_cells_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_environment_cells_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_n_environment_metacells_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_environment_metacells_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_n_metacells_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_metacells_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_n_neighborhood_blocks_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_neighborhood_blocks_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_n_neighborhood_cells_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_neighborhood_cells_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_n_neighborhood_metacells_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_neighborhood_metacells_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_total_UMIs_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_total_UMIs_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_total_environment_UMIs_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_total_environment_UMIs_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_total_neighborhood_UMIs_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_total_neighborhood_UMIs_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_type_per_block_by_cells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_type_per_block_by_cells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_type_per_block_by_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_type_per_block_by_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_type_per_cell_by_blocks">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_type_per_cell_by_blocks()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_vector_of_type_per_metacell_by_blocks">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_type_per_metacell_by_blocks()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="compute_modules.html">compute_modules
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="compute_modules.html#metacellspy.compute_modules.compute_blocks_modules">
+<code class="docutils literal notranslate">
+<span class="pre">compute_blocks_modules()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="analyze_modules.html">analyze_modules
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_matrix_of_cells_dispersion_per_metacell_per_module">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_cells_dispersion_per_metacell_per_module()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_matrix_of_n_genes_per_module_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_n_genes_per_module_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_stats_of_euclidean_modules_cells_distance_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_stats_of_euclidean_modules_cells_distance_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_stats_of_linear_fraction_in_environment_cells_per_module_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_stats_of_linear_fraction_in_environment_cells_per_module_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_stats_of_linear_fraction_in_neighborhood_cells_per_module_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_stats_of_linear_fraction_in_neighborhood_cells_per_module_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_tensor_of_linear_fraction_per_block_per_module_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_tensor_of_linear_fraction_per_block_per_module_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_vector_of_n_modules_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_n_modules_per_block()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="sharpen_metacells.html">sharpen_metacells
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="sharpen_metacells.html#metacellspy.sharpen_metacells.compute_matrix_of_n_cells_per_prev_block_per_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_n_cells_per_prev_block_per_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="sharpen_metacells.html#metacellspy.sharpen_metacells.compute_matrix_of_n_cells_per_prev_block_type_per_block_type">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_n_cells_per_prev_block_type_per_block_type()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="sharpen_metacells.html#metacellspy.sharpen_metacells.compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="sharpen_metacells.html#metacellspy.sharpen_metacells.compute_vector_of_global_flow_order_per_type">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_global_flow_order_per_type()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="sharpen_metacells.html#metacellspy.sharpen_metacells.sharpen_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">sharpen_metacells()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l1">
+<a class="reference internal" href="project_cells.html">project_cells
+</a>
+<ul>
+
+<li class="toctree-l2">
+<a class="reference internal" href="project_cells.html#metacellspy.project_cells.compute_cells_projection">
+<code class="docutils literal notranslate">
+<span class="pre">compute_cells_projection()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="project_cells.html#metacellspy.project_cells.compute_matrix_of_correlation_between_neighborhood_cells_and_projected_metacells_per_gene_per_projected_block">
+<code class="docutils literal notranslate">
+<span class="pre">compute_matrix_of_correlation_between_neighborhood_cells_and_projected_metacells_per_gene_per_projected_block()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
+<a class="reference internal" href="project_cells.html#metacellspy.project_cells.compute_vector_of_correlation_between_cells_and_projected_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">compute_vector_of_correlation_between_cells_and_projected_metacells()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+           
+</div>
+          
+</div>
+          
+<footer>
+<div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        
+<a href="readme.html" class="btn btn-neutral float-left" title="metacellspy 0.1.0 - Metacell analysis" accesskey="p" rel="prev">
+<span class="fa fa-arrow-circle-left" aria-hidden="true">
+</span> Previous
+</a>
+        
+<a href="julia_import.html" class="btn btn-neutral float-right" title="julia_import" accesskey="n" rel="next">Next 
+<span class="fa fa-arrow-circle-right" aria-hidden="true">
+</span>
+</a>
+    
+</div>
+
+  
+<hr/>
+
+  
+<div role="contentinfo">
+    
+<p>&#169; Copyright 2025 Weizmann Institute of Science.
+</p>
+  
+</div>
+
+  Built with 
+<a href="https://www.sphinx-doc.org/">Sphinx
+</a> using a
+    
+<a href="https://github.com/readthedocs/sphinx_rtd_theme">theme
+</a>
+    provided by 
+<a href="https://readthedocs.org">Read the Docs
+</a>.
+   
+
+
+</footer>
+        
+</div>
+      
+</div>
+    
+</section>
+  
+</div>
+  
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  
+</script> 
+
+
+</body>
+
+</html>
