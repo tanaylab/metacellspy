@@ -39,3 +39,6 @@ The Python package provides the same API as the Julia package, with the followin
 
 Each function's documentation links to the Julia documentation of the function it invokes, which is where the details
 live.
+
+See the `Python v0.1.0 documentation <https://tanaylab.github.io/metacellspy/v0.1.0/html/index.html>`_ and the
+`Julia v0.1.0 documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/index.html>`_ for details.
