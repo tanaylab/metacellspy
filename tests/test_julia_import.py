@@ -21,7 +21,7 @@ def test_shares_the_dafpy_julia_runtime() -> None:
 
 def test_wrapped_package_does_not_leak() -> None:
     for name in EXPORTED_NAMES:
-        assert not jl.seval(f'isdefined(Main, Symbol("{name}"))'), f"the exported {name} leaked into Julia's Main"
+        assert not jl.isdefined(jl.Main, jl.Symbol(name)), f"the exported {name} leaked into Julia's Main"
 
 
 def test_both_julia_packages_are_imported() -> None:
