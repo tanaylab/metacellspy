@@ -1,14 +1,13 @@
-metacellspy 0.1.0 - Metacell analysis
-=====================================
+metacellspy 0.1.0 - Metacell sharpening analysis
+================================================
 
-`Metacells.jl <https://github.com/tanaylab/Metacells.jl>`_ is a Julia package which groups single-cell RNA sequencing
-profiles into metacells, groups metacells into blocks, identifies the gene modules of each block, and sharpens the
-result by re-grouping the cells by these modules. This package (``metacellspy``) is a wrapper around the Julia package
-that allows invoking these computations from Python, using the
-`JuliaCall <https://github.com/JuliaPy/PythonCall.jl>`_ package.
+`Metacells.jl <https://github.com/tanaylab/Metacells.jl>`_ is a Julia package which sharpens metacells: groups metacells
+into blocks, identifies the gene modules of each block, and sharpens the result by re-grouping the cells by these
+modules. This package (``metacellspy``) is a wrapper around the Julia package that allows invoking these computations
+from Python, using the `JuliaCall <https://github.com/JuliaPy/PythonCall.jl>`_ package.
 
 This is unrelated to the `metacells <https://github.com/tanaylab/metacells>`_ Python package, which is a separate and
-independent implementation.
+independent implementation used to compute the original (unsharpened) metacells.
 
 Installation
 ------------
