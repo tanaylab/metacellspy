@@ -13,7 +13,7 @@
   
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-<title>metacellspy 0.1.0 - Metacell analysis &mdash; Metacells 0.1.0 documentation
+<title>metacellspy 0.1.0 - Metacell sharpening analysis &mdash; Metacells 0.1.0 documentation
 </title>
       
 <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
@@ -137,7 +137,7 @@
 </a>
 </li>
       
-<li class="breadcrumb-item active">metacellspy 0.1.0 - Metacell analysis
+<li class="breadcrumb-item active">metacellspy 0.1.0 - Metacell sharpening analysis
 </li>
       
 <li class="wy-breadcrumbs-aside">
@@ -158,24 +158,23 @@
 <div itemprop="articleBody">
              
   
-<section id="metacellspy-0-1-0-metacell-analysis">
+<section id="metacellspy-0-1-0-metacell-sharpening-analysis">
 
-<h1>metacellspy 0.1.0 - Metacell analysis
-<a class="headerlink" href="#metacellspy-0-1-0-metacell-analysis" title="Link to this heading">
+<h1>metacellspy 0.1.0 - Metacell sharpening analysis
+<a class="headerlink" href="#metacellspy-0-1-0-metacell-sharpening-analysis" title="Link to this heading">
 </a>
 </h1>
 
 <p>
 <a class="reference external" href="https://github.com/tanaylab/Metacells.jl">Metacells.jl
-</a> is a Julia package which groups single-cell RNA sequencing
-profiles into metacells, groups metacells into blocks, identifies the gene modules of each block, and sharpens the
-result by re-grouping the cells by these modules. This package (
+</a> is a Julia package which sharpens metacells: groups metacells
+into blocks, identifies the gene modules of each block, and sharpens the result by re-grouping the cells by these
+modules. This package (
 <code class="docutils literal notranslate">
 <span class="pre">metacellspy
 </span>
-</code>) is a wrapper around the Julia package
-that allows invoking these computations from Python, using the
-
+</code>) is a wrapper around the Julia package that allows invoking these computations
+from Python, using the 
 <a class="reference external" href="https://github.com/JuliaPy/PythonCall.jl">JuliaCall
 </a> package.
 </p>
@@ -183,7 +182,7 @@ that allows invoking these computations from Python, using the
 <p>This is unrelated to the 
 <a class="reference external" href="https://github.com/tanaylab/metacells">metacells
 </a> Python package, which is a separate and
-independent implementation.
+independent implementation used to compute the original (unsharpened) metacells.
 </p>
 
 <section id="installation">
@@ -295,6 +294,14 @@ lives in a repository.
 
 <p>Each function’s documentation links to the Julia documentation of the function it invokes, which is where the details
 live.
+</p>
+
+<p>See the 
+<a class="reference external" href="https://tanaylab.github.io/metacellspy/v0.1.0/html/index.html">Python v0.1.0 documentation
+</a> and the
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/index.html">Julia v0.1.0 documentation
+</a> for details.
 </p>
 
 </section>
