@@ -56,6 +56,23 @@ def test_empty_type() -> None:
         assert list(daf.axis_np_vector("type")) == types
 
 
+def test_properties_defaults() -> None:
+    # A type axis created in advance may hold types the data does not use, and each reconstructed property then needs
+    # a default for them. The defaults are a Python dictionary, which is not the ``Dict`` the keyword is declared as,
+    # so passing any used to fail with a type error naming the keyword.
+    daf = dp.memory_daf(name="test")
+    daf.add_axis("gene", ["G1", "G2"])
+    daf.add_axis("type", ["T1", "T2", "T3"])
+    daf.add_axis("metacell", ["M1", "M2"])
+    daf.set_vector("metacell", "type", ["T1", "T2"])
+    daf.set_vector("metacell", "score", [1.0, 2.0])
+
+    mc.reconstruct_type_axis(daf, properties_defaults={"score": 0.0})
+
+    # T3 is used by no metacell, so it takes the default rather than failing for want of one.
+    assert list(daf.get_np_vector("type", "score")) == [1.0, 2.0, 0.0]
+
+
 @needs_test_data
 def test_import_cells_h5ad() -> None:
     daf = dp.memory_daf(name="test")

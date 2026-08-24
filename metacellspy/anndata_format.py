@@ -41,6 +41,13 @@ def _copy_anndata(copy_data: Optional[CopyAnnData]) -> Any:
     return jl.convert(jl.Metacells.AnnDataFormat.CopyAnnData, copy_data)
 
 
+def _properties_defaults(properties_defaults: Optional[Mapping[str, StorageScalar]]) -> Any:
+    # The same as above: the keyword is declared as a ``Dict``, which a ``PyDict`` is not.
+    if properties_defaults is None:
+        return None
+    return jl.convert(jl.Dict, properties_defaults)
+
+
 def import_cells_h5ad(
     daf: DafWriter,
     *,
@@ -128,6 +135,6 @@ def reconstruct_type_axis(
             empty_type=_to_julia_scalar_or_collection(empty_type),
             type_colors_csv=type_colors_csv,
             implicit_properties=_to_julia_set(implicit_properties),
-            properties_defaults=properties_defaults,
+            properties_defaults=_properties_defaults(properties_defaults),
         ),
     )
