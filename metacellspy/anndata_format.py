@@ -13,6 +13,7 @@ from dafpy import DafWriter
 from dafpy import StorageScalar
 
 from .julia_import import _given
+from .julia_import import _to_julia_set
 from .julia_import import jl
 
 __all__ = [
@@ -114,14 +115,14 @@ def reconstruct_type_axis(
     """
     jl.Metacells.reconstruct_type_axis_b(
         daf,
-        skipped_properties=skipped_properties,
+        skipped_properties=_to_julia_set(skipped_properties),
         **_given(
             base_axis=base_axis,
             type_property=type_property,
             type_axis=type_axis,
             empty_type=empty_type,
             type_colors_csv=type_colors_csv,
-            implicit_properties=implicit_properties,
+            implicit_properties=_to_julia_set(implicit_properties),
             properties_defaults=properties_defaults,
         ),
     )

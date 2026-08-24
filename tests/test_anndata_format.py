@@ -23,6 +23,20 @@ N_CELLS = 68579
 N_GENES = 32738
 
 
+def test_reconstruct_type_axis() -> None:
+    # The default ``skipped_properties`` is a Python set, so this failed before it was converted to a Julia one; the
+    # function could not be called at all. This needs no imported data, being about what reaches Julia rather than
+    # about what was read from a file.
+    daf = dp.memory_daf(name="test")
+    daf.add_axis("gene", ["G1", "G2"])
+    daf.add_axis("metacell", ["M1", "M2", "M3"])
+    daf.set_vector("metacell", "type", ["T1", "T1", "T2"])
+
+    mc.reconstruct_type_axis(daf)
+
+    assert list(daf.axis_np_vector("type")) == ["T1", "T2"]
+
+
 @needs_test_data
 def test_import_cells_h5ad() -> None:
     daf = dp.memory_daf(name="test")
