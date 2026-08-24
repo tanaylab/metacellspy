@@ -76,7 +76,6 @@
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html&gt;`__ for details.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSet</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
@@ -89,14 +88,13 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_scalar_or_collection</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_strings_set</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;CopyAnnData&quot;</span><span class="p">,</span>
     <span class="s2">&quot;import_cells_h5ad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;import_gene_masks_per_type&quot;</span><span class="p">,</span>
     <span class="s2">&quot;import_metacells_h5ad&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reconstruct_type_axis&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1">#: Which of the ``AnnData`` properties to copy, and under which name. Mapping a name to ``None``</span>
@@ -114,13 +112,6 @@
     <span class="k">return</span> <span class="n">jl</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">AnnDataFormat</span><span class="o">.</span><span class="n">CopyAnnData</span><span class="p">,</span> <span class="n">copy_data</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_properties_defaults</span><span class="p">(</span><span class="n">properties_defaults</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">StorageScalar</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="c1"># The same as above: the keyword is declared as a ``Dict``, which a ``PyDict`` is not.</span>
-    <span class="k">if</span> <span class="n">properties_defaults</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">jl</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">jl</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">properties_defaults</span><span class="p">)</span>
-
-
 <div class="viewcode-block" id="import_cells_h5ad">
 <a class="viewcode-back" href="../../anndata_format.html#metacellspy.anndata_format.import_cells_h5ad">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">import_cells_h5ad</span><span class="p">(</span>
@@ -128,13 +119,18 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">cells_h5ad</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">copy_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CopyAnnData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">type_colors_csv</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">empty_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">bestify</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">min_sparse_saving_fraction</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">insist</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set. See the Julia</span>
+<span class="sd">    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set. Giving a ``type_colors_csv`` also</span>
+<span class="sd">    creates a ``type`` axis out of it, the file being the authority on which types exist and in what order; the</span>
+<span class="sd">    ``empty_type`` value(s) are what the data spells &quot;this cell has no type&quot; as, which may be one value or any</span>
+<span class="sd">    collection of them. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_cells_h5ad!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -143,6 +139,8 @@
         <span class="n">cells_h5ad</span><span class="o">=</span><span class="n">cells_h5ad</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">copy_data</span><span class="o">=</span><span class="n">_copy_anndata</span><span class="p">(</span><span class="n">copy_data</span><span class="p">),</span>
+            <span class="n">type_colors_csv</span><span class="o">=</span><span class="n">type_colors_csv</span><span class="p">,</span>
+            <span class="n">empty_type</span><span class="o">=</span><span class="n">_to_julia_scalar_or_collection</span><span class="p">(</span><span class="n">empty_type</span><span class="p">),</span>
             <span class="n">bestify</span><span class="o">=</span><span class="n">bestify</span><span class="p">,</span>
             <span class="n">min_sparse_saving_fraction</span><span class="o">=</span><span class="n">min_sparse_saving_fraction</span><span class="p">,</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
@@ -185,40 +183,19 @@
 
 
 
-<div class="viewcode-block" id="reconstruct_type_axis">
-<a class="viewcode-back" href="../../anndata_format.html#metacellspy.anndata_format.reconstruct_type_axis">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">reconstruct_type_axis</span><span class="p">(</span>
+<div class="viewcode-block" id="import_gene_masks_per_type">
+<a class="viewcode-back" href="../../anndata_format.html#metacellspy.anndata_format.import_gene_masks_per_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">import_gene_masks_per_type</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">base_axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">type_property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">type_axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">empty_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">type_colors_csv</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">implicit_properties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">skipped_properties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">&quot;rare_gene_module&quot;</span><span class="p">,</span> <span class="s2">&quot;is_rare&quot;</span><span class="p">}),</span>
-    <span class="n">properties_defaults</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">StorageScalar</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Create a type axis after importing data containing type annotations. The ``empty_type`` value(s), meaning &quot;there is</span>
-<span class="sd">    no type here&quot;, may be a single one or any collection of them, since data often spells this in more than one way</span>
-<span class="sd">    (e.g., both ``Outliers`` and ``Doublet`` may appear where a type is expected). See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.reconstruct_type_axis!&gt;`__</span>
+<span class="sd">    Convert per-gene masks which name a type in their own name into a per-gene-per-type matrix. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_gene_masks_per_type!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">reconstruct_type_axis_b</span><span class="p">(</span>
-        <span class="n">daf</span><span class="p">,</span>
-        <span class="n">skipped_properties</span><span class="o">=</span><span class="n">_to_julia_strings_set</span><span class="p">(</span><span class="n">skipped_properties</span><span class="p">),</span>
-        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">base_axis</span><span class="o">=</span><span class="n">base_axis</span><span class="p">,</span>
-            <span class="n">type_property</span><span class="o">=</span><span class="n">type_property</span><span class="p">,</span>
-            <span class="n">type_axis</span><span class="o">=</span><span class="n">type_axis</span><span class="p">,</span>
-            <span class="n">empty_type</span><span class="o">=</span><span class="n">_to_julia_scalar_or_collection</span><span class="p">(</span><span class="n">empty_type</span><span class="p">),</span>
-            <span class="n">type_colors_csv</span><span class="o">=</span><span class="n">type_colors_csv</span><span class="p">,</span>
-            <span class="n">implicit_properties</span><span class="o">=</span><span class="n">_to_julia_strings_set</span><span class="p">(</span><span class="n">implicit_properties</span><span class="p">),</span>
-            <span class="n">properties_defaults</span><span class="o">=</span><span class="n">_properties_defaults</span><span class="p">(</span><span class="n">properties_defaults</span><span class="p">),</span>
-        <span class="p">),</span>
-    <span class="p">)</span></div>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">import_gene_masks_per_type_b</span><span class="p">(</span><span class="n">daf</span><span class="p">,</span> <span class="o">**</span><span class="n">_given</span><span class="p">(</span><span class="n">type_axis</span><span class="o">=</span><span class="n">type_axis</span><span class="p">))</span></div>
 
 </pre></div>
 

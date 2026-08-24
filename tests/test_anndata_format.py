@@ -23,54 +23,23 @@ N_CELLS = 68579
 N_GENES = 32738
 
 
-def test_reconstruct_type_axis() -> None:
-    # The default ``skipped_properties`` is a Python set, so this failed before it was converted to a Julia one; the
-    # function could not be called at all. This needs no imported data, being about what reaches Julia rather than
-    # about what was read from a file.
+def test_import_gene_masks_per_type() -> None:
+    # ``AnnData`` has only two axes, so a mask of genes per type has to be spelled as one property per type. This
+    # needs no imported data, being about the masks once they are in the repository.
     daf = dp.memory_daf(name="test")
-    daf.add_axis("gene", ["G1", "G2"])
-    daf.add_axis("metacell", ["M1", "M2", "M3"])
-    daf.set_vector("metacell", "type", ["T1", "T1", "T2"])
+    daf.add_axis("gene", ["G1", "G2", "G3"])
+    daf.add_axis("type", ["T1", "T2"])
+    daf.set_vector("gene", "essential_gene_of_T1", [True, False, False])
+    daf.set_vector("gene", "essential_gene_of_T2", [False, True, True])
 
-    mc.reconstruct_type_axis(daf)
+    mc.import_gene_masks_per_type(daf)
 
-    assert list(daf.axis_np_vector("type")) == ["T1", "T2"]
-
-
-def test_empty_type() -> None:
-    # The value(s) meaning "there is no type here" may be given as one of them, or as any collection of them. Giving
-    # only one of them leaves the other as a type of its own, which is what tells the cases apart.
-    for empty_type, types in (
-        ("Outliers", ["Doublet", "T1"]),
-        (("Outliers", "Doublet"), ["T1"]),
-        (["Outliers", "Doublet"], ["T1"]),
-        ({"Outliers", "Doublet"}, ["T1"]),
-    ):
-        daf = dp.memory_daf(name="test")
-        daf.add_axis("gene", ["G1", "G2"])
-        daf.add_axis("metacell", ["M1", "M2", "M3", "M4"])
-        daf.set_vector("metacell", "type", ["T1", "T1", "Outliers", "Doublet"])
-
-        mc.reconstruct_type_axis(daf, empty_type=empty_type)
-
-        assert list(daf.axis_np_vector("type")) == types
-
-
-def test_properties_defaults() -> None:
-    # A type axis created in advance may hold types the data does not use, and each reconstructed property then needs
-    # a default for them. The defaults are a Python dictionary, which is not the ``Dict`` the keyword is declared as,
-    # so passing any used to fail with a type error naming the keyword.
-    daf = dp.memory_daf(name="test")
-    daf.add_axis("gene", ["G1", "G2"])
-    daf.add_axis("type", ["T1", "T2", "T3"])
-    daf.add_axis("metacell", ["M1", "M2"])
-    daf.set_vector("metacell", "type", ["T1", "T2"])
-    daf.set_vector("metacell", "score", [1.0, 2.0])
-
-    mc.reconstruct_type_axis(daf, properties_defaults={"score": 0.0})
-
-    # T3 is used by no metacell, so it takes the default rather than failing for want of one.
-    assert list(daf.get_np_vector("type", "score")) == [1.0, 2.0, 0.0]
+    assert daf.has_matrix("gene", "type", "is_essential")
+    assert daf.get_np_matrix("gene", "type", "is_essential").tolist() == [
+        [True, False],
+        [False, True],
+        [False, True],
+    ]
 
 
 @needs_test_data

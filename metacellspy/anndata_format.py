@@ -3,7 +3,6 @@ Import ``AnnData`` based data sets. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html>`__ for details.
 """
 
-from typing import AbstractSet
 from typing import Any
 from typing import Collection
 from typing import Mapping
@@ -16,14 +15,13 @@ from dafpy import StorageScalar
 
 from .julia_import import _given
 from .julia_import import _to_julia_scalar_or_collection
-from .julia_import import _to_julia_strings_set
 from .julia_import import jl
 
 __all__ = [
     "CopyAnnData",
     "import_cells_h5ad",
+    "import_gene_masks_per_type",
     "import_metacells_h5ad",
-    "reconstruct_type_axis",
 ]
 
 #: Which of the ``AnnData`` properties to copy, and under which name. Mapping a name to ``None``
@@ -41,25 +39,23 @@ def _copy_anndata(copy_data: Optional[CopyAnnData]) -> Any:
     return jl.convert(jl.Metacells.AnnDataFormat.CopyAnnData, copy_data)
 
 
-def _properties_defaults(properties_defaults: Optional[Mapping[str, StorageScalar]]) -> Any:
-    # The same as above: the keyword is declared as a ``Dict``, which a ``PyDict`` is not.
-    if properties_defaults is None:
-        return None
-    return jl.convert(jl.Dict, properties_defaults)
-
-
 def import_cells_h5ad(
     daf: DafWriter,
     *,
     cells_h5ad: str,
     copy_data: Optional[CopyAnnData] = None,
+    type_colors_csv: Optional[str] = None,
+    empty_type: Optional[Union[str, Collection[str]]] = None,
     bestify: Optional[bool] = None,
     min_sparse_saving_fraction: Optional[float] = None,
     overwrite: Optional[bool] = None,
     insist: Optional[bool] = None,
 ) -> None:
     """
-    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set. See the Julia
+    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set. Giving a ``type_colors_csv`` also
+    creates a ``type`` axis out of it, the file being the authority on which types exist and in what order; the
+    ``empty_type`` value(s) are what the data spells "this cell has no type" as, which may be one value or any
+    collection of them. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_cells_h5ad!>`__
     for details.
     """
@@ -68,6 +64,8 @@ def import_cells_h5ad(
         cells_h5ad=cells_h5ad,
         **_given(
             copy_data=_copy_anndata(copy_data),
+            type_colors_csv=type_colors_csv,
+            empty_type=_to_julia_scalar_or_collection(empty_type),
             bestify=bestify,
             min_sparse_saving_fraction=min_sparse_saving_fraction,
             overwrite=overwrite,
@@ -106,35 +104,14 @@ def import_metacells_h5ad(
     )
 
 
-def reconstruct_type_axis(
+def import_gene_masks_per_type(
     daf: DafWriter,
     *,
-    base_axis: Optional[str] = None,
-    type_property: Optional[str] = None,
     type_axis: Optional[str] = None,
-    empty_type: Optional[Union[str, Collection[str]]] = None,
-    type_colors_csv: Optional[str] = None,
-    implicit_properties: Optional[AbstractSet[str]] = None,
-    skipped_properties: Optional[AbstractSet[str]] = frozenset({"rare_gene_module", "is_rare"}),
-    properties_defaults: Optional[Mapping[str, StorageScalar]] = None,
 ) -> None:
     """
-    Create a type axis after importing data containing type annotations. The ``empty_type`` value(s), meaning "there is
-    no type here", may be a single one or any collection of them, since data often spells this in more than one way
-    (e.g., both ``Outliers`` and ``Doublet`` may appear where a type is expected). See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.reconstruct_type_axis!>`__
+    Convert per-gene masks which name a type in their own name into a per-gene-per-type matrix. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_gene_masks_per_type!>`__
     for details.
     """
-    jl.Metacells.reconstruct_type_axis_b(
-        daf,
-        skipped_properties=_to_julia_strings_set(skipped_properties),
-        **_given(
-            base_axis=base_axis,
-            type_property=type_property,
-            type_axis=type_axis,
-            empty_type=_to_julia_scalar_or_collection(empty_type),
-            type_colors_csv=type_colors_csv,
-            implicit_properties=_to_julia_strings_set(implicit_properties),
-            properties_defaults=_properties_defaults(properties_defaults),
-        ),
-    )
+    jl.Metacells.import_gene_masks_per_type_b(daf, **_given(type_axis=type_axis))

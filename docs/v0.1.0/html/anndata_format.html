@@ -141,18 +141,18 @@
 </li>
 
 <li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.anndata_format.import_metacells_h5ad">
+<a class="reference internal" href="#metacellspy.anndata_format.import_gene_masks_per_type">
 <code class="docutils literal notranslate">
-<span class="pre">import_metacells_h5ad()
+<span class="pre">import_gene_masks_per_type()
 </span>
 </code>
 </a>
 </li>
 
 <li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.anndata_format.reconstruct_type_axis">
+<a class="reference internal" href="#metacellspy.anndata_format.import_metacells_h5ad">
 <code class="docutils literal notranslate">
-<span class="pre">reconstruct_type_axis()
+<span class="pre">import_metacells_h5ad()
 </span>
 </code>
 </a>
@@ -692,6 +692,102 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 </em>, 
 <em class="sig-param">
 <span class="n">
+<span class="pre">type_colors_csv
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">empty_type
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">Collection
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
 <span class="pre">bestify
 </span>
 </span>
@@ -871,9 +967,132 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 <code class="docutils literal notranslate">
 <span class="pre">daf
 </span>
-</code> data set. See the Julia
+</code> data set. Giving a 
+<code class="docutils literal notranslate">
+<span class="pre">type_colors_csv
+</span>
+</code> also
+creates a 
+<code class="docutils literal notranslate">
+<span class="pre">type
+</span>
+</code> axis out of it, the file being the authority on which types exist and in what order; the
+
+<code class="docutils literal notranslate">
+<span class="pre">empty_type
+</span>
+</code> value(s) are what the data spells “this cell has no type” as, which may be one value or any
+collection of them. See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_cells_h5ad!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.anndata_format.import_gene_masks_per_type">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.anndata_format.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">import_gene_masks_per_type
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafWriter
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">type_axis
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">None
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/anndata_format.html#import_gene_masks_per_type">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.anndata_format.import_gene_masks_per_type" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Convert per-gene masks which name a type in their own name into a per-gene-per-type matrix. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_gene_masks_per_type!">documentation
 </a>
 for details.
 </p>
@@ -1360,584 +1579,6 @@ for details.
 </code> data set. See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_metacells_h5ad!">documentation
-</a>
-for details.
-</p>
-
-</dd>
-</dl>
-
-
-<dl class="py function">
-
-<dt class="sig sig-object py" id="metacellspy.anndata_format.reconstruct_type_axis">
-
-<span class="sig-prename descclassname">
-<span class="pre">metacellspy.anndata_format.
-</span>
-</span>
-<span class="sig-name descname">
-<span class="pre">reconstruct_type_axis
-</span>
-</span>
-<span class="sig-paren">(
-</span>
-<em class="sig-param">
-<span class="n">
-<span class="pre">daf
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="keyword-only-separator o">
-<abbr title="Keyword-only parameters separator (PEP 3102)">
-<span class="pre">*
-</span>
-</abbr>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">base_axis
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">type_property
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">type_axis
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">empty_type
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">Collection
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">type_colors_csv
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">implicit_properties
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">AbstractSet
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">skipped_properties
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">AbstractSet
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">frozenset({'is_rare',
-</span> 
-<span class="pre">'rare_gene_module'})
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">properties_defaults
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">Mapping
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">,
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int8
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int16
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint8
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint16
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>
-<span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
-</span>
-<a class="reference internal" href="_modules/metacellspy/anndata_format.html#reconstruct_type_axis">
-<span class="viewcode-link">
-<span class="pre">[source]
-</span>
-</span>
-</a>
-<a class="headerlink" href="#metacellspy.anndata_format.reconstruct_type_axis" title="Link to this definition">
-</a>
-</dt>
-
-<dd>
-<p>Create a type axis after importing data containing type annotations. The 
-<code class="docutils literal notranslate">
-<span class="pre">empty_type
-</span>
-</code> value(s), meaning “there is
-no type here”, may be a single one or any collection of them, since data often spells this in more than one way
-(e.g., both 
-<code class="docutils literal notranslate">
-<span class="pre">Outliers
-</span>
-</code> and 
-<code class="docutils literal notranslate">
-<span class="pre">Doublet
-</span>
-</code> may appear where a type is expected). See the Julia
-
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.reconstruct_type_axis!">documentation
 </a>
 for details.
 </p>
