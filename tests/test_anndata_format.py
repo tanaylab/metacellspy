@@ -37,6 +37,25 @@ def test_reconstruct_type_axis() -> None:
     assert list(daf.axis_np_vector("type")) == ["T1", "T2"]
 
 
+def test_empty_type() -> None:
+    # The value(s) meaning "there is no type here" may be given as one of them, or as any collection of them. Giving
+    # only one of them leaves the other as a type of its own, which is what tells the cases apart.
+    for empty_type, types in (
+        ("Outliers", ["Doublet", "T1"]),
+        (("Outliers", "Doublet"), ["T1"]),
+        (["Outliers", "Doublet"], ["T1"]),
+        ({"Outliers", "Doublet"}, ["T1"]),
+    ):
+        daf = dp.memory_daf(name="test")
+        daf.add_axis("gene", ["G1", "G2"])
+        daf.add_axis("metacell", ["M1", "M2", "M3", "M4"])
+        daf.set_vector("metacell", "type", ["T1", "T1", "Outliers", "Doublet"])
+
+        mc.reconstruct_type_axis(daf, empty_type=empty_type)
+
+        assert list(daf.axis_np_vector("type")) == types
+
+
 @needs_test_data
 def test_import_cells_h5ad() -> None:
     daf = dp.memory_daf(name="test")

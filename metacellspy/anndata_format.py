@@ -5,14 +5,17 @@ Import ``AnnData`` based data sets. See the Julia
 
 from typing import AbstractSet
 from typing import Any
+from typing import Collection
 from typing import Mapping
 from typing import Optional
 from typing import Tuple
+from typing import Union
 
 from dafpy import DafWriter
 from dafpy import StorageScalar
 
 from .julia_import import _given
+from .julia_import import _to_julia_scalar_or_collection
 from .julia_import import _to_julia_set
 from .julia_import import jl
 
@@ -102,14 +105,16 @@ def reconstruct_type_axis(
     base_axis: Optional[str] = None,
     type_property: Optional[str] = None,
     type_axis: Optional[str] = None,
-    empty_type: Optional[str] = None,
+    empty_type: Optional[Union[str, Collection[str]]] = None,
     type_colors_csv: Optional[str] = None,
     implicit_properties: Optional[AbstractSet[str]] = None,
     skipped_properties: Optional[AbstractSet[str]] = frozenset({"rare_gene_module", "is_rare"}),
     properties_defaults: Optional[Mapping[str, StorageScalar]] = None,
 ) -> None:
     """
-    Create a type axis after importing data containing type annotations. See the Julia
+    Create a type axis after importing data containing type annotations. The ``empty_type`` value(s), meaning "there is
+    no type here", may be a single one or any collection of them, since data often spells this in more than one way
+    (e.g., both ``Outliers`` and ``Doublet`` may appear where a type is expected). See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.reconstruct_type_axis!>`__
     for details.
     """
@@ -120,7 +125,7 @@ def reconstruct_type_axis(
             base_axis=base_axis,
             type_property=type_property,
             type_axis=type_axis,
-            empty_type=empty_type,
+            empty_type=_to_julia_scalar_or_collection(empty_type),
             type_colors_csv=type_colors_csv,
             implicit_properties=_to_julia_set(implicit_properties),
             properties_defaults=properties_defaults,

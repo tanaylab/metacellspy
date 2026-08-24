@@ -1542,6 +1542,26 @@ for details.
 </span>
 <span class="w"> 
 </span>
+<span class="pre">Collection
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
 <span class="pre">None
 </span>
 </span>
@@ -1901,7 +1921,21 @@ for details.
 </dt>
 
 <dd>
-<p>Create a type axis after importing data containing type annotations. See the Julia
+<p>Create a type axis after importing data containing type annotations. The 
+<code class="docutils literal notranslate">
+<span class="pre">empty_type
+</span>
+</code> value(s), meaning “there is
+no type here”, may be a single one or any collection of them, since data often spells this in more than one way
+(e.g., both 
+<code class="docutils literal notranslate">
+<span class="pre">Outliers
+</span>
+</code> and 
+<code class="docutils literal notranslate">
+<span class="pre">Doublet
+</span>
+</code> may appear where a type is expected). See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.reconstruct_type_axis!">documentation
 </a>

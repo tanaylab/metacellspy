@@ -78,14 +78,17 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSet</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageScalar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_scalar_or_collection</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_set</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
 
@@ -183,14 +186,16 @@
     <span class="n">base_axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">type_property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">type_axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">empty_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">empty_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">type_colors_csv</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">implicit_properties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">skipped_properties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AbstractSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">&quot;rare_gene_module&quot;</span><span class="p">,</span> <span class="s2">&quot;is_rare&quot;</span><span class="p">}),</span>
     <span class="n">properties_defaults</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">StorageScalar</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Create a type axis after importing data containing type annotations. See the Julia</span>
+<span class="sd">    Create a type axis after importing data containing type annotations. The ``empty_type`` value(s), meaning &quot;there is</span>
+<span class="sd">    no type here&quot;, may be a single one or any collection of them, since data often spells this in more than one way</span>
+<span class="sd">    (e.g., both ``Outliers`` and ``Doublet`` may appear where a type is expected). See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.reconstruct_type_axis!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -201,7 +206,7 @@
             <span class="n">base_axis</span><span class="o">=</span><span class="n">base_axis</span><span class="p">,</span>
             <span class="n">type_property</span><span class="o">=</span><span class="n">type_property</span><span class="p">,</span>
             <span class="n">type_axis</span><span class="o">=</span><span class="n">type_axis</span><span class="p">,</span>
-            <span class="n">empty_type</span><span class="o">=</span><span class="n">empty_type</span><span class="p">,</span>
+            <span class="n">empty_type</span><span class="o">=</span><span class="n">_to_julia_scalar_or_collection</span><span class="p">(</span><span class="n">empty_type</span><span class="p">),</span>
             <span class="n">type_colors_csv</span><span class="o">=</span><span class="n">type_colors_csv</span><span class="p">,</span>
             <span class="n">implicit_properties</span><span class="o">=</span><span class="n">_to_julia_set</span><span class="p">(</span><span class="n">implicit_properties</span><span class="p">),</span>
             <span class="n">properties_defaults</span><span class="o">=</span><span class="n">properties_defaults</span><span class="p">,</span>
