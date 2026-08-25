@@ -42,6 +42,39 @@ def test_import_gene_masks_per_type() -> None:
     ]
 
 
+def test_import_type_colors_csv(tmp_path) -> None:
+    # The file is the authority on which types exist and in what order: it may name a type nothing has, but a type of
+    # some entry which it does not name is an error. This needs no imported data, being about the csv and the axis.
+    csv = tmp_path / "type_colors.csv"
+    csv.write_text("type,color\nT1,#ff0000\nT2,#00ff00\nT3,#0000ff\n")
+
+    daf = dp.memory_daf(name="test")
+    daf.add_axis("cell", ["C1", "C2", "C3"])
+    daf.set_vector("cell", "type", ["T1", "", "T2"])
+
+    mc.import_type_colors_csv(daf, type_colors_csv=str(csv))
+
+    assert list(daf.axis_np_vector("type")) == ["T1", "T2", "T3"]
+    assert list(daf.get_np_vector("type", "color")) == ["#ff0000", "#00ff00", "#0000ff"]
+
+
+def test_import_type_colors_csv_missing_type(tmp_path) -> None:
+    # An empty value means "no type" and is exempt; anything else has to be in the file. Saying "no type" some other
+    # way is ``unify_empty_vector_values``, which is where that concept lives.
+    csv = tmp_path / "type_colors.csv"
+    csv.write_text("type,color\nT1,#ff0000\n")
+
+    daf = dp.memory_daf(name="test")
+    daf.add_axis("cell", ["C1", "C2"])
+    daf.set_vector("cell", "type", ["T1", "Outliers"])
+
+    with pytest.raises(Exception, match="Outliers"):
+        mc.import_type_colors_csv(daf, type_colors_csv=str(csv))
+
+    # Nothing is written until everything is verified.
+    assert not daf.has_axis("type")
+
+
 @needs_test_data
 def test_import_cells_h5ad() -> None:
     daf = dp.memory_daf(name="test")

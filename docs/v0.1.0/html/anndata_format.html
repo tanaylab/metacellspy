@@ -158,6 +158,15 @@
 </a>
 </li>
 
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.anndata_format.import_type_colors_csv">
+<code class="docutils literal notranslate">
+<span class="pre">import_type_colors_csv()
+</span>
+</code>
+</a>
+</li>
+
 </ul>
 
 </li>
@@ -692,102 +701,6 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 </em>, 
 <em class="sig-param">
 <span class="n">
-<span class="pre">type_colors_csv
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">empty_type
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">Collection
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
 <span class="pre">bestify
 </span>
 </span>
@@ -967,22 +880,7 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 <code class="docutils literal notranslate">
 <span class="pre">daf
 </span>
-</code> data set. Giving a 
-<code class="docutils literal notranslate">
-<span class="pre">type_colors_csv
-</span>
-</code> also
-creates a 
-<code class="docutils literal notranslate">
-<span class="pre">type
-</span>
-</code> axis out of it, the file being the authority on which types exist and in what order; the
-
-<code class="docutils literal notranslate">
-<span class="pre">empty_type
-</span>
-</code> value(s) are what the data spells “this cell has no type” as, which may be one value or any
-collection of them. See the Julia
+</code> data set. See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_cells_h5ad!">documentation
 </a>
@@ -1579,6 +1477,258 @@ for details.
 </code> data set. See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_metacells_h5ad!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.anndata_format.import_type_colors_csv">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.anndata_format.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">import_type_colors_csv
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafWriter
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">type_colors_csv
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">axis
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">property
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">type_axis
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">overwrite
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">None
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/anndata_format.html#import_type_colors_csv">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.anndata_format.import_type_colors_csv" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Create a 
+<code class="docutils literal notranslate">
+<span class="pre">type_axis
+</span>
+</code> out of a csv file, which is the authority on which types there are, what they are called,
+and in what order they are listed. An empty 
+<code class="docutils literal notranslate">
+<span class="pre">property
+</span>
+</code> value means the entry has no type; data spelling that some
+other way should be passed through 
+<code class="docutils literal notranslate">
+<span class="pre">dafpy.unify_empty_vector_values
+</span>
+</code> first. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_type_colors_csv!">documentation
 </a>
 for details.
 </p>

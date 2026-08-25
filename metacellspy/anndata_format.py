@@ -4,17 +4,14 @@ Import ``AnnData`` based data sets. See the Julia
 """
 
 from typing import Any
-from typing import Collection
 from typing import Mapping
 from typing import Optional
 from typing import Tuple
-from typing import Union
 
 from dafpy import DafWriter
 from dafpy import StorageScalar
 
 from .julia_import import _given
-from .julia_import import _to_julia_scalar_or_collection
 from .julia_import import jl
 
 __all__ = [
@@ -22,6 +19,7 @@ __all__ = [
     "import_cells_h5ad",
     "import_gene_masks_per_type",
     "import_metacells_h5ad",
+    "import_type_colors_csv",
 ]
 
 #: Which of the ``AnnData`` properties to copy, and under which name. Mapping a name to ``None``
@@ -44,18 +42,13 @@ def import_cells_h5ad(
     *,
     cells_h5ad: str,
     copy_data: Optional[CopyAnnData] = None,
-    type_colors_csv: Optional[str] = None,
-    empty_type: Optional[Union[str, Collection[str]]] = None,
     bestify: Optional[bool] = None,
     min_sparse_saving_fraction: Optional[float] = None,
     overwrite: Optional[bool] = None,
     insist: Optional[bool] = None,
 ) -> None:
     """
-    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set. Giving a ``type_colors_csv`` also
-    creates a ``type`` axis out of it, the file being the authority on which types exist and in what order; the
-    ``empty_type`` value(s) are what the data spells "this cell has no type" as, which may be one value or any
-    collection of them. See the Julia
+    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_cells_h5ad!>`__
     for details.
     """
@@ -64,8 +57,6 @@ def import_cells_h5ad(
         cells_h5ad=cells_h5ad,
         **_given(
             copy_data=_copy_anndata(copy_data),
-            type_colors_csv=type_colors_csv,
-            empty_type=_to_julia_scalar_or_collection(empty_type),
             bestify=bestify,
             min_sparse_saving_fraction=min_sparse_saving_fraction,
             overwrite=overwrite,
@@ -115,3 +106,26 @@ def import_gene_masks_per_type(
     for details.
     """
     jl.Metacells.import_gene_masks_per_type_b(daf, **_given(type_axis=type_axis))
+
+
+def import_type_colors_csv(
+    daf: DafWriter,
+    *,
+    type_colors_csv: str,
+    axis: Optional[str] = None,
+    property: Optional[str] = None,  # pylint: disable=redefined-builtin
+    type_axis: Optional[str] = None,
+    overwrite: Optional[bool] = None,
+) -> None:
+    """
+    Create a ``type_axis`` out of a csv file, which is the authority on which types there are, what they are called,
+    and in what order they are listed. An empty ``property`` value means the entry has no type; data spelling that some
+    other way should be passed through ``dafpy.unify_empty_vector_values`` first. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_type_colors_csv!>`__
+    for details.
+    """
+    jl.Metacells.import_type_colors_csv_b(
+        daf,
+        type_colors_csv=type_colors_csv,
+        **_given(axis=axis, property=property, type_axis=type_axis, overwrite=overwrite),
+    )
