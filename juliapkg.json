@@ -1,6 +1,0 @@
-{
-    "packages": {
-        "Metacells": { "uuid": "2c3fbd22-7937-42a8-a46e-a575a65e83f1", "url": "https://github.com:/tanaylab/Metacells.jl.git" },
-        "Random":    { "uuid": "9a3f8284-a2c9-5f02-9a11-845980a1fd5c" }
-    }
-}
