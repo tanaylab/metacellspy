@@ -91,8 +91,9 @@ def test_copy_data_renames_a_property() -> None:
     daf = dp.memory_daf(name="test")
 
     # The mapping has to reach Julia as its own kind of dictionary, which is the one thing about
-    # importing that needs converting rather than passing straight through.
-    mc.import_cells_h5ad(daf, cells_h5ad=str(CELLS_H5AD), copy_data={"gene_ids": ("gene_identifier", None)})
+    # importing that needs converting rather than passing straight through. A key names the kind of
+    # data as well as its name, so a per-gene vector is named by its axis along with its name.
+    mc.import_cells_h5ad(daf, cells_h5ad=str(CELLS_H5AD), copy_data={("gene", "gene_ids"): ("gene_identifier", None)})
 
     assert daf.has_vector("gene", "gene_identifier")
 
@@ -101,7 +102,18 @@ def test_copy_data_renames_a_property() -> None:
 def test_skipping_a_property() -> None:
     daf = dp.memory_daf(name="test")
 
-    # Mapping a name to ``None`` skips it, which is the other half of the conversion.
-    mc.import_cells_h5ad(daf, cells_h5ad=str(CELLS_H5AD), copy_data={"gene_ids": None})
+    # Mapping a key to ``None`` skips it, which is the other half of the conversion.
+    mc.import_cells_h5ad(daf, cells_h5ad=str(CELLS_H5AD), copy_data={("gene", "gene_ids"): None})
 
     assert not daf.has_vector("gene", "gene_ids")
+
+
+@needs_test_data
+def test_a_vector_and_a_matrix_of_one_name() -> None:
+    daf = dp.memory_daf(name="test")
+
+    # Why the kind is part of the key: ``X`` is the name of the UMIs matrix, and an ``AnnData`` may
+    # carry an ``obs`` column of that name beside it. Naming the one must not silently take the other.
+    mc.import_cells_h5ad(daf, cells_h5ad=str(CELLS_H5AD), copy_data={("cell", "X"): None})
+
+    assert daf.has_matrix("cell", "gene", "UMIs")

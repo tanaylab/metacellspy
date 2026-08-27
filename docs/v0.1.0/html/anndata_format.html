@@ -216,6 +216,11 @@
 </a>
 </li>
 
+<li class="toctree-l2">
+<a class="reference internal" href="pipeline.html">pipeline
+</a>
+</li>
+
 </ul>
 
 </li>
@@ -321,7 +326,7 @@
 <code class="docutils literal notranslate">
 <span class="pre">AnnData
 </span>
-</code> properties to copy, and under which name. Mapping a name to 
+</code> properties to copy, and under which name. Mapping a key to 
 <code class="docutils literal notranslate">
 <span class="pre">None
 </span>
@@ -334,6 +339,50 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 </code> does not have.
 </p>
 
+<p>The key says what kind of data it is as well as its name: a name on its own is a scalar, a
+
+<code class="docutils literal notranslate">
+<span class="pre">(axis,
+</span> 
+<span class="pre">name)
+</span>
+</code> pair is a vector, and a 
+<code class="docutils literal notranslate">
+<span class="pre">(rows_axis,
+</span> 
+<span class="pre">columns_axis,
+</span> 
+<span class="pre">name)
+</span>
+</code> triple is a matrix.
+The axes are named as 
+<code class="docutils literal notranslate">
+<span class="pre">Daf
+</span>
+</code> names them - 
+<code class="docutils literal notranslate">
+<span class="pre">cell
+</span>
+</code>, 
+<code class="docutils literal notranslate">
+<span class="pre">gene
+</span>
+</code>, 
+<code class="docutils literal notranslate">
+<span class="pre">metacell
+</span>
+</code> - and not as
+
+<code class="docutils literal notranslate">
+<span class="pre">AnnData
+</span>
+</code> names them. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.CopyAnnData">documentation
+</a>
+for details.
+</p>
+
 <p>alias of 
 <code class="xref py py-class docutils literal notranslate">
 <span class="pre">Mapping
@@ -342,7 +391,35 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 <code class="xref py py-class docutils literal notranslate">
 <span class="pre">str
 </span>
+</code> | 
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">Tuple
+</span>
+</code>[
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">str
+</span>
 </code>, 
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">str
+</span>
+</code>] | 
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">Tuple
+</span>
+</code>[
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">str
+</span>
+</code>, 
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">str
+</span>
+</code>, 
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">str
+</span>
+</code>], 
 <code class="xref py py-class docutils literal notranslate">
 <span class="pre">Tuple
 </span>
@@ -494,6 +571,70 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 </span>
 </span>
 <span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">Tuple
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">Tuple
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
 </span>
 <span class="p">
 <span class="pre">,
@@ -1088,6 +1229,70 @@ for details.
 </span>
 </span>
 <span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">Tuple
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">Tuple
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
 </span>
 <span class="p">
 <span class="pre">,

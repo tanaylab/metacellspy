@@ -18,3 +18,4 @@ API
   analyze_modules
   sharpen_metacells
   project_cells
+  pipeline

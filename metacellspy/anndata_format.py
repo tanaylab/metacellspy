@@ -9,6 +9,7 @@ from typing import Optional
 from typing import Tuple
 
 from dafpy import DafWriter
+from dafpy import PropertyKey
 from dafpy import StorageScalar
 
 from .julia_import import _given
@@ -22,10 +23,17 @@ __all__ = [
     "import_type_colors_csv",
 ]
 
-#: Which of the ``AnnData`` properties to copy, and under which name. Mapping a name to ``None``
+#: Which of the ``AnnData`` properties to copy, and under which name. Mapping a key to ``None``
 #: skips it; mapping it to a name and a value renames it, using the value for entries the
 #: ``AnnData`` does not have.
-CopyAnnData = Mapping[str, Optional[Tuple[str, Optional[StorageScalar]]]]
+#:
+#: The key says what kind of data it is as well as its name: a name on its own is a scalar, a
+#: ``(axis, name)`` pair is a vector, and a ``(rows_axis, columns_axis, name)`` triple is a matrix.
+#: The axes are named as ``Daf`` names them - ``cell``, ``gene``, ``metacell`` - and not as
+#: ``AnnData`` names them. See the Julia
+#: `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.CopyAnnData>`__
+#: for details.
+CopyAnnData = Mapping[PropertyKey, Optional[Tuple[str, Optional[StorageScalar]]]]
 
 
 def _copy_anndata(copy_data: Optional[CopyAnnData]) -> Any:

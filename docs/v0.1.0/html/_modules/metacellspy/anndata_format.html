@@ -82,6 +82,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropertyKey</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageScalar</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
@@ -95,10 +96,17 @@
     <span class="s2">&quot;import_type_colors_csv&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="c1">#: Which of the ``AnnData`` properties to copy, and under which name. Mapping a name to ``None``</span>
+<span class="c1">#: Which of the ``AnnData`` properties to copy, and under which name. Mapping a key to ``None``</span>
 <span class="c1">#: skips it; mapping it to a name and a value renames it, using the value for entries the</span>
 <span class="c1">#: ``AnnData`` does not have.</span>
-<span class="n">CopyAnnData</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StorageScalar</span><span class="p">]]]]</span>
+<span class="c1">#:</span>
+<span class="c1">#: The key says what kind of data it is as well as its name: a name on its own is a scalar, a</span>
+<span class="c1">#: ``(axis, name)`` pair is a vector, and a ``(rows_axis, columns_axis, name)`` triple is a matrix.</span>
+<span class="c1">#: The axes are named as ``Daf`` names them - ``cell``, ``gene``, ``metacell`` - and not as</span>
+<span class="c1">#: ``AnnData`` names them. See the Julia</span>
+<span class="c1">#: `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.CopyAnnData&gt;`__</span>
+<span class="c1">#: for details.</span>
+<span class="n">CopyAnnData</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">PropertyKey</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StorageScalar</span><span class="p">]]]]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_copy_anndata</span><span class="p">(</span><span class="n">copy_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CopyAnnData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>

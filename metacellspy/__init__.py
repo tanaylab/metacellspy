@@ -40,5 +40,6 @@ from .compute_modules import *
 from .defaults import *
 from .gmara import *
 from .julia_import import *
+from .pipeline import *
 from .project_cells import *
 from .sharpen_metacells import *

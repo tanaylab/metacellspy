@@ -13,7 +13,7 @@
   
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-<title>compute_blocks &mdash; Metacells 0.1.0 documentation
+<title>pipeline &mdash; Metacells 0.1.0 documentation
 </title>
       
 <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
@@ -44,9 +44,7 @@
     
 <link rel="search" title="Search" href="search.html" />
     
-<link rel="next" title="analyze_blocks" href="analyze_blocks.html" />
-    
-<link rel="prev" title="analyze_genes" href="analyze_genes.html" /> 
+<link rel="prev" title="project_cells" href="project_cells.html" /> 
 
 </head>
 
@@ -137,22 +135,9 @@
 </a>
 </li>
 
-<li class="toctree-l2 current">
-<a class="current reference internal" href="#">compute_blocks
+<li class="toctree-l2">
+<a class="reference internal" href="compute_blocks.html">compute_blocks
 </a>
-<ul>
-
-<li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.compute_blocks.compute_metacells_blocks">
-<code class="docutils literal notranslate">
-<span class="pre">compute_metacells_blocks()
-</span>
-</code>
-</a>
-</li>
-
-</ul>
-
 </li>
 
 <li class="toctree-l2">
@@ -180,9 +165,40 @@
 </a>
 </li>
 
-<li class="toctree-l2">
-<a class="reference internal" href="pipeline.html">pipeline
+<li class="toctree-l2 current">
+<a class="current reference internal" href="#">pipeline
 </a>
+<ul>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.pipeline.prepare_markers">
+<code class="docutils literal notranslate">
+<span class="pre">prepare_markers()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.pipeline.prepare_metacells">
+<code class="docutils literal notranslate">
+<span class="pre">prepare_metacells()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.pipeline.prepare_skeletons">
+<code class="docutils literal notranslate">
+<span class="pre">prepare_skeletons()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
 </li>
 
 </ul>
@@ -229,12 +245,12 @@
 </a>
 </li>
       
-<li class="breadcrumb-item active">compute_blocks
+<li class="breadcrumb-item active">pipeline
 </li>
       
 <li class="wy-breadcrumbs-aside">
             
-<a href="_sources/compute_blocks.rst.txt" rel="nofollow"> View page source
+<a href="_sources/pipeline.rst.txt" rel="nofollow"> View page source
 </a>
       
 </li>
@@ -250,31 +266,31 @@
 <div itemprop="articleBody">
              
   
-<section id="module-metacellspy.compute_blocks">
+<section id="module-metacellspy.pipeline">
 
-<span id="compute-blocks">
+<span id="pipeline">
 </span>
-<h1>compute_blocks
-<a class="headerlink" href="#module-metacellspy.compute_blocks" title="Link to this heading">
+<h1>pipeline
+<a class="headerlink" href="#module-metacellspy.pipeline" title="Link to this heading">
 </a>
 </h1>
 
-<p>Group metacells into blocks. See the Julia
+<p>Run whole stages of the metacells pipeline. See the Julia
 
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/compute_blocks.html">documentation
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html">documentation
 </a> for details.
 </p>
 
 <dl class="py function">
 
-<dt class="sig sig-object py" id="metacellspy.compute_blocks.compute_metacells_blocks">
+<dt class="sig sig-object py" id="metacellspy.pipeline.prepare_markers">
 
 <span class="sig-prename descclassname">
-<span class="pre">metacellspy.compute_blocks.
+<span class="pre">metacellspy.pipeline.
 </span>
 </span>
 <span class="sig-name descname">
-<span class="pre">compute_metacells_blocks
+<span class="pre">prepare_markers
 </span>
 </span>
 <span class="sig-paren">(
@@ -305,7 +321,261 @@
 </em>, 
 <em class="sig-param">
 <span class="n">
-<span class="pre">n_blocks
+<span class="pre">overwrite
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">None
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/pipeline.html#prepare_markers">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.pipeline.prepare_markers" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Find the marker genes, rank them, and correlate each of them with every other. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_markers!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.pipeline.prepare_metacells">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.pipeline.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">prepare_metacells
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafWriter
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">overwrite
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">None
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/pipeline.html#prepare_metacells">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.pipeline.prepare_metacells" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Aggregate the cells of each metacell into the metacell. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_metacells!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.pipeline.prepare_skeletons">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.pipeline.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">prepare_skeletons
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafWriter
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">prev_daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafReader
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">rng
 </span>
 </span>
 <span class="p">
@@ -317,16 +587,6 @@
 <span class="n">
 <span class="pre">int
 </span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
 </span>
 <span class="w"> 
 </span>
@@ -337,83 +597,7 @@
 <span class="w"> 
 </span>
 <span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">max_block_span
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">prefix
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="default_value">
-<span class="pre">None
+<span class="pre">0
 </span>
 </span>
 </em>, 
@@ -465,28 +649,20 @@
 </span>
 </span>
 </span>
-<a class="reference internal" href="_modules/metacellspy/compute_blocks.html#compute_metacells_blocks">
+<a class="reference internal" href="_modules/metacellspy/pipeline.html#prepare_skeletons">
 <span class="viewcode-link">
 <span class="pre">[source]
 </span>
 </span>
 </a>
-<a class="headerlink" href="#metacellspy.compute_blocks.compute_metacells_blocks" title="Link to this definition">
+<a class="headerlink" href="#metacellspy.pipeline.prepare_skeletons" title="Link to this definition">
 </a>
 </dt>
 
 <dd>
-<p>Compute and set the 
-<code class="docutils literal notranslate">
-<span class="pre">block_axis
-</span>
-</code> and 
-<code class="docutils literal notranslate">
-<span class="pre">vector_of_block_per_metacell
-</span>
-</code>. See the Julia
+<p>Choose the skeleton genes and compute the distances and the layout which follow from them. See the Julia
 
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/compute_blocks.html#Metacells.ComputeBlocks.compute_metacells_blocks!">documentation
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_skeletons!">documentation
 </a>
 for details.
 </p>
@@ -506,14 +682,9 @@ for details.
 <footer>
 <div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         
-<a href="analyze_genes.html" class="btn btn-neutral float-left" title="analyze_genes" accesskey="p" rel="prev">
+<a href="project_cells.html" class="btn btn-neutral float-left" title="project_cells" accesskey="p" rel="prev">
 <span class="fa fa-arrow-circle-left" aria-hidden="true">
 </span> Previous
-</a>
-        
-<a href="analyze_blocks.html" class="btn btn-neutral float-right" title="analyze_blocks" accesskey="n" rel="next">Next 
-<span class="fa fa-arrow-circle-right" aria-hidden="true">
-</span>
 </a>
     
 </div>
