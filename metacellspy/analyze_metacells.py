@@ -25,6 +25,7 @@ __all__ = [
     "compute_matrix_of_max_skeleton_fold_distance_between_metacells",
     "compute_metacells_2d_umap",
     "compute_metacells_3d_umap",
+    "compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene",
     "compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gene",
     "compute_vector_of_n_cells_per_metacell",
     "compute_vector_of_total_UMIs_per_metacell",
@@ -240,6 +241,26 @@ def compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gen
     for details.
     """
     jl.Metacells.compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gene_b(
+        daf,
+        **_given(
+            gene_fraction_regularization=gene_fraction_regularization,
+            overwrite=overwrite,
+        ),
+    )
+
+
+def compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene(
+    daf: DafWriter,
+    *,
+    gene_fraction_regularization: Optional[float] = None,
+    overwrite: Optional[bool] = None,
+) -> None:
+    """
+    Compute and set ``vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene``. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene!>`__
+    for details.
+    """
+    jl.Metacells.compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene_b(
         daf,
         **_given(
             gene_fraction_regularization=gene_fraction_regularization,

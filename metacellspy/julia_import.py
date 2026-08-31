@@ -10,9 +10,11 @@ importing this package, since importing it imports ``dafpy``, which starts Julia
 from typing import Any
 from typing import Optional
 
+from dafpy.julia_import import _from_julia_array  # pylint: disable=unused-import
 from dafpy.julia_import import _from_julia_frame  # pylint: disable=unused-import
 from dafpy.julia_import import _given  # pylint: disable=unused-import
 from dafpy.julia_import import _to_julia_array  # pylint: disable=unused-import
+from dafpy.julia_import import _to_julia_scalar_or_collection  # pylint: disable=unused-import
 from dafpy.julia_import import jl
 from dafpy.julia_import import jl_version
 

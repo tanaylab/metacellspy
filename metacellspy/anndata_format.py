@@ -8,10 +8,12 @@ from typing import Mapping
 from typing import Optional
 from typing import Tuple
 
+import numpy as np
 from dafpy import DafWriter
 from dafpy import PropertyKey
 from dafpy import StorageScalar
 
+from .julia_import import _from_julia_array
 from .julia_import import _given
 from .julia_import import jl
 
@@ -54,13 +56,14 @@ def import_cells_h5ad(
     min_sparse_saving_fraction: Optional[float] = None,
     overwrite: Optional[bool] = None,
     insist: Optional[bool] = None,
-) -> None:
+) -> Optional[np.ndarray]:
     """
-    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set. See the Julia
+    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set, and return the ``metacell_name`` per
+    cell it holds, which is not imported. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.import_cells_h5ad!>`__
     for details.
     """
-    jl.Metacells.import_cells_h5ad_b(
+    metacell_per_cell = jl.Metacells.import_cells_h5ad_b(
         daf,
         cells_h5ad=cells_h5ad,
         **_given(
@@ -71,6 +74,9 @@ def import_cells_h5ad(
             insist=insist,
         ),
     )
+    if metacell_per_cell is None:
+        return None
+    return _from_julia_array(metacell_per_cell)
 
 
 def import_metacells_h5ad(
