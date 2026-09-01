@@ -21,7 +21,6 @@ from .julia_import import jl
 __all__ = [
     "analyze_metacells",
     "import_base_metacells",
-    "prepare_markers",
     "prepare_metacells",
 ]
 
@@ -52,25 +51,11 @@ def import_base_metacells(
 
 def prepare_metacells(daf: DafWriter, *, overwrite: Optional[bool] = None) -> None:
     """
-    Aggregate the cells of each metacell into the metacell. See the Julia
+    Aggregate the cells of each metacell into the metacell, and find the marker genes. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_metacells!>`__
     for details.
     """
     jl.Metacells.prepare_metacells_b(
-        daf,
-        **_given(
-            overwrite=overwrite,
-        ),
-    )
-
-
-def prepare_markers(daf: DafWriter, *, overwrite: Optional[bool] = None) -> None:
-    """
-    Find the marker genes, rank them, and correlate each of them with every other. See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_markers!>`__
-    for details.
-    """
-    jl.Metacells.prepare_markers_b(
         daf,
         **_given(
             overwrite=overwrite,
@@ -88,8 +73,7 @@ def analyze_metacells(
     overwrite: Optional[bool] = None,
 ) -> None:
     """
-    Work out what a set of metacells says about the manifold - the skeleton genes, the geometry, the blocks and their
-    gene modules - which is everything sharpening them needs. See the Julia
+    Compute more advanced properties based on the metacells, taking into account gene masks. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.analyze_metacells!>`__
     for details.
     """
