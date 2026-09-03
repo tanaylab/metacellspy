@@ -22,6 +22,7 @@ __all__ = [
     "analyze_metacells",
     "import_base_metacells",
     "prepare_metacells",
+    "qc_metacells",
 ]
 
 
@@ -84,6 +85,27 @@ def analyze_metacells(
             prev_daf=prev_daf,
             module_status=module_status,
             rng=_rng(rng),
+            overwrite=overwrite,
+        ),
+    )
+
+
+def qc_metacells(
+    *,
+    daf: DafWriter,
+    base_daf: DafReader,
+    overwrite: Optional[bool] = None,
+) -> None:
+    """
+    Say how well the metacells describe the cells they were aggregated from, judged in the locations of the manifold a
+    base repository laid out. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.qc_metacells!>`__
+    for details.
+    """
+    jl.Metacells.qc_metacells_b(
+        daf=daf,
+        base_daf=base_daf,
+        **_given(
             overwrite=overwrite,
         ),
     )
