@@ -84,7 +84,7 @@ def compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type(
 
 def compute_vector_of_global_flow_order_per_type(
     final_daf: DafReader,
-    base_daf_per_round: Sequence[DafReader],
+    daf_per_round: Sequence[DafReader],
     *,
     output_daf: DafWriter,
     restarts: Optional[int] = None,
@@ -99,7 +99,7 @@ def compute_vector_of_global_flow_order_per_type(
     """
     jl.Metacells.compute_vector_of_global_flow_order_per_type_b(
         final_daf,
-        jl.DafPy._to_daf_readers(list(base_daf_per_round)),
+        jl.DafPy._to_daf_readers(list(daf_per_round)),
         output_daf=output_daf,
         **_given(
             restarts=restarts,
@@ -112,7 +112,7 @@ def compute_vector_of_global_flow_order_per_type(
 def sharpen_metacells(
     *,
     sharp_daf: DafWriter,
-    base_daf: DafReader,
+    prev_daf: DafReader,
     prefix: Optional[str] = None,
     min_cells_in_metacell: Optional[int] = None,
     max_cells_in_metacell: Optional[int] = None,
@@ -134,7 +134,7 @@ def sharpen_metacells(
     overwrite: Optional[bool] = None,
 ) -> None:
     """
-    Given an ``base_daf`` metacells repository with a blocks structure and local gene modules that describe the cell
+    Given a ``prev_daf`` metacells repository with a blocks structure and local gene modules that describe the cell
     state manifold, compute a ``sharp_daf`` metacells repository, which hopefully more faithfully captures this
     manifold. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.sharpen_metacells!>`__
@@ -142,7 +142,7 @@ def sharpen_metacells(
     """
     jl.Metacells.sharpen_metacells_b(
         sharp_daf=sharp_daf,
-        base_daf=base_daf,
+        prev_daf=prev_daf,
         sharpening_round=sharpening_round,
         improvement_half_life=improvement_half_life,
         **_given(
