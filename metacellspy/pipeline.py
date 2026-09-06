@@ -52,7 +52,8 @@ def import_base_metacells(
 
 def prepare_metacells(daf: DafWriter, *, overwrite: Optional[bool] = None) -> None:
     """
-    Aggregate the cells of each metacell into the metacell, and find the marker genes. See the Julia
+    Aggregate the cells of each metacell into the metacell, and find the marker genes and how they correlate with
+    each other. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_metacells!>`__
     for details.
     """

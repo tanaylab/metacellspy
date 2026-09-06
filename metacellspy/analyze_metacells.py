@@ -210,6 +210,7 @@ def compute_metacells_3d_umap(
     *,
     min_dist: Optional[float] = None,
     n_neighbors: Optional[int] = None,
+    rng: int = 0,
     overwrite: Optional[bool] = None,
 ) -> None:
     """
@@ -224,6 +225,7 @@ def compute_metacells_3d_umap(
         **_given(
             min_dist=min_dist,
             n_neighbors=n_neighbors,
+            rng=_rng(rng),
             overwrite=overwrite,
         ),
     )

@@ -116,6 +116,7 @@
     <span class="s2">&quot;compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks&quot;</span><span class="p">,</span>
     <span class="s2">&quot;compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block&quot;</span><span class="p">,</span>
     <span class="s2">&quot;compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_module_sharing_at_changed_base_blocks&quot;</span><span class="p">,</span>
     <span class="s2">&quot;compute_vector_of_block_closest_by_pertinent_markers_per_cell&quot;</span><span class="p">,</span>
     <span class="s2">&quot;compute_vector_of_n_cells_per_block&quot;</span><span class="p">,</span>
     <span class="s2">&quot;compute_vector_of_n_environment_cells_per_block&quot;</span><span class="p">,</span>
@@ -757,6 +758,33 @@
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">gene_fraction_regularization</span><span class="o">=</span><span class="n">gene_fraction_regularization</span><span class="p">,</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compute_module_sharing_at_changed_base_blocks">
+<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_module_sharing_at_changed_base_blocks">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_module_sharing_at_changed_base_blocks</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">other_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="n">base_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">min_changed_correlation</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute and set ``vector_of_mean_no_module_fraction_in_base_neighborhood_cells_at_improved_base_blocks_per_gene``,</span>
+<span class="sd">    ``matrix_of_mean_shared_module_fraction_in_base_neighborhood_cells_at_improved_base_blocks_per_regulator_per_gene``</span>
+<span class="sd">    and their degraded counterparts. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_module_sharing_at_changed_base_blocks!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_module_sharing_at_changed_base_blocks_b</span><span class="p">(</span>
+        <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
+        <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">min_changed_correlation</span><span class="o">=</span><span class="n">min_changed_correlation</span><span class="p">,</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span></div>

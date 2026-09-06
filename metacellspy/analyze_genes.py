@@ -36,6 +36,7 @@ def compute_gene_report(
     *,
     daf: DafReader,
     base_daf: Optional[DafReader] = None,
+    regulators_count: Optional[int] = None,
 ) -> pd.DataFrame:
     """
     Return a per-marker-gene report as a ``DataFrame``, one row per marker gene, sorted by ``rank``. See the Julia
@@ -46,6 +47,7 @@ def compute_gene_report(
         daf=daf,
         **_given(
             base_daf=base_daf,
+            regulators_count=regulators_count,
         ),
     )
     return _from_julia_frame(result)

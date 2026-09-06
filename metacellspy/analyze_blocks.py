@@ -43,6 +43,7 @@ __all__ = [
     "compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks",
     "compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block",
     "compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block",
+    "compute_module_sharing_at_changed_base_blocks",
     "compute_vector_of_block_closest_by_pertinent_markers_per_cell",
     "compute_vector_of_n_cells_per_block",
     "compute_vector_of_n_environment_cells_per_block",
@@ -610,6 +611,30 @@ def compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block(
         daf,
         **_given(
             gene_fraction_regularization=gene_fraction_regularization,
+            overwrite=overwrite,
+        ),
+    )
+
+
+def compute_module_sharing_at_changed_base_blocks(
+    *,
+    other_daf: DafWriter,
+    base_daf: DafReader,
+    min_changed_correlation: Optional[float] = None,
+    overwrite: Optional[bool] = None,
+) -> None:
+    """
+    Compute and set ``vector_of_mean_no_module_fraction_in_base_neighborhood_cells_at_improved_base_blocks_per_gene``,
+    ``matrix_of_mean_shared_module_fraction_in_base_neighborhood_cells_at_improved_base_blocks_per_regulator_per_gene``
+    and their degraded counterparts. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_module_sharing_at_changed_base_blocks!>`__
+    for details.
+    """
+    jl.Metacells.compute_module_sharing_at_changed_base_blocks_b(
+        other_daf=other_daf,
+        base_daf=base_daf,
+        **_given(
+            min_changed_correlation=min_changed_correlation,
             overwrite=overwrite,
         ),
     )

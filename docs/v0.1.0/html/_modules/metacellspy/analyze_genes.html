@@ -111,6 +111,7 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
     <span class="n">base_daf</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DafReader</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">regulators_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a per-marker-gene report as a ``DataFrame``, one row per marker gene, sorted by ``rank``. See the Julia</span>
@@ -121,6 +122,7 @@
         <span class="n">daf</span><span class="o">=</span><span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
+            <span class="n">regulators_count</span><span class="o">=</span><span class="n">regulators_count</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">_from_julia_frame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
