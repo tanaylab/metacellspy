@@ -76,7 +76,9 @@
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html&gt;`__ for details.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterator</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
 
@@ -84,6 +86,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafReader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageScalar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">wrap_daf</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_rng</span>
@@ -96,6 +99,9 @@
     <span class="s2">&quot;import_base_metacells&quot;</span><span class="p">,</span>
     <span class="s2">&quot;prepare_metacells&quot;</span><span class="p">,</span>
     <span class="s2">&quot;qc_metacells&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sharpen_round&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SharpeningRound&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sharpening_rounds&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -178,22 +184,166 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">qc_metacells</span><span class="p">(</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
-    <span class="n">base_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">score_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Say how well the metacells describe the cells they were aggregated from, judged in the locations of the manifold a</span>
-<span class="sd">    base repository laid out. See the Julia</span>
+<span class="sd">    Say how well the metacells describe the cells they were aggregated from, judged in the locations of the manifold</span>
+<span class="sd">    the ``score_daf`` repository laid out. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.qc_metacells!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">qc_metacells_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="o">=</span><span class="n">daf</span><span class="p">,</span>
-        <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
+        <span class="n">score_daf</span><span class="o">=</span><span class="n">score_daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="sharpen_round">
+<a class="viewcode-back" href="../../pipeline.html#metacellspy.pipeline.sharpen_round">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sharpen_round</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">sharp_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">score_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">sharpening_round</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">metacells_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">blocks_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">module_status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run one round of sharpening: regroup the cells into new metacells, aggregate and analyze them, and score them</span>
+<span class="sd">    against the ``score_daf``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.sharpen_round!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">sharpen_round_b</span><span class="p">(</span>
+        <span class="n">sharp_daf</span><span class="o">=</span><span class="n">sharp_daf</span><span class="p">,</span>
+        <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>
+        <span class="n">score_daf</span><span class="o">=</span><span class="n">score_daf</span><span class="p">,</span>
+        <span class="n">sharpening_round</span><span class="o">=</span><span class="n">sharpening_round</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">metacells_prefix</span><span class="o">=</span><span class="n">metacells_prefix</span><span class="p">,</span>
+            <span class="n">blocks_prefix</span><span class="o">=</span><span class="n">blocks_prefix</span><span class="p">,</span>
+            <span class="n">module_status</span><span class="o">=</span><span class="n">module_status</span><span class="p">,</span>
+            <span class="n">rng</span><span class="o">=</span><span class="n">_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">),</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="SharpeningRound">
+<a class="viewcode-back" href="../../pipeline.html#metacellspy.pipeline.SharpeningRound">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SharpeningRound</span><span class="p">:</span>  <span class="c1"># pylint: disable=too-many-instance-attributes</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    One round of the :py:func:`sharpening_rounds`. The ``index`` is the number of the round, starting at 1. The</span>
+<span class="sd">    ``previous_daf`` is the metacells of the round before this one. The ``metacells_prefix`` and the ``blocks_prefix``</span>
+<span class="sd">    are this round&#39;s prefixes. The rest are as given to :py:func:`sharpening_rounds`. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.SharpeningRound&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jl_obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jl_obj</span> <span class="o">=</span> <span class="n">jl_obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_daf</span> <span class="o">=</span> <span class="n">wrap_daf</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">previous_daf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_daf</span> <span class="o">=</span> <span class="n">wrap_daf</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">base_daf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score_daf</span> <span class="o">=</span> <span class="n">wrap_daf</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">score_daf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directory</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">directory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metacells_prefix</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">metacells_prefix</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocks_prefix</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">blocks_prefix</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_status</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">module_status</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">jl_obj</span><span class="o">.</span><span class="n">overwrite</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SharpeningRound.run">
+<a class="viewcode-back" href="../../pipeline.html#metacellspy.pipeline.SharpeningRound.run">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">metacells_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">blocks_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">module_status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DafWriter</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run this round, creating a repository with the ``name`` in the round&#39;s ``directory``, and return it. Any of the</span>
+<span class="sd">        round&#39;s parameters can be overridden for this round only. See the Julia</span>
+<span class="sd">        `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.run!&gt;`__</span>
+<span class="sd">        for details.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sharp_daf</span> <span class="o">=</span> <span class="n">wrap_daf</span><span class="p">(</span>
+            <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">run_b</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">jl_obj</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+                    <span class="n">metacells_prefix</span><span class="o">=</span><span class="n">metacells_prefix</span><span class="p">,</span>
+                    <span class="n">blocks_prefix</span><span class="o">=</span><span class="n">blocks_prefix</span><span class="p">,</span>
+                    <span class="n">module_status</span><span class="o">=</span><span class="n">module_status</span><span class="p">,</span>
+                    <span class="n">rng</span><span class="o">=</span><span class="n">_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">),</span>
+                    <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sharp_daf</span><span class="p">,</span> <span class="n">DafWriter</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sharp_daf</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="sharpening_rounds">
+<a class="viewcode-back" href="../../pipeline.html#metacellspy.pipeline.sharpening_rounds">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sharpening_rounds</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">initial_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">base_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">score_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">metacells_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">blocks_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">module_status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">SharpeningRound</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Iterate on rounds of sharpening, starting from the ``initial_daf`` metacells. Each round is a</span>
+<span class="sd">    :py:class:`SharpeningRound`, which must be run before the next one is taken. The iteration never ends by itself.</span>
+<span class="sd">    The caller decides when to stop:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        for sharpening_round in sharpening_rounds(initial_daf=..., base_daf=..., score_daf=..., directory=&quot;dafs&quot;):</span>
+<span class="sd">            if sharpening_round.index &gt; 2:</span>
+<span class="sd">                break</span>
+<span class="sd">            metacells_daf = sharpening_round.run(f&quot;metacells.R{sharpening_round.index}&quot;)</span>
+
+<span class="sd">    See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.sharpening_rounds&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rounds</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">sharpening_rounds</span><span class="p">(</span>
+        <span class="n">initial_daf</span><span class="o">=</span><span class="n">initial_daf</span><span class="p">,</span>
+        <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
+        <span class="n">score_daf</span><span class="o">=</span><span class="n">score_daf</span><span class="p">,</span>
+        <span class="n">directory</span><span class="o">=</span><span class="n">directory</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">metacells_prefix</span><span class="o">=</span><span class="n">metacells_prefix</span><span class="p">,</span>
+            <span class="n">blocks_prefix</span><span class="o">=</span><span class="n">blocks_prefix</span><span class="p">,</span>
+            <span class="n">module_status</span><span class="o">=</span><span class="n">module_status</span><span class="p">,</span>
+            <span class="n">rng</span><span class="o">=</span><span class="n">_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">),</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">jl_round</span> <span class="ow">in</span> <span class="n">rounds</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">SharpeningRound</span><span class="p">(</span><span class="n">jl_round</span><span class="p">)</span></div>
 
 </pre></div>
 

@@ -206,6 +206,46 @@
 </a>
 </li>
 
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.pipeline.sharpen_round">
+<code class="docutils literal notranslate">
+<span class="pre">sharpen_round()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.pipeline.SharpeningRound">
+<code class="docutils literal notranslate">
+<span class="pre">SharpeningRound
+</span>
+</code>
+</a>
+<ul>
+
+<li class="toctree-l4">
+<a class="reference internal" href="#metacellspy.pipeline.SharpeningRound.run">
+<code class="docutils literal notranslate">
+<span class="pre">SharpeningRound.run()
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.pipeline.sharpening_rounds">
+<code class="docutils literal notranslate">
+<span class="pre">sharpening_rounds()
+</span>
+</code>
+</a>
+</li>
+
 </ul>
 
 </li>
@@ -1147,7 +1187,7 @@ for details.
 </em>, 
 <em class="sig-param">
 <span class="n">
-<span class="pre">base_daf
+<span class="pre">score_daf
 </span>
 </span>
 <span class="p">
@@ -1220,10 +1260,1085 @@ for details.
 </dt>
 
 <dd>
-<p>Say how well the metacells describe the cells they were aggregated from, judged in the locations of the manifold a
-base repository laid out. See the Julia
+<p>Say how well the metacells describe the cells they were aggregated from, judged in the locations of the manifold
+the 
+<code class="docutils literal notranslate">
+<span class="pre">score_daf
+</span>
+</code> repository laid out. See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.qc_metacells!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.pipeline.sharpen_round">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.pipeline.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">sharpen_round
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">sharp_daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafWriter
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">prev_daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafReader
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">score_daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafReader
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">sharpening_round
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">int
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">metacells_prefix
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">blocks_prefix
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">module_status
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">rng
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">int
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">0
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">overwrite
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">None
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/pipeline.html#sharpen_round">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.pipeline.sharpen_round" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Run one round of sharpening: regroup the cells into new metacells, aggregate and analyze them, and score them
+against the 
+<code class="docutils literal notranslate">
+<span class="pre">score_daf
+</span>
+</code>. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.sharpen_round!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py class">
+
+<dt class="sig sig-object py" id="metacellspy.pipeline.SharpeningRound">
+
+<span class="property">
+<span class="k">
+<span class="pre">class
+</span>
+</span>
+<span class="w"> 
+</span>
+</span>
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.pipeline.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">SharpeningRound
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">jl_obj
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">Any
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/pipeline.html#SharpeningRound">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.pipeline.SharpeningRound" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>One round of the 
+<a class="reference internal" href="#metacellspy.pipeline.sharpening_rounds" title="metacellspy.pipeline.sharpening_rounds">
+<code class="xref py py-func docutils literal notranslate">
+<span class="pre">sharpening_rounds()
+</span>
+</code>
+</a>. The 
+<code class="docutils literal notranslate">
+<span class="pre">index
+</span>
+</code> is the number of the round, starting at 1. The
+
+<code class="docutils literal notranslate">
+<span class="pre">previous_daf
+</span>
+</code> is the metacells of the round before this one. The 
+<code class="docutils literal notranslate">
+<span class="pre">metacells_prefix
+</span>
+</code> and the 
+<code class="docutils literal notranslate">
+<span class="pre">blocks_prefix
+</span>
+</code>
+are this round’s prefixes. The rest are as given to 
+<a class="reference internal" href="#metacellspy.pipeline.sharpening_rounds" title="metacellspy.pipeline.sharpening_rounds">
+<code class="xref py py-func docutils literal notranslate">
+<span class="pre">sharpening_rounds()
+</span>
+</code>
+</a>. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.SharpeningRound">documentation
+</a>
+for details.
+</p>
+
+<dl class="py method">
+
+<dt class="sig sig-object py" id="metacellspy.pipeline.SharpeningRound.run">
+
+<span class="sig-name descname">
+<span class="pre">run
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">name
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">metacells_prefix
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">blocks_prefix
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">module_status
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">rng
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">int
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">0
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">overwrite
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">DafWriter
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/pipeline.html#SharpeningRound.run">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.pipeline.SharpeningRound.run" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Run this round, creating a repository with the 
+<code class="docutils literal notranslate">
+<span class="pre">name
+</span>
+</code> in the round’s 
+<code class="docutils literal notranslate">
+<span class="pre">directory
+</span>
+</code>, and return it. Any of the
+round’s parameters can be overridden for this round only. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.run!">documentation
+</a>
+for details.
+</p>
+
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.pipeline.sharpening_rounds">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.pipeline.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">sharpening_rounds
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">initial_daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafReader
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">base_daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafReader
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">score_daf
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">DafReader
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">directory
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">metacells_prefix
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">blocks_prefix
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">str
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">module_status
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">rng
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">int
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">0
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">overwrite
+</span>
+</span>
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="n">
+<span class="pre">bool
+</span>
+<span class="w"> 
+</span>
+<span class="p">
+<span class="pre">|
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">None
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span> 
+<span class="sig-return">
+<span class="sig-return-icon">&#x2192;
+</span> 
+<span class="sig-return-typehint">
+<span class="pre">Iterator
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<a class="reference internal" href="#metacellspy.pipeline.SharpeningRound" title="metacellspy.pipeline.SharpeningRound">
+<span class="pre">SharpeningRound
+</span>
+</a>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+</span>
+</span>
+<a class="reference internal" href="_modules/metacellspy/pipeline.html#sharpening_rounds">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.pipeline.sharpening_rounds" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Iterate on rounds of sharpening, starting from the 
+<code class="docutils literal notranslate">
+<span class="pre">initial_daf
+</span>
+</code> metacells. Each round is a
+
+<a class="reference internal" href="#metacellspy.pipeline.SharpeningRound" title="metacellspy.pipeline.SharpeningRound">
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">SharpeningRound
+</span>
+</code>
+</a>, which must be run before the next one is taken. The iteration never ends by itself.
+The caller decides when to stop:
+</p>
+
+<div class="highlight-python notranslate">
+<div class="highlight">
+<pre>
+<span>
+</span>
+<span class="k">for
+</span> 
+<span class="n">sharpening_round
+</span> 
+<span class="ow">in
+</span> 
+<span class="n">sharpening_rounds
+</span>
+<span class="p">(
+</span>
+<span class="n">initial_daf
+</span>
+<span class="o">=...
+</span>
+<span class="p">,
+</span> 
+<span class="n">base_daf
+</span>
+<span class="o">=...
+</span>
+<span class="p">,
+</span> 
+<span class="n">score_daf
+</span>
+<span class="o">=...
+</span>
+<span class="p">,
+</span> 
+<span class="n">directory
+</span>
+<span class="o">=
+</span>
+<span class="s2">&quot;dafs&quot;
+</span>
+<span class="p">):
+</span>
+    
+<span class="k">if
+</span> 
+<span class="n">sharpening_round
+</span>
+<span class="o">.
+</span>
+<span class="n">index
+</span> 
+<span class="o">&gt;
+</span> 
+<span class="mi">2
+</span>
+<span class="p">:
+</span>
+        
+<span class="k">break
+</span>
+    
+<span class="n">metacells_daf
+</span> 
+<span class="o">=
+</span> 
+<span class="n">sharpening_round
+</span>
+<span class="o">.
+</span>
+<span class="n">run
+</span>
+<span class="p">(
+</span>
+<span class="sa">f
+</span>
+<span class="s2">&quot;metacells.R
+</span>
+<span class="si">{
+</span>
+<span class="n">sharpening_round
+</span>
+<span class="o">.
+</span>
+<span class="n">index
+</span>
+<span class="si">}
+</span>
+<span class="s2">&quot;
+</span>
+<span class="p">)
+</span>
+
+</pre>
+</div>
+
+</div>
+
+<p>See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.sharpening_rounds">documentation
 </a>
 for details.
 </p>
