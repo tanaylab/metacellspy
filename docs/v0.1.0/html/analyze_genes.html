@@ -364,49 +364,15 @@
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">base_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -418,33 +384,9 @@
 <span class="pre">regulators_count
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">int
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -452,14 +394,6 @@
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">DataFrame
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#compute_gene_report">
 <span class="viewcode-link">
@@ -486,6 +420,70 @@
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>base_daf
+</strong> (
+<em>DafReader
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>regulators_count
+</strong> (
+<em>int
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>DataFrame
+</em>
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -518,49 +516,15 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">base_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -568,14 +532,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">DataFrame
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#compute_skeleton_report">
 <span class="viewcode-link">
@@ -600,6 +556,57 @@ markers most correlated with it (descending). See the Julia
 for details.
 </p>
 
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>base_daf
+</strong> (
+<em>DafReader
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>DataFrame
+</em>
+</p>
+
+</dd>
+
+</dl>
+
 </dd>
 </dl>
 
@@ -623,16 +630,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -647,33 +644,9 @@ for details.
 <span class="pre">min_gene_correlation
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -685,33 +658,9 @@ for details.
 <span class="pre">min_gene_correlation_quantile
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -723,33 +672,9 @@ for details.
 <span class="pre">genes_correlation_window
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">int
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -761,33 +686,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -795,14 +696,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#compute_vector_of_is_correlated_with_skeleton_per_gene">
 <span class="viewcode-link">
@@ -825,6 +718,94 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>min_gene_correlation
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>min_gene_correlation_quantile
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>genes_correlation_window
+</strong> (
+<em>int
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -849,16 +830,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -873,33 +844,9 @@ for details.
 <span class="pre">min_marker_gene_max_fraction
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -911,33 +858,9 @@ for details.
 <span class="pre">min_marker_gene_range_fold
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -949,33 +872,9 @@ for details.
 <span class="pre">min_marker_quantile
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -987,33 +886,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1021,14 +896,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#compute_vector_of_is_marker_per_gene">
 <span class="viewcode-link">
@@ -1051,6 +918,94 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>min_marker_gene_max_fraction
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>min_marker_gene_range_fold
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>min_marker_quantile
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1075,16 +1030,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -1099,33 +1044,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1133,14 +1054,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#compute_vector_of_is_skeleton_per_gene">
 <span class="viewcode-link">
@@ -1163,6 +1076,55 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1187,16 +1149,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -1211,33 +1163,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1245,14 +1173,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#compute_vector_of_marker_rank_per_gene">
 <span class="viewcode-link">
@@ -1275,6 +1195,55 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1299,16 +1268,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -1323,49 +1282,15 @@ for details.
 <span class="pre">species
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">namespace
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1377,33 +1302,9 @@ for details.
 <span class="pre">version
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1415,33 +1316,9 @@ for details.
 <span class="pre">cache_dir
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1453,33 +1330,9 @@ for details.
 <span class="pre">timeout
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1491,33 +1344,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1525,14 +1354,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#fetch_gmara_vector_of_is_regulator_per_gene">
 <span class="viewcode-link">
@@ -1560,6 +1381,116 @@ for details.
 for details.
 </p>
 
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>species
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>namespace
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>version
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>cache_dir
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>timeout
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
+
 </dd>
 </dl>
 
@@ -1583,16 +1514,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -1607,49 +1528,15 @@ for details.
 <span class="pre">species
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">namespace
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1661,33 +1548,9 @@ for details.
 <span class="pre">version
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1699,33 +1562,9 @@ for details.
 <span class="pre">cache_dir
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1737,33 +1576,9 @@ for details.
 <span class="pre">timeout
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1775,33 +1590,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1809,14 +1600,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#fetch_gmara_vector_of_is_transcription_factor_per_gene">
 <span class="viewcode-link">
@@ -1844,6 +1627,116 @@ for details.
 for details.
 </p>
 
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>species
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>namespace
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>version
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>cache_dir
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>timeout
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
+
 </dd>
 </dl>
 
@@ -1867,26 +1760,8 @@ for details.
 <span class="pre">score_per_variable_per_observation
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">ndarray
-</span>
-</span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">ndarray
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/analyze_genes.html#rank_variables">
 <span class="viewcode-link">
@@ -1910,6 +1785,38 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<p>
+<strong>score_per_variable_per_observation
+</strong> (
+<em>ndarray
+</em>)
+</p>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>ndarray
+</em>
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>

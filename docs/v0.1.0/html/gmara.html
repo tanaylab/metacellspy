@@ -417,14 +417,6 @@
 <span class="sig-paren">(
 </span>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/gmara.html#empty_gmara_cache">
 <span class="viewcode-link">
@@ -443,6 +435,21 @@
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -475,49 +482,15 @@ for details.
 <span class="pre">species
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">namespace
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -529,33 +502,9 @@ for details.
 <span class="pre">list
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -567,33 +516,9 @@ for details.
 <span class="pre">version
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -605,33 +530,9 @@ for details.
 <span class="pre">cache_dir
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -643,33 +544,9 @@ for details.
 <span class="pre">timeout
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -677,24 +554,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">AbstractSet
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/gmara.html#gmara_genes">
 <span class="viewcode-link">
@@ -731,6 +590,109 @@ Julia
 for details.
 </p>
 
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>species
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>namespace
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>list
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>version
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>cache_dir
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>timeout
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>AbstractSet
+</em>[str]
+</p>
+
+</dd>
+
+</dl>
+
 </dd>
 </dl>
 
@@ -754,16 +716,6 @@ for details.
 <span class="pre">name
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -778,26 +730,8 @@ for details.
 <span class="pre">namespace
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-</span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">str
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/gmara.html#normalize_gene_name">
 <span class="viewcode-link">
@@ -816,6 +750,51 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>name
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>namespace
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>str
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -840,16 +819,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -864,49 +833,15 @@ for details.
 <span class="pre">species
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">namespace
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -918,33 +853,9 @@ for details.
 <span class="pre">list
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -956,33 +867,9 @@ for details.
 <span class="pre">version
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -994,33 +881,9 @@ for details.
 <span class="pre">gene_name_property
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1032,33 +895,9 @@ for details.
 <span class="pre">property
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1070,33 +909,9 @@ for details.
 <span class="pre">cache_dir
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1108,33 +923,9 @@ for details.
 <span class="pre">timeout
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1146,33 +937,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1180,14 +947,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">int
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/gmara.html#set_gmara_genes_mask">
 <span class="viewcode-link">
@@ -1227,6 +986,155 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>species
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>namespace
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>list
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>version
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>gene_name_property
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>property
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>cache_dir
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>timeout
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>int
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>

@@ -349,16 +349,6 @@
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -373,33 +363,9 @@
 <span class="pre">prefix
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -411,33 +377,9 @@
 <span class="pre">prev_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -449,33 +391,9 @@
 <span class="pre">module_status
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -487,23 +405,9 @@
 <span class="pre">rng
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">int
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">0
@@ -515,33 +419,9 @@
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -549,14 +429,6 @@
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/pipeline.html#analyze_metacells">
 <span class="viewcode-link">
@@ -575,6 +447,103 @@
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>prefix
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>prev_daf
+</strong> (
+<em>DafReader
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>module_status
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>rng
+</strong> (
+<em>int
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -607,30 +576,10 @@ for details.
 <span class="pre">cells_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">metacells_daf
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
 </span>
 </span>
 </em>, 
@@ -639,329 +588,15 @@ for details.
 <span class="pre">metacell_per_cell
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">ndarray
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">empty_metacells
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int8
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int16
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint8
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint16
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">Collection
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int8
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int16
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">int64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint8
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint16
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">uint64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float32
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">float64
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">str
-</span>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -973,33 +608,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1007,14 +618,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/pipeline.html#import_base_metacells">
 <span class="viewcode-link">
@@ -1033,6 +636,200 @@ for details.
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>cells_daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>metacells_daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>metacell_per_cell
+</strong> (
+<em>ndarray
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>empty_metacells
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>int
+</em>
+<em> | 
+</em>
+<em>float
+</em>
+<em> | 
+</em>
+<em>int8
+</em>
+<em> | 
+</em>
+<em>int16
+</em>
+<em> | 
+</em>
+<em>int32
+</em>
+<em> | 
+</em>
+<em>int64
+</em>
+<em> | 
+</em>
+<em>uint8
+</em>
+<em> | 
+</em>
+<em>uint16
+</em>
+<em> | 
+</em>
+<em>uint32
+</em>
+<em> | 
+</em>
+<em>uint64
+</em>
+<em> | 
+</em>
+<em>float32
+</em>
+<em> | 
+</em>
+<em>float64
+</em>
+<em> | 
+</em>
+<em>str
+</em>
+<em> | 
+</em>
+<em>Collection
+</em>
+<em>[
+</em>
+<em>bool
+</em>
+<em> | 
+</em>
+<em>int
+</em>
+<em> | 
+</em>
+<em>float
+</em>
+<em> | 
+</em>
+<em>int8
+</em>
+<em> | 
+</em>
+<em>int16
+</em>
+<em> | 
+</em>
+<em>int32
+</em>
+<em> | 
+</em>
+<em>int64
+</em>
+<em> | 
+</em>
+<em>uint8
+</em>
+<em> | 
+</em>
+<em>uint16
+</em>
+<em> | 
+</em>
+<em>uint32
+</em>
+<em> | 
+</em>
+<em>uint64
+</em>
+<em> | 
+</em>
+<em>float32
+</em>
+<em> | 
+</em>
+<em>float64
+</em>
+<em> | 
+</em>
+<em>str
+</em>
+<em>] 
+</em>
+<em>| 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1057,16 +854,6 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="keyword-only-separator o">
@@ -1081,33 +868,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1115,14 +878,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/pipeline.html#prepare_metacells">
 <span class="viewcode-link">
@@ -1142,6 +897,55 @@ each other. See the Julia
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1174,30 +978,10 @@ for details.
 <span class="pre">daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">score_daf
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
 </span>
 </span>
 </em>, 
@@ -1206,33 +990,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1240,14 +1000,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/pipeline.html#qc_metacells">
 <span class="viewcode-link">
@@ -1271,6 +1023,64 @@ the
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>score_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1303,30 +1113,10 @@ for details.
 <span class="pre">sharp_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafWriter
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">prev_daf
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
 </span>
 </span>
 </em>, 
@@ -1335,30 +1125,10 @@ for details.
 <span class="pre">score_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">sharpening_round
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">int
 </span>
 </span>
 </em>, 
@@ -1367,33 +1137,9 @@ for details.
 <span class="pre">metacells_prefix
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1405,33 +1151,9 @@ for details.
 <span class="pre">blocks_prefix
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1443,33 +1165,9 @@ for details.
 <span class="pre">module_status
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1481,23 +1179,9 @@ for details.
 <span class="pre">rng
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">int
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">0
@@ -1509,33 +1193,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1543,14 +1203,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">None
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/pipeline.html#sharpen_round">
 <span class="viewcode-link">
@@ -1574,6 +1226,130 @@ against the
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>sharp_daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>prev_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>score_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>sharpening_round
+</strong> (
+<em>int
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>metacells_prefix
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>blocks_prefix
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>module_status
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>rng
+</strong> (
+<em>int
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1604,16 +1380,6 @@ for details.
 <em class="sig-param">
 <span class="n">
 <span class="pre">jl_obj
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">Any
 </span>
 </span>
 </em>
@@ -1667,6 +1433,25 @@ are this round’s prefixes. The rest are as given to
 for details.
 </p>
 
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<p>
+<strong>jl_obj
+</strong> (
+<em>Any
+</em>)
+</p>
+
+</dd>
+
+</dl>
+
 <dl class="py method">
 
 <dt class="sig sig-object py" id="metacellspy.pipeline.SharpeningRound.run">
@@ -1680,16 +1465,6 @@ for details.
 <em class="sig-param">
 <span class="n">
 <span class="pre">name
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
 </span>
 </span>
 </em>, 
@@ -1706,33 +1481,9 @@ for details.
 <span class="pre">metacells_prefix
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1744,33 +1495,9 @@ for details.
 <span class="pre">blocks_prefix
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1782,33 +1509,9 @@ for details.
 <span class="pre">module_status
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1820,23 +1523,9 @@ for details.
 <span class="pre">rng
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">int
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">0
@@ -1848,33 +1537,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -1882,14 +1547,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">DafWriter
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/pipeline.html#SharpeningRound.run">
 <span class="viewcode-link">
@@ -1917,6 +1574,105 @@ round’s parameters can be overridden for this round only. See the Julia
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>name
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>metacells_prefix
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>blocks_prefix
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>module_status
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>rng
+</strong> (
+<em>int
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>DafWriter
+</em>
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
@@ -1953,30 +1709,10 @@ for details.
 <span class="pre">initial_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">base_daf
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
 </span>
 </span>
 </em>, 
@@ -1985,30 +1721,10 @@ for details.
 <span class="pre">score_daf
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">DafReader
-</span>
-</span>
 </em>, 
 <em class="sig-param">
 <span class="n">
 <span class="pre">directory
-</span>
-</span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
 </span>
 </span>
 </em>, 
@@ -2017,33 +1733,9 @@ for details.
 <span class="pre">metacells_prefix
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -2055,33 +1747,9 @@ for details.
 <span class="pre">blocks_prefix
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">str
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -2093,33 +1761,9 @@ for details.
 <span class="pre">module_status
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -2131,23 +1775,9 @@ for details.
 <span class="pre">rng
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">int
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">0
@@ -2159,33 +1789,9 @@ for details.
 <span class="pre">overwrite
 </span>
 </span>
-<span class="p">
-<span class="pre">:
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="n">
-<span class="pre">bool
-</span>
-<span class="w"> 
-</span>
-<span class="p">
-<span class="pre">|
-</span>
-</span>
-<span class="w"> 
-</span>
-<span class="pre">None
-</span>
-</span>
-<span class="w"> 
-</span>
 <span class="o">
 <span class="pre">=
 </span>
-</span>
-<span class="w"> 
 </span>
 <span class="default_value">
 <span class="pre">None
@@ -2193,26 +1799,6 @@ for details.
 </span>
 </em>
 <span class="sig-paren">)
-</span> 
-<span class="sig-return">
-<span class="sig-return-icon">&#x2192;
-</span> 
-<span class="sig-return-typehint">
-<span class="pre">Iterator
-</span>
-<span class="p">
-<span class="pre">[
-</span>
-</span>
-<a class="reference internal" href="#metacellspy.pipeline.SharpeningRound" title="metacellspy.pipeline.SharpeningRound">
-<span class="pre">SharpeningRound
-</span>
-</a>
-<span class="p">
-<span class="pre">]
-</span>
-</span>
-</span>
 </span>
 <a class="reference internal" href="_modules/metacellspy/pipeline.html#sharpening_rounds">
 <span class="viewcode-link">
@@ -2342,6 +1928,136 @@ The caller decides when to stop:
 </a>
 for details.
 </p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>initial_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>base_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>score_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>directory
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>metacells_prefix
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>blocks_prefix
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>module_status
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>rng
+</strong> (
+<em>int
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>Iterator
+</em>[
+<a class="reference internal" href="#metacellspy.pipeline.SharpeningRound" title="metacellspy.pipeline.SharpeningRound">
+<em>SharpeningRound
+</em>
+</a>]
+</p>
+
+</dd>
+
+</dl>
 
 </dd>
 </dl>
