@@ -127,6 +127,46 @@
 </li>
 
 <li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.EnsemblConsistency">
+<code class="docutils literal notranslate">
+<span class="pre">EnsemblConsistency
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.GmaraEnsemblGenes">
+<code class="docutils literal notranslate">
+<span class="pre">GmaraEnsemblGenes
+</span>
+</code>
+</a>
+<ul>
+
+<li class="toctree-l4">
+<a class="reference internal" href="#metacellspy.gmara.GmaraEnsemblGenes.ensembls_of_name">
+<code class="docutils literal notranslate">
+<span class="pre">GmaraEnsemblGenes.ensembls_of_name
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l4">
+<a class="reference internal" href="#metacellspy.gmara.GmaraEnsemblGenes.final_ensembls_of_ensembl">
+<code class="docutils literal notranslate">
+<span class="pre">GmaraEnsemblGenes.final_ensembls_of_ensembl
+</span>
+</code>
+</a>
+</li>
+
+</ul>
+
+</li>
+
+<li class="toctree-l3">
 <a class="reference internal" href="#metacellspy.gmara.TIMEOUT">
 <code class="docutils literal notranslate">
 <span class="pre">TIMEOUT
@@ -136,9 +176,27 @@
 </li>
 
 <li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.collect_ensembl_genes">
+<code class="docutils literal notranslate">
+<span class="pre">collect_ensembl_genes()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
 <a class="reference internal" href="#metacellspy.gmara.empty_gmara_cache">
 <code class="docutils literal notranslate">
 <span class="pre">empty_gmara_cache()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.fetch_gmara_ensembl_genes">
+<code class="docutils literal notranslate">
+<span class="pre">fetch_gmara_ensembl_genes()
 </span>
 </code>
 </a>
@@ -175,6 +233,15 @@
 <a class="reference internal" href="#metacellspy.gmara.set_gmara_genes_mask">
 <code class="docutils literal notranslate">
 <span class="pre">set_gmara_genes_mask()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.verify_consistent_ensembl_genes">
+<code class="docutils literal notranslate">
+<span class="pre">verify_consistent_ensembl_genes()
 </span>
 </code>
 </a>
@@ -365,6 +432,316 @@
 </dl>
 
 
+<dl class="py class">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.EnsemblConsistency">
+
+<span class="property">
+<span class="k">
+<span class="pre">class
+</span>
+</span>
+<span class="w"> 
+</span>
+</span>
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">EnsemblConsistency
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">jl_obj
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#EnsemblConsistency">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.EnsemblConsistency" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>The consistency of the Ensembl identifier of a gene name with the mappings of Gmara, as returned by
+
+<a class="reference internal" href="#metacellspy.gmara.verify_consistent_ensembl_genes" title="metacellspy.gmara.verify_consistent_ensembl_genes">
+<code class="xref py py-func docutils literal notranslate">
+<span class="pre">verify_consistent_ensembl_genes()
+</span>
+</code>
+</a>. The 
+<code class="docutils literal notranslate">
+<span class="pre">normalized_ensembl
+</span>
+</code> is 
+<code class="docutils literal notranslate">
+<span class="pre">None
+</span>
+</code> if the 
+<code class="docutils literal notranslate">
+<span class="pre">ensembl
+</span>
+</code> is not in the
+form of an Ensembl identifier. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.EnsemblConsistency">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<p>
+<strong>jl_obj
+</strong> (
+<em>Any
+</em>)
+</p>
+
+</dd>
+
+</dl>
+
+</dd>
+</dl>
+
+
+<dl class="py class">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.GmaraEnsemblGenes">
+
+<span class="property">
+<span class="k">
+<span class="pre">class
+</span>
+</span>
+<span class="w"> 
+</span>
+</span>
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">GmaraEnsemblGenes
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="n">
+<span class="pre">jl_obj
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#GmaraEnsemblGenes">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.GmaraEnsemblGenes" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>The mappings of gene names to EnsemblGenes of some version of Gmara for some species, as returned by
+
+<a class="reference internal" href="#metacellspy.gmara.fetch_gmara_ensembl_genes" title="metacellspy.gmara.fetch_gmara_ensembl_genes">
+<code class="xref py py-func docutils literal notranslate">
+<span class="pre">fetch_gmara_ensembl_genes()
+</span>
+</code>
+</a>. The 
+<code class="docutils literal notranslate">
+<span class="pre">ensembls_of_name
+</span>
+</code> and 
+<code class="docutils literal notranslate">
+<span class="pre">final_ensembls_of_ensembl
+</span>
+</code> are converted from
+Julia when first accessed. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.GmaraEnsemblGenes">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<p>
+<strong>jl_obj
+</strong> (
+<em>Any
+</em>)
+</p>
+
+</dd>
+
+</dl>
+
+<dl class="py property">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.GmaraEnsemblGenes.ensembls_of_name">
+
+<span class="property">
+<span class="k">
+<span class="pre">property
+</span>
+</span>
+<span class="w"> 
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">ensembls_of_name
+</span>
+</span>
+<span class="property">
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">Dict
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">FrozenSet
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+</span>
+<a class="headerlink" href="#metacellspy.gmara.GmaraEnsemblGenes.ensembls_of_name" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>The final EnsemblGenes of each name of the namespace.
+</p>
+
+</dd>
+</dl>
+
+
+<dl class="py property">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.GmaraEnsemblGenes.final_ensembls_of_ensembl">
+
+<span class="property">
+<span class="k">
+<span class="pre">property
+</span>
+</span>
+<span class="w"> 
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">final_ensembls_of_ensembl
+</span>
+</span>
+<span class="property">
+<span class="p">
+<span class="pre">:
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">Dict
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">,
+</span>
+</span>
+<span class="w"> 
+</span>
+<span class="pre">FrozenSet
+</span>
+<span class="p">
+<span class="pre">[
+</span>
+</span>
+<span class="pre">str
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+<span class="p">
+<span class="pre">]
+</span>
+</span>
+</span>
+<a class="headerlink" href="#metacellspy.gmara.GmaraEnsemblGenes.final_ensembls_of_ensembl" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>The final EnsemblGenes of each EnsemblGene identifier.
+</p>
+
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+
+
 <dl class="py data">
 
 <dt class="sig sig-object py" id="metacellspy.gmara.TIMEOUT">
@@ -413,6 +790,117 @@
 
 <dl class="py function">
 
+<dt class="sig sig-object py" id="metacellspy.gmara.collect_ensembl_genes">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">collect_ensembl_genes
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">names
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">gmara_ensembl_genes
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#collect_ensembl_genes">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.collect_ensembl_genes" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Return the EnsemblGene of each of the 
+<code class="docutils literal notranslate">
+<span class="pre">names
+</span>
+</code>, or empty if it maps to none or to several. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.collect_ensembl_genes">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>names
+</strong> (
+<em>ndarray
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>gmara_ensembl_genes
+</strong> (
+<a class="reference internal" href="#metacellspy.gmara.GmaraEnsemblGenes" title="metacellspy.gmara.GmaraEnsemblGenes">
+<em>GmaraEnsemblGenes
+</em>
+</a>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>ndarray
+</em>
+</p>
+
+</dd>
+
+</dl>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
 <dt class="sig sig-object py" id="metacellspy.gmara.empty_gmara_cache">
 
 <span class="sig-prename descclassname">
@@ -454,6 +942,214 @@ for details.
 
 <dd class="field-odd">
 <p>None
+</p>
+
+</dd>
+
+</dl>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.fetch_gmara_ensembl_genes">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">fetch_gmara_ensembl_genes
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">species
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">namespace
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">version
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">cache_dir
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">timeout
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#fetch_gmara_ensembl_genes">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.fetch_gmara_ensembl_genes" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Fetch the mappings of gene names to EnsemblGenes of some 
+<code class="docutils literal notranslate">
+<span class="pre">version
+</span>
+</code> of Gmara for some 
+<code class="docutils literal notranslate">
+<span class="pre">species
+</span>
+</code>. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.fetch_gmara_ensembl_genes">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>species
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>namespace
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>version
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>cache_dir
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>timeout
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<a class="reference internal" href="#metacellspy.gmara.GmaraEnsemblGenes" title="metacellspy.gmara.GmaraEnsemblGenes">
+<em>GmaraEnsemblGenes
+</em>
+</a>
 </p>
 
 </dd>
@@ -1427,6 +2123,147 @@ for details.
 
 <dd class="field-even">
 <p>int
+</p>
+
+</dd>
+
+</dl>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.gmara.verify_consistent_ensembl_genes">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">verify_consistent_ensembl_genes
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">names
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">ensembl_per_name
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">gmara_ensembl_genes
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#verify_consistent_ensembl_genes">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.verify_consistent_ensembl_genes" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Verify that the Ensembl identifier of each of the 
+<code class="docutils literal notranslate">
+<span class="pre">names
+</span>
+</code> is consistent with the 
+<code class="docutils literal notranslate">
+<span class="pre">gmara_ensembl_genes
+</span>
+</code>. Returns
+the 
+<a class="reference internal" href="#metacellspy.gmara.EnsemblConsistency" title="metacellspy.gmara.EnsemblConsistency">
+<code class="xref py py-class docutils literal notranslate">
+<span class="pre">EnsemblConsistency
+</span>
+</code>
+</a> of each name, in the same order. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.verify_consistent_ensembl_genes">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>names
+</strong> (
+<em>ndarray
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>ensembl_per_name
+</strong> (
+<em>ndarray
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>gmara_ensembl_genes
+</strong> (
+<a class="reference internal" href="#metacellspy.gmara.GmaraEnsemblGenes" title="metacellspy.gmara.GmaraEnsemblGenes">
+<em>GmaraEnsemblGenes
+</em>
+</a>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>List
+</em>[
+<a class="reference internal" href="#metacellspy.gmara.EnsemblConsistency" title="metacellspy.gmara.EnsemblConsistency">
+<em>EnsemblConsistency
+</em>
+</a>]
 </p>
 
 </dd>

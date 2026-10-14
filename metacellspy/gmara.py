@@ -3,7 +3,12 @@ Fetch gene lists from the Gmara service. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html>`__ for details.
 """
 
+from functools import cached_property
 from typing import AbstractSet
+from typing import Any
+from typing import Dict
+from typing import FrozenSet
+from typing import List
 from typing import Optional
 
 import numpy as np
@@ -16,12 +21,17 @@ from .julia_import import jl
 
 __all__ = [
     "CACHE_DIR",
+    "EnsemblConsistency",
+    "GmaraEnsemblGenes",
     "TIMEOUT",
+    "collect_ensembl_genes",
     "empty_gmara_cache",
+    "fetch_gmara_ensembl_genes",
     "gmara_genes",
     "gmara_genes_mask",
     "normalize_gene_name",
     "set_gmara_genes_mask",
+    "verify_consistent_ensembl_genes",
 ]
 
 # These two are a snapshot taken when this module is imported, and are informational only. They come
@@ -35,6 +45,87 @@ CACHE_DIR: str = str(jl.Metacells.Gmara.CACHE_DIR)
 TIMEOUT: float = float(jl.Metacells.Gmara.TIMEOUT)
 
 
+def _frozen_set(jl_set: Any) -> FrozenSet[str]:
+    # Convert a Julia set of strings.
+    return frozenset(str(value) for value in jl_set)
+
+
+def _dict_of_frozen_sets(jl_dict: Any) -> Dict[str, FrozenSet[str]]:
+    # Convert a Julia dictionary of sets of strings.
+    return {str(key): _frozen_set(values) for key, values in jl_dict.items()}
+
+
+class EnsemblConsistency:  # pylint: disable=too-many-instance-attributes
+    """
+    The consistency of the Ensembl identifier of a gene name with the mappings of Gmara, as returned by
+    :py:func:`verify_consistent_ensembl_genes`. The ``normalized_ensembl`` is ``None`` if the ``ensembl`` is not in the
+    form of an Ensembl identifier. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.EnsemblConsistency>`__
+    for details.
+    """
+
+    def __init__(self, jl_obj: Any) -> None:
+        self.jl_obj = jl_obj
+        self.name = str(jl_obj.name)
+        self.ensembl = str(jl_obj.ensembl)
+        self.normalized_ensembl = None if jl_obj.normalized_ensembl is None else str(jl_obj.normalized_ensembl)
+        self.name_ensembls = _frozen_set(jl_obj.name_ensembls)
+        self.final_ensembls = _frozen_set(jl_obj.final_ensembls)
+        self.is_consistent = bool(jl_obj.is_consistent)
+        self.ensembl_is_normalized = bool(jl_obj.ensembl_is_normalized)
+        self.name_is_empty = bool(jl_obj.name_is_empty)
+        self.name_is_unknown = bool(jl_obj.name_is_unknown)
+        self.ensembl_is_empty = bool(jl_obj.ensembl_is_empty)
+        self.ensembl_is_invalid = bool(jl_obj.ensembl_is_invalid)
+        self.ensembl_is_unknown = bool(jl_obj.ensembl_is_unknown)
+        self.ensembl_is_retired = bool(jl_obj.ensembl_is_retired)
+        self.ensembl_is_different = bool(jl_obj.ensembl_is_different)
+
+
+class GmaraEnsemblGenes:
+    """
+    The mappings of gene names to EnsemblGenes of some version of Gmara for some species, as returned by
+    :py:func:`fetch_gmara_ensembl_genes`. The ``ensembls_of_name`` and ``final_ensembls_of_ensembl`` are converted from
+    Julia when first accessed. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.GmaraEnsemblGenes>`__
+    for details.
+    """
+
+    def __init__(self, jl_obj: Any) -> None:
+        self.jl_obj = jl_obj
+
+    @cached_property
+    def ensembls_of_name(self) -> Dict[str, FrozenSet[str]]:
+        """
+        The final EnsemblGenes of each name of the namespace.
+        """
+        return _dict_of_frozen_sets(self.jl_obj.ensembls_of_name)
+
+    @cached_property
+    def final_ensembls_of_ensembl(self) -> Dict[str, FrozenSet[str]]:
+        """
+        The final EnsemblGenes of each EnsemblGene identifier.
+        """
+        return _dict_of_frozen_sets(self.jl_obj.final_ensembls_of_ensembl)
+
+
+def collect_ensembl_genes(
+    *,
+    names: np.ndarray,
+    gmara_ensembl_genes: GmaraEnsemblGenes,
+) -> np.ndarray:
+    """
+    Return the EnsemblGene of each of the ``names``, or empty if it maps to none or to several. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.collect_ensembl_genes>`__
+    for details.
+    """
+    result = jl.Metacells.collect_ensembl_genes(
+        names=_to_julia_array(names),
+        gmara_ensembl_genes=gmara_ensembl_genes.jl_obj,
+    )
+    return _from_julia_array(result)
+
+
 def empty_gmara_cache() -> None:
     """
     All requests are cached in-memory. See the Julia
@@ -42,6 +133,31 @@ def empty_gmara_cache() -> None:
     for details.
     """
     jl.Metacells.empty_gmara_cache_b()
+
+
+def fetch_gmara_ensembl_genes(
+    *,
+    species: str,
+    namespace: Optional[str] = None,
+    version: Optional[str] = None,
+    cache_dir: Optional[str] = None,
+    timeout: Optional[float] = None,
+) -> GmaraEnsemblGenes:
+    """
+    Fetch the mappings of gene names to EnsemblGenes of some ``version`` of Gmara for some ``species``. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.fetch_gmara_ensembl_genes>`__
+    for details.
+    """
+    result = jl.Metacells.fetch_gmara_ensembl_genes(
+        species=species,
+        **_given(
+            namespace=namespace,
+            version=version,
+            cache_dir=cache_dir,
+            timeout=timeout,
+        ),
+    )
+    return GmaraEnsemblGenes(result)
 
 
 def gmara_genes(
@@ -155,3 +271,23 @@ def set_gmara_genes_mask(
         ),
     )
     return int(result)
+
+
+def verify_consistent_ensembl_genes(
+    *,
+    names: np.ndarray,
+    ensembl_per_name: np.ndarray,
+    gmara_ensembl_genes: GmaraEnsemblGenes,
+) -> List[EnsemblConsistency]:
+    """
+    Verify that the Ensembl identifier of each of the ``names`` is consistent with the ``gmara_ensembl_genes``. Returns
+    the :py:class:`EnsemblConsistency` of each name, in the same order. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.verify_consistent_ensembl_genes>`__
+    for details.
+    """
+    result = jl.Metacells.verify_consistent_ensembl_genes(
+        names=_to_julia_array(names),
+        ensembl_per_name=_to_julia_array(ensembl_per_name),
+        gmara_ensembl_genes=gmara_ensembl_genes.jl_obj,
+    )
+    return [EnsemblConsistency(consistency) for consistency in result]
