@@ -71,26 +71,30 @@
            <div itemprop="articleBody">
              
   <h1>Source code for metacellspy.gmara</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Fetch gene lists from the Gmara service. See the Julia</span>
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html&gt;`__ for details.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSet</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_from_julia_array</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_array</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;CACHE_DIR&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TIMEOUT&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;empty_gmara_cache&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;gmara_genes&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;normalize_gene_name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;set_gmara_genes_mask&quot;</span><span class="p">,</span>
+    <span class="s2">"CACHE_DIR"</span><span class="p">,</span>
+    <span class="s2">"TIMEOUT"</span><span class="p">,</span>
+    <span class="s2">"empty_gmara_cache"</span><span class="p">,</span>
+    <span class="s2">"gmara_genes"</span><span class="p">,</span>
+    <span class="s2">"gmara_genes_mask"</span><span class="p">,</span>
+    <span class="s2">"normalize_gene_name"</span><span class="p">,</span>
+    <span class="s2">"set_gmara_genes_mask"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># These two are a snapshot taken when this module is imported, and are informational only. They come</span>
@@ -107,11 +111,11 @@
 <div class="viewcode-block" id="empty_gmara_cache">
 <a class="viewcode-back" href="../../gmara.html#metacellspy.gmara.empty_gmara_cache">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">empty_gmara_cache</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    All requests are cached in-memory. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.empty_gmara_cache!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">empty_gmara_cache_b</span><span class="p">()</span></div>
 
 
@@ -127,12 +131,12 @@
     <span class="n">cache_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AbstractSet</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return the set of names of a ``version`` of a ``list`` in a ``namespace`` of genes of some ``species``. See the</span>
 <span class="sd">    Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.gmara_genes&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">gmara_genes</span><span class="p">(</span>
         <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
@@ -147,21 +151,56 @@
 
 
 
+<div class="viewcode-block" id="gmara_genes_mask">
+<a class="viewcode-back" href="../../gmara.html#metacellspy.gmara.gmara_genes_mask">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">gmara_genes_mask</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">names</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">species</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="nb">list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
+    <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cache_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return a mask with, for each of the ``names`` in the ``namespace``, whether it is in some ``version`` of a Gmara</span>
+<span class="sd">    ``list`` for some ``species``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.gmara_genes_mask&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    """</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">gmara_genes_mask</span><span class="p">(</span>
+        <span class="n">names</span><span class="o">=</span><span class="n">_to_julia_array</span><span class="p">(</span><span class="n">names</span><span class="p">),</span>
+        <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+            <span class="nb">list</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_from_julia_array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+
 <div class="viewcode-block" id="normalize_gene_name">
 <a class="viewcode-back" href="../../gmara.html#metacellspy.gmara.normalize_gene_name">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">normalize_gene_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">validate</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Normalize a gene name in some namespace. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.normalize_gene_name&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">normalize_gene_name</span><span class="p">(</span>
         <span class="n">name</span><span class="p">,</span>
         <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span><span class="n">validate</span><span class="o">=</span><span class="n">validate</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
@@ -176,18 +215,18 @@
     <span class="n">namespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="nb">list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
     <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">gene_name_property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="nb">property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
+    <span class="n">name_property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mask_property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">cache_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Set a gene property mask in ``daf`` based on some ``version`` of a Gmara ``list`` of some ``namespace`` for some</span>
 <span class="sd">    ``species``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.set_gmara_genes_mask!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">set_gmara_genes_mask_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="p">,</span>
         <span class="n">species</span><span class="o">=</span><span class="n">species</span><span class="p">,</span>
@@ -195,8 +234,8 @@
             <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
             <span class="nb">list</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span>
             <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
-            <span class="n">gene_name_property</span><span class="o">=</span><span class="n">gene_name_property</span><span class="p">,</span>
-            <span class="nb">property</span><span class="o">=</span><span class="nb">property</span><span class="p">,</span>
+            <span class="n">name_property</span><span class="o">=</span><span class="n">name_property</span><span class="p">,</span>
+            <span class="n">mask_property</span><span class="o">=</span><span class="n">mask_property</span><span class="p">,</span>
             <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>

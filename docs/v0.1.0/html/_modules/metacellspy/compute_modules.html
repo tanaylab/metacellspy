@@ -71,10 +71,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for metacellspy.compute_modules</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Group genes into modules of each block. See the Julia</span>
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/compute_modules.html&gt;`__ for details.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
@@ -85,7 +85,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;compute_blocks_modules&quot;</span><span class="p">,</span>
+    <span class="s2">"compute_blocks_modules"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -104,13 +104,13 @@
     <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_anchor_per_module``, ``matrix_of_is_found_per_module_per_block``,</span>
 <span class="sd">    ``matrix_of_module_per_gene_per_block``, and (if ``module_status`` is specified),</span>
 <span class="sd">    ``matrix_of_module_status_per_gene_per_block``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/compute_modules.html#Metacells.ComputeModules.compute_blocks_modules!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_blocks_modules_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>

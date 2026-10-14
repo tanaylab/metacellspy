@@ -27,7 +27,7 @@ __all__ = [
 
 #: Which of the ``AnnData`` properties to copy, and under which name. Mapping a key to ``None``
 #: skips it; mapping it to a name and a value renames it, using the value for entries the
-#: ``AnnData`` does not have.
+#: ``AnnData`` does not have. The name may be ``=``, to keep the name of the ``AnnData`` property.
 #:
 #: The key says what kind of data it is as well as its name: a name on its own is a scalar, a
 #: ``(axis, name)`` pair is a vector, and a ``(rows_axis, columns_axis, name)`` triple is a matrix.
@@ -52,6 +52,7 @@ def import_cells_h5ad(
     *,
     cells_h5ad: str,
     copy_data: Optional[CopyAnnData] = None,
+    ensembl_property: Optional[str] = None,
     bestify: Optional[bool] = None,
     min_sparse_saving_fraction: Optional[float] = None,
     overwrite: Optional[bool] = None,
@@ -68,6 +69,7 @@ def import_cells_h5ad(
         cells_h5ad=cells_h5ad,
         **_given(
             copy_data=_copy_anndata(copy_data),
+            ensembl_property=ensembl_property,
             bestify=bestify,
             min_sparse_saving_fraction=min_sparse_saving_fraction,
             overwrite=overwrite,

@@ -162,13 +162,14 @@ def fetch_gmara_vector_of_is_regulator_per_gene(
     *,
     species: str,
     namespace: Optional[str] = None,
+    name_property: Optional[str] = None,
     version: Optional[str] = None,
     cache_dir: Optional[str] = None,
     timeout: Optional[float] = None,
     overwrite: Optional[bool] = None,
 ) -> None:
     """
-    Fetch and set ``vector_of_is_transcription_factor_per_gene`` from ``Gmara``. See the Julia
+    Fetch and set ``vector_of_is_regulator_per_gene`` from ``Gmara``. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_genes.html#Metacells.AnalyzeGenes.fetch_gmara_vector_of_is_regulator_per_gene!>`__
     for details.
     """
@@ -177,6 +178,7 @@ def fetch_gmara_vector_of_is_regulator_per_gene(
         species=species,
         **_given(
             namespace=namespace,
+            name_property=name_property,
             version=version,
             cache_dir=cache_dir,
             timeout=timeout,
@@ -190,6 +192,7 @@ def fetch_gmara_vector_of_is_transcription_factor_per_gene(
     *,
     species: str,
     namespace: Optional[str] = None,
+    name_property: Optional[str] = None,
     version: Optional[str] = None,
     cache_dir: Optional[str] = None,
     timeout: Optional[float] = None,
@@ -205,6 +208,7 @@ def fetch_gmara_vector_of_is_transcription_factor_per_gene(
         species=species,
         **_given(
             namespace=namespace,
+            name_property=name_property,
             version=version,
             cache_dir=cache_dir,
             timeout=timeout,

@@ -71,10 +71,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for metacellspy.compute_blocks</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Group metacells into blocks. See the Julia</span>
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/compute_blocks.html&gt;`__ for details.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
@@ -84,7 +84,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;compute_metacells_blocks&quot;</span><span class="p">,</span>
+    <span class="s2">"compute_metacells_blocks"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -98,11 +98,11 @@
     <span class="n">prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set the ``block_axis`` and ``vector_of_block_per_metacell``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/compute_blocks.html#Metacells.ComputeBlocks.compute_metacells_blocks!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_metacells_blocks_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>

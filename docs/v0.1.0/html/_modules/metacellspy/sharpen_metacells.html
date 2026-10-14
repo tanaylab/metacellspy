@@ -71,10 +71,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for metacellspy.sharpen_metacells</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Sharpen the metacells by re-grouping the cells. See the Julia</span>
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html&gt;`__ for details.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
@@ -87,11 +87,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;compute_matrix_of_n_cells_per_prev_block_per_block&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_matrix_of_n_cells_per_prev_block_type_per_block_type&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_vector_of_global_flow_order_per_type&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sharpen_metacells&quot;</span><span class="p">,</span>
+    <span class="s2">"compute_matrix_of_n_cells_per_prev_block_per_block"</span><span class="p">,</span>
+    <span class="s2">"compute_matrix_of_n_cells_per_prev_block_type_per_block_type"</span><span class="p">,</span>
+    <span class="s2">"compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type"</span><span class="p">,</span>
+    <span class="s2">"compute_vector_of_global_flow_order_per_type"</span><span class="p">,</span>
+    <span class="s2">"sharpen_metacells"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -103,11 +103,11 @@
     <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_n_cells_per_prev_block_per_block``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_matrix_of_n_cells_per_prev_block_per_block!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_n_cells_per_prev_block_per_block_b</span><span class="p">(</span>
         <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
         <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>
@@ -126,11 +126,11 @@
     <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_n_cells_per_prev_block_type_per_block_type``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_matrix_of_n_cells_per_prev_block_type_per_block_type!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_n_cells_per_prev_block_type_per_block_type_b</span><span class="p">(</span>
         <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
         <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>
@@ -149,11 +149,11 @@
     <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_n_cells_per_prev_metacell_type_per_metacell_type``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type_b</span><span class="p">(</span>
         <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
         <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>
@@ -175,12 +175,12 @@
     <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_global_flow_order_per_type``, a global order of the types minimizing the total weighted</span>
 <span class="sd">    crossings of the type flow across the sharpening rounds. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.compute_vector_of_global_flow_order_per_type!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_vector_of_global_flow_order_per_type_b</span><span class="p">(</span>
         <span class="n">final_daf</span><span class="p">,</span>
         <span class="n">jl</span><span class="o">.</span><span class="n">DafPy</span><span class="o">.</span><span class="n">_to_daf_readers</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">daf_per_round</span><span class="p">)),</span>
@@ -220,13 +220,13 @@
     <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Given a ``prev_daf`` metacells repository with a blocks structure and local gene modules that describe the cell</span>
 <span class="sd">    state manifold, compute a ``sharp_daf`` metacells repository, which hopefully more faithfully captures this</span>
 <span class="sd">    manifold. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html#Metacells.SharpenMetacells.sharpen_metacells!&gt;`__</span>
 <span class="sd">    for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">sharpen_metacells_b</span><span class="p">(</span>
         <span class="n">sharp_daf</span><span class="o">=</span><span class="n">sharp_daf</span><span class="p">,</span>
         <span class="n">prev_daf</span><span class="o">=</span><span class="n">prev_daf</span><span class="p">,</span>

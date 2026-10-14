@@ -44,12 +44,21 @@ def test_unknown_list_is_an_error(tmp_path: Path) -> None:
         mc.gmara_genes(species=SPECIES, list="no-such-list", cache_dir=str(tmp_path))
 
 
+def test_gmara_genes_mask(tmp_path: Path) -> None:
+    known = sorted(mc.gmara_genes(species=SPECIES, cache_dir=str(tmp_path)))
+    names = np.array([known[0], "NO-SUCH-GENE", known[1]])
+
+    mask = mc.gmara_genes_mask(names=names, species=SPECIES, cache_dir=str(tmp_path))
+
+    np.testing.assert_array_equal(mask, np.array([True, False, True]))
+
+
 def test_set_gmara_genes_mask(tmp_path: Path) -> None:
     known = sorted(mc.gmara_genes(species=SPECIES, cache_dir=str(tmp_path)))
     names = [known[0], known[1], "NO-SUCH-GENE"]
     daf = memory_daf_of_genes(names)
 
-    n_marked = mc.set_gmara_genes_mask(daf, species=SPECIES, property="is_known", cache_dir=str(tmp_path))
+    n_marked = mc.set_gmara_genes_mask(daf, species=SPECIES, mask_property="is_known", cache_dir=str(tmp_path))
 
     assert n_marked == 2
     mask = daf.get_np_vector("gene", "is_known")

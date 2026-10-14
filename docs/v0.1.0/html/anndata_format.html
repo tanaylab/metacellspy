@@ -336,7 +336,15 @@ skips it; mapping it to a name and a value renames it, using the value for entri
 <code class="docutils literal notranslate">
 <span class="pre">AnnData
 </span>
-</code> does not have.
+</code> does not have. The name may be 
+<code class="docutils literal notranslate">
+<span class="pre">=
+</span>
+</code>, to keep the name of the 
+<code class="docutils literal notranslate">
+<span class="pre">AnnData
+</span>
+</code> property.
 </p>
 
 <p>The key says what kind of data it is as well as its name: a name on its own is a scalar, a
@@ -535,6 +543,20 @@ for details.
 <em class="sig-param">
 <span class="n">
 <span class="pre">copy_data
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">ensembl_property
 </span>
 </span>
 <span class="o">
@@ -782,6 +804,19 @@ for details.
 <em>] 
 </em>
 <em>| 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>ensembl_property
+</strong> (
+<em>str
+</em>
+<em> | 
 </em>
 <em>None
 </em>)

@@ -154,6 +154,15 @@
 </li>
 
 <li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.gmara.gmara_genes_mask">
+<code class="docutils literal notranslate">
+<span class="pre">gmara_genes_mask()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
 <a class="reference internal" href="#metacellspy.gmara.normalize_gene_name">
 <code class="docutils literal notranslate">
 <span class="pre">normalize_gene_name()
@@ -699,6 +708,267 @@ for details.
 
 <dl class="py function">
 
+<dt class="sig sig-object py" id="metacellspy.gmara.gmara_genes_mask">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.gmara.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">gmara_genes_mask
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">names
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">species
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">namespace
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">list
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">version
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">cache_dir
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">timeout
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/gmara.html#gmara_genes_mask">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.gmara.gmara_genes_mask" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Return a mask with, for each of the 
+<code class="docutils literal notranslate">
+<span class="pre">names
+</span>
+</code> in the 
+<code class="docutils literal notranslate">
+<span class="pre">namespace
+</span>
+</code>, whether it is in some 
+<code class="docutils literal notranslate">
+<span class="pre">version
+</span>
+</code> of a Gmara
+
+<code class="docutils literal notranslate">
+<span class="pre">list
+</span>
+</code> for some 
+<code class="docutils literal notranslate">
+<span class="pre">species
+</span>
+</code>. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.gmara_genes_mask">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>names
+</strong> (
+<em>ndarray
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>species
+</strong> (
+<em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>namespace
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>list
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>version
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>cache_dir
+</strong> (
+<em>str
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>timeout
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>
+<em>ndarray
+</em>
+</p>
+
+</dd>
+
+</dl>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
 <dt class="sig sig-object py" id="metacellspy.gmara.normalize_gene_name">
 
 <span class="sig-prename descclassname">
@@ -728,6 +998,20 @@ for details.
 <em class="sig-param">
 <span class="n">
 <span class="pre">namespace
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">validate
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
 </span>
 </span>
 </em>
@@ -775,6 +1059,19 @@ for details.
 <strong>namespace
 </strong> (
 <em>str
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>validate
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
 </em>)
 </p>
 </li>
@@ -878,7 +1175,7 @@ for details.
 </em>, 
 <em class="sig-param">
 <span class="n">
-<span class="pre">gene_name_property
+<span class="pre">name_property
 </span>
 </span>
 <span class="o">
@@ -892,7 +1189,7 @@ for details.
 </em>, 
 <em class="sig-param">
 <span class="n">
-<span class="pre">property
+<span class="pre">mask_property
 </span>
 </span>
 <span class="o">
@@ -1056,7 +1353,7 @@ for details.
 
 <li>
 <p>
-<strong>gene_name_property
+<strong>name_property
 </strong> (
 <em>str
 </em>
@@ -1069,7 +1366,7 @@ for details.
 
 <li>
 <p>
-<strong>property
+<strong>mask_property
 </strong> (
 <em>str
 </em>

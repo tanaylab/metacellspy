@@ -109,6 +109,16 @@ def test_skipping_a_property() -> None:
 
 
 @needs_test_data
+def test_ensembl_property() -> None:
+    daf = dp.memory_daf(name="test")
+
+    mc.import_cells_h5ad(daf, cells_h5ad=str(CELLS_H5AD), ensembl_property="gene_ids")
+
+    assert daf.has_vector("gene", "ensembl")
+    assert not daf.has_vector("gene", "gene_ids")
+
+
+@needs_test_data
 def test_a_vector_and_a_matrix_of_one_name() -> None:
     daf = dp.memory_daf(name="test")
 

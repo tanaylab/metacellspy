@@ -6,9 +6,12 @@ Fetch gene lists from the Gmara service. See the Julia
 from typing import AbstractSet
 from typing import Optional
 
+import numpy as np
 from dafpy import DafWriter
 
+from .julia_import import _from_julia_array
 from .julia_import import _given
+from .julia_import import _to_julia_array
 from .julia_import import jl
 
 __all__ = [
@@ -16,6 +19,7 @@ __all__ = [
     "TIMEOUT",
     "empty_gmara_cache",
     "gmara_genes",
+    "gmara_genes_mask",
     "normalize_gene_name",
     "set_gmara_genes_mask",
 ]
@@ -68,10 +72,41 @@ def gmara_genes(
     return {str(name) for name in result}
 
 
+def gmara_genes_mask(
+    *,
+    names: np.ndarray,
+    species: str,
+    namespace: Optional[str] = None,
+    list: Optional[str] = None,  # pylint: disable=redefined-builtin
+    version: Optional[str] = None,
+    cache_dir: Optional[str] = None,
+    timeout: Optional[float] = None,
+) -> np.ndarray:
+    """
+    Return a mask with, for each of the ``names`` in the ``namespace``, whether it is in some ``version`` of a Gmara
+    ``list`` for some ``species``. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/gmara.html#Metacells.Gmara.gmara_genes_mask>`__
+    for details.
+    """
+    result = jl.Metacells.gmara_genes_mask(
+        names=_to_julia_array(names),
+        species=species,
+        **_given(
+            namespace=namespace,
+            list=list,
+            version=version,
+            cache_dir=cache_dir,
+            timeout=timeout,
+        ),
+    )
+    return _from_julia_array(result)
+
+
 def normalize_gene_name(
     name: str,
     *,
     namespace: str,
+    validate: Optional[bool] = None,
 ) -> str:
     """
     Normalize a gene name in some namespace. See the Julia
@@ -81,6 +116,7 @@ def normalize_gene_name(
     result = jl.Metacells.normalize_gene_name(
         name,
         namespace=namespace,
+        **_given(validate=validate),
     )
     return str(result)
 
@@ -92,8 +128,8 @@ def set_gmara_genes_mask(
     namespace: Optional[str] = None,
     list: Optional[str] = None,  # pylint: disable=redefined-builtin
     version: Optional[str] = None,
-    gene_name_property: Optional[str] = None,
-    property: Optional[str] = None,  # pylint: disable=redefined-builtin
+    name_property: Optional[str] = None,
+    mask_property: Optional[str] = None,
     cache_dir: Optional[str] = None,
     timeout: Optional[float] = None,
     overwrite: Optional[bool] = None,
@@ -111,8 +147,8 @@ def set_gmara_genes_mask(
             namespace=namespace,
             list=list,
             version=version,
-            gene_name_property=gene_name_property,
-            property=property,
+            name_property=name_property,
+            mask_property=mask_property,
             cache_dir=cache_dir,
             timeout=timeout,
             overwrite=overwrite,
