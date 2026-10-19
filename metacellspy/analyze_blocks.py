@@ -9,12 +9,10 @@ Compute per-block data. See the Julia
 
 from typing import Optional
 
-import numpy as np
 from dafpy import DafReader
 from dafpy import DafWriter
 
 from .julia_import import _given
-from .julia_import import _to_julia_array
 from .julia_import import jl
 
 __all__ = [
@@ -27,7 +25,6 @@ __all__ = [
     "compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_punctuated_metacells_per_gene_per_base_block",
     "compute_matrix_of_correlation_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block",
     "compute_matrix_of_correlation_between_neighborhood_cells_and_punctuated_metacells_per_gene_per_block",
-    "compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block",
     "compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block",
     "compute_matrix_of_is_correlated_with_skeleton_in_neighborhood_per_gene_per_block",
     "compute_matrix_of_is_environment_distinct_per_gene_per_block",
@@ -37,12 +34,10 @@ __all__ = [
     "compute_matrix_of_is_in_neighborhood_per_block_per_block",
     "compute_matrix_of_is_neighborhood_distinct_per_gene_per_block",
     "compute_matrix_of_is_neighborhood_marker_per_gene_per_block",
-    "compute_matrix_of_is_strong_per_gene_per_block",
     "compute_matrix_of_linear_fraction_per_gene_per_block",
     "compute_matrix_of_log_linear_fraction_per_gene_per_block",
-    "compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks",
-    "compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block",
-    "compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block",
+    "compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks",
+    "compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block",
     "compute_module_sharing_at_changed_base_blocks",
     "compute_vector_of_block_closest_by_pertinent_markers_per_cell",
     "compute_vector_of_n_cells_per_block",
@@ -248,32 +243,6 @@ def compute_matrix_of_correlation_between_neighborhood_cells_and_punctuated_meta
         daf,
         **_given(
             gene_fraction_regularization=gene_fraction_regularization,
-            overwrite=overwrite,
-        ),
-    )
-
-
-def compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block(
-    *,
-    other_daf: DafWriter,
-    base_daf: DafReader,
-    gene_fraction_regularization: Optional[float] = None,
-    is_relevant_gene_per_base_block: Optional[np.ndarray] = None,
-    overwrite: Optional[bool] = None,
-) -> None:
-    """
-    Compute and set
-    ``matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block``.
-    See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block!>`__
-    for details.
-    """
-    jl.Metacells.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block_b(
-        other_daf=other_daf,
-        base_daf=base_daf,
-        **_given(
-            gene_fraction_regularization=gene_fraction_regularization,
-            is_relevant_gene_per_base_block=_to_julia_array(is_relevant_gene_per_base_block),
             overwrite=overwrite,
         ),
     )
@@ -497,26 +466,6 @@ def compute_matrix_of_is_neighborhood_marker_per_gene_per_block(
     )
 
 
-def compute_matrix_of_is_strong_per_gene_per_block(
-    daf: DafWriter,
-    *,
-    min_strong_linear_fraction: Optional[float] = None,
-    overwrite: Optional[bool] = None,
-) -> None:
-    """
-    Compute and set ``matrix_of_is_strong_per_gene_per_block``. See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_is_strong_per_gene_per_block!>`__
-    for details.
-    """
-    jl.Metacells.compute_matrix_of_is_strong_per_gene_per_block_b(
-        daf,
-        **_given(
-            min_strong_linear_fraction=min_strong_linear_fraction,
-            overwrite=overwrite,
-        ),
-    )
-
-
 def compute_matrix_of_linear_fraction_per_gene_per_block(
     daf: DafWriter,
     *,
@@ -555,20 +504,18 @@ def compute_matrix_of_log_linear_fraction_per_gene_per_block(
     )
 
 
-def compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks(
+def compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks(
     daf: DafWriter,
     *,
     overwrite: Optional[bool] = None,
 ) -> None:
     """
-    Compute and set ``matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks``, the mean Euclidean skeleton
-    genes fractions distance between the metacells of the blocks, by reducing
-    ``matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block`` over the metacells of each block. See the
-    Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks!>`__
+    Compute and set ``matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks``, the root mean square of the
+    Euclidean skeleton genes fractions distance between the metacells of the blocks. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks!>`__
     for details.
     """
-    jl.Metacells.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks_b(
+    jl.Metacells.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks_b(
         daf,
         **_given(
             overwrite=overwrite,
@@ -576,38 +523,19 @@ def compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks(
     )
 
 
-def compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block(
-    daf: DafWriter,
-    *,
-    overwrite: Optional[bool] = None,
-) -> None:
-    """
-    Compute and set ``matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block``, the mean Euclidean
-    skeleton genes fractions distance between each metacell and the metacells of each block. See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block!>`__
-    for details.
-    """
-    jl.Metacells.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block_b(
-        daf,
-        **_given(
-            overwrite=overwrite,
-        ),
-    )
-
-
-def compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block(
+def compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block(
     daf: DafWriter,
     *,
     gene_fraction_regularization: Optional[float] = None,
     overwrite: Optional[bool] = None,
 ) -> None:
     """
-    Compute and set ``matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block`` and
-    ``matrix_of_most_correlated_quantile_per_gene_in_neighborhood_per_gene_per_block``. See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block!>`__
+    Compute and set ``matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block``, the root mean square of
+    the Euclidean skeleton genes fractions distance between each metacell and the metacells of each block. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block!>`__
     for details.
     """
-    jl.Metacells.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block_b(
+    jl.Metacells.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block_b(
         daf,
         **_given(
             gene_fraction_regularization=gene_fraction_regularization,

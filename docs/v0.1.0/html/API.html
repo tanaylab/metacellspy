@@ -618,9 +618,9 @@ is a separate and independent implementation.
 </li>
 
 <li class="toctree-l2">
-<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells">
+<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell">
 <code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells()
+<span class="pre">compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell()
 </span>
 </code>
 </a>
@@ -639,15 +639,6 @@ is a separate and independent implementation.
 <a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_log_linear_fraction_per_gene_per_metacell">
 <code class="docutils literal notranslate">
 <span class="pre">compute_matrix_of_log_linear_fraction_per_gene_per_metacell()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l2">
-<a class="reference internal" href="analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_max_skeleton_fold_distance_between_metacells()
 </span>
 </code>
 </a>
@@ -924,15 +915,6 @@ is a separate and independent implementation.
 </li>
 
 <li class="toctree-l2">
-<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l2">
 <a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block">
 <code class="docutils literal notranslate">
 <span class="pre">compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block()
@@ -1014,15 +996,6 @@ is a separate and independent implementation.
 </li>
 
 <li class="toctree-l2">
-<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_strong_per_gene_per_block">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_is_strong_per_gene_per_block()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l2">
 <a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_linear_fraction_per_gene_per_block">
 <code class="docutils literal notranslate">
 <span class="pre">compute_matrix_of_linear_fraction_per_gene_per_block()
@@ -1041,27 +1014,18 @@ is a separate and independent implementation.
 </li>
 
 <li class="toctree-l2">
-<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks">
 <code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks()
+<span class="pre">compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks()
 </span>
 </code>
 </a>
 </li>
 
 <li class="toctree-l2">
-<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block">
+<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block">
 <code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l2">
-<a class="reference internal" href="analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block()
+<span class="pre">compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block()
 </span>
 </code>
 </a>
@@ -1257,6 +1221,15 @@ is a separate and independent implementation.
 </li>
 
 <li class="toctree-l2">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_projected_modules_z_score_cutoff">
+<code class="docutils literal notranslate">
+<span class="pre">compute_projected_modules_z_score_cutoff()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l2">
 <a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_stats_of_euclidean_modules_cells_distance_per_metacell">
 <code class="docutils literal notranslate">
 <span class="pre">compute_stats_of_euclidean_modules_cells_distance_per_metacell()
@@ -1284,9 +1257,9 @@ is a separate and independent implementation.
 </li>
 
 <li class="toctree-l2">
-<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_tensor_of_linear_fraction_per_block_per_module_per_metacell">
+<a class="reference internal" href="analyze_modules.html#metacellspy.analyze_modules.compute_tensor_of_mean_cells_z_score_per_block_per_module_per_metacell">
 <code class="docutils literal notranslate">
-<span class="pre">compute_tensor_of_linear_fraction_per_block_per_module_per_metacell()
+<span class="pre">compute_tensor_of_mean_cells_z_score_per_block_per_module_per_metacell()
 </span>
 </code>
 </a>

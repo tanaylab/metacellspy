@@ -92,10 +92,9 @@
     <span class="s2">"compute_matrix_of_UMIs_per_gene_per_metacell"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_correlation_between_markers_per_gene_per_gene"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells"</span><span class="p">,</span>
-    <span class="s2">"compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells"</span><span class="p">,</span>
+    <span class="s2">"compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_linear_fraction_per_gene_per_metacell"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_log_linear_fraction_per_gene_per_metacell"</span><span class="p">,</span>
-    <span class="s2">"compute_matrix_of_max_skeleton_fold_distance_between_metacells"</span><span class="p">,</span>
     <span class="s2">"compute_metacells_2d_umap"</span><span class="p">,</span>
     <span class="s2">"compute_metacells_3d_umap"</span><span class="p">,</span>
     <span class="s2">"compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene"</span><span class="p">,</span>
@@ -176,23 +175,25 @@
 
 
 
-<div class="viewcode-block" id="compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells">
-<a class="viewcode-back" href="../../analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells</span><span class="p">(</span>
+<div class="viewcode-block" id="compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell">
+<a class="viewcode-back" href="../../analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set ``matrix_of_euclidean_skeleton_fold_distance_between_metacells``. See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells!&gt;`__</span>
+<span class="sd">    Compute and set ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells_b</span><span class="p">(</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">gene_fraction_regularization</span><span class="o">=</span><span class="n">gene_fraction_regularization</span><span class="p">,</span>
+            <span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span></div>
@@ -243,35 +244,6 @@
 
 
 
-<div class="viewcode-block" id="compute_matrix_of_max_skeleton_fold_distance_between_metacells">
-<a class="viewcode-back" href="../../analyze_metacells.html#metacellspy.analyze_metacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_max_skeleton_fold_distance_between_metacells</span><span class="p">(</span>
-    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">min_significant_gene_UMIs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">fold_confidence</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">min_confidence_UMIs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set ``matrix_of_max_skeleton_fold_distance_between_metacells``. See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells!&gt;`__</span>
-<span class="sd">    for details.</span>
-<span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_max_skeleton_fold_distance_between_metacells_b</span><span class="p">(</span>
-        <span class="n">daf</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">gene_fraction_regularization</span><span class="o">=</span><span class="n">gene_fraction_regularization</span><span class="p">,</span>
-            <span class="n">min_significant_gene_UMIs</span><span class="o">=</span><span class="n">min_significant_gene_UMIs</span><span class="p">,</span>
-            <span class="n">fold_confidence</span><span class="o">=</span><span class="n">fold_confidence</span><span class="p">,</span>
-            <span class="n">min_confidence_UMIs</span><span class="o">=</span><span class="n">min_confidence_UMIs</span><span class="p">,</span>
-            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
-        <span class="p">),</span>
-    <span class="p">)</span></div>
-
-
-
 <div class="viewcode-block" id="compute_metacells_2d_umap">
 <a class="viewcode-back" href="../../analyze_metacells.html#metacellspy.analyze_metacells.compute_metacells_2d_umap">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_metacells_2d_umap</span><span class="p">(</span>
@@ -285,7 +257,8 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_umap_x_per_metacell`` and ``vector_of_umap_y_per_metacell`` by computing a 2D UMAP</span>
-<span class="sd">    projection from the Euclidean skeleton fold distance between metacells. See the Julia</span>
+<span class="sd">    projection from the ``n_neighbors`` nearest neighbors of each metacell in</span>
+<span class="sd">    ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_metacells_2d_umap!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    """</span>
@@ -314,8 +287,8 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_umap_u_per_metacell``, ``vector_of_umap_v_per_metacell`` and</span>
-<span class="sd">    ``vector_of_umap_w_per_metacell`` by computing a 3D UMAP projection from the Euclidean skeleton fold distance</span>
-<span class="sd">    between metacells. See the Julia</span>
+<span class="sd">    ``vector_of_umap_w_per_metacell`` by computing a 3D UMAP projection from the ``n_neighbors`` nearest neighbors of</span>
+<span class="sd">    each metacell in ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia</span>
 <span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_metacells_3d_umap!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    """</span>

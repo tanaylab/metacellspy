@@ -82,12 +82,10 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafReader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_array</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
@@ -100,7 +98,6 @@
     <span class="s2">"compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_punctuated_metacells_per_gene_per_base_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_correlation_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_correlation_between_neighborhood_cells_and_punctuated_metacells_per_gene_per_block"</span><span class="p">,</span>
-    <span class="s2">"compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_is_correlated_with_skeleton_in_neighborhood_per_gene_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_is_environment_distinct_per_gene_per_block"</span><span class="p">,</span>
@@ -110,12 +107,10 @@
     <span class="s2">"compute_matrix_of_is_in_neighborhood_per_block_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_is_neighborhood_distinct_per_gene_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_is_neighborhood_marker_per_gene_per_block"</span><span class="p">,</span>
-    <span class="s2">"compute_matrix_of_is_strong_per_gene_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_linear_fraction_per_gene_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_log_linear_fraction_per_gene_per_block"</span><span class="p">,</span>
-    <span class="s2">"compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks"</span><span class="p">,</span>
-    <span class="s2">"compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block"</span><span class="p">,</span>
-    <span class="s2">"compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block"</span><span class="p">,</span>
+    <span class="s2">"compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks"</span><span class="p">,</span>
+    <span class="s2">"compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_module_sharing_at_changed_base_blocks"</span><span class="p">,</span>
     <span class="s2">"compute_vector_of_block_closest_by_pertinent_markers_per_cell"</span><span class="p">,</span>
     <span class="s2">"compute_vector_of_n_cells_per_block"</span><span class="p">,</span>
@@ -347,35 +342,6 @@
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">gene_fraction_regularization</span><span class="o">=</span><span class="n">gene_fraction_regularization</span><span class="p">,</span>
-            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
-        <span class="p">),</span>
-    <span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">
-<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block</span><span class="p">(</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">other_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
-    <span class="n">base_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
-    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">is_relevant_gene_per_base_block</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set</span>
-<span class="sd">    ``matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block``.</span>
-<span class="sd">    See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block!&gt;`__</span>
-<span class="sd">    for details.</span>
-<span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block_b</span><span class="p">(</span>
-        <span class="n">other_daf</span><span class="o">=</span><span class="n">other_daf</span><span class="p">,</span>
-        <span class="n">base_daf</span><span class="o">=</span><span class="n">base_daf</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">gene_fraction_regularization</span><span class="o">=</span><span class="n">gene_fraction_regularization</span><span class="p">,</span>
-            <span class="n">is_relevant_gene_per_base_block</span><span class="o">=</span><span class="n">_to_julia_array</span><span class="p">(</span><span class="n">is_relevant_gene_per_base_block</span><span class="p">),</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span></div>
@@ -627,29 +593,6 @@
 
 
 
-<div class="viewcode-block" id="compute_matrix_of_is_strong_per_gene_per_block">
-<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_is_strong_per_gene_per_block">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_is_strong_per_gene_per_block</span><span class="p">(</span>
-    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">min_strong_linear_fraction</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set ``matrix_of_is_strong_per_gene_per_block``. See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_is_strong_per_gene_per_block!&gt;`__</span>
-<span class="sd">    for details.</span>
-<span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_is_strong_per_gene_per_block_b</span><span class="p">(</span>
-        <span class="n">daf</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">min_strong_linear_fraction</span><span class="o">=</span><span class="n">min_strong_linear_fraction</span><span class="p">,</span>
-            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
-        <span class="p">),</span>
-    <span class="p">)</span></div>
-
-
-
 <div class="viewcode-block" id="compute_matrix_of_linear_fraction_per_gene_per_block">
 <a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_linear_fraction_per_gene_per_block">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_linear_fraction_per_gene_per_block</span><span class="p">(</span>
@@ -694,22 +637,20 @@
 
 
 
-<div class="viewcode-block" id="compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks">
-<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks</span><span class="p">(</span>
+<div class="viewcode-block" id="compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks">
+<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set ``matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks``, the mean Euclidean skeleton</span>
-<span class="sd">    genes fractions distance between the metacells of the blocks, by reducing</span>
-<span class="sd">    ``matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block`` over the metacells of each block. See the</span>
-<span class="sd">    Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks!&gt;`__</span>
+<span class="sd">    Compute and set ``matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks``, the root mean square of the</span>
+<span class="sd">    Euclidean skeleton genes fractions distance between the metacells of the blocks. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks_b</span><span class="p">(</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
@@ -718,43 +659,21 @@
 
 
 
-<div class="viewcode-block" id="compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block">
-<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block</span><span class="p">(</span>
-    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set ``matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block``, the mean Euclidean</span>
-<span class="sd">    skeleton genes fractions distance between each metacell and the metacells of each block. See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block!&gt;`__</span>
-<span class="sd">    for details.</span>
-<span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block_b</span><span class="p">(</span>
-        <span class="n">daf</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
-        <span class="p">),</span>
-    <span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block">
-<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block</span><span class="p">(</span>
+<div class="viewcode-block" id="compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block">
+<a class="viewcode-back" href="../../analyze_blocks.html#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set ``matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block`` and</span>
-<span class="sd">    ``matrix_of_most_correlated_quantile_per_gene_in_neighborhood_per_gene_per_block``. See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block!&gt;`__</span>
+<span class="sd">    Compute and set ``matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block``, the root mean square of</span>
+<span class="sd">    the Euclidean skeleton genes fractions distance between each metacell and the metacells of each block. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block!&gt;`__</span>
 <span class="sd">    for details.</span>
 <span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block_b</span><span class="p">(</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
             <span class="n">gene_fraction_regularization</span><span class="o">=</span><span class="n">gene_fraction_regularization</span><span class="p">,</span>

@@ -19,10 +19,9 @@ __all__ = [
     "compute_matrix_of_UMIs_per_gene_per_metacell",
     "compute_matrix_of_correlation_between_markers_per_gene_per_gene",
     "compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells",
-    "compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells",
+    "compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell",
     "compute_matrix_of_linear_fraction_per_gene_per_metacell",
     "compute_matrix_of_log_linear_fraction_per_gene_per_metacell",
-    "compute_matrix_of_max_skeleton_fold_distance_between_metacells",
     "compute_metacells_2d_umap",
     "compute_metacells_3d_umap",
     "compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene",
@@ -94,21 +93,23 @@ def compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells(
     )
 
 
-def compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells(
+def compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell(
     daf: DafWriter,
     *,
     gene_fraction_regularization: Optional[float] = None,
+    n_neighbors: Optional[int] = None,
     overwrite: Optional[bool] = None,
 ) -> None:
     """
-    Compute and set ``matrix_of_euclidean_skeleton_fold_distance_between_metacells``. See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells!>`__
+    Compute and set ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell!>`__
     for details.
     """
-    jl.Metacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells_b(
+    jl.Metacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell_b(
         daf,
         **_given(
             gene_fraction_regularization=gene_fraction_regularization,
+            n_neighbors=n_neighbors,
             overwrite=overwrite,
         ),
     )
@@ -152,32 +153,6 @@ def compute_matrix_of_log_linear_fraction_per_gene_per_metacell(
     )
 
 
-def compute_matrix_of_max_skeleton_fold_distance_between_metacells(
-    daf: DafWriter,
-    *,
-    gene_fraction_regularization: Optional[float] = None,
-    min_significant_gene_UMIs: Optional[int] = None,
-    fold_confidence: Optional[float] = None,
-    min_confidence_UMIs: Optional[float] = None,
-    overwrite: Optional[bool] = None,
-) -> None:
-    """
-    Compute and set ``matrix_of_max_skeleton_fold_distance_between_metacells``. See the Julia
-    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells!>`__
-    for details.
-    """
-    jl.Metacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells_b(
-        daf,
-        **_given(
-            gene_fraction_regularization=gene_fraction_regularization,
-            min_significant_gene_UMIs=min_significant_gene_UMIs,
-            fold_confidence=fold_confidence,
-            min_confidence_UMIs=min_confidence_UMIs,
-            overwrite=overwrite,
-        ),
-    )
-
-
 def compute_metacells_2d_umap(
     daf: DafWriter,
     *,
@@ -189,7 +164,8 @@ def compute_metacells_2d_umap(
 ) -> None:
     """
     Compute and set ``vector_of_umap_x_per_metacell`` and ``vector_of_umap_y_per_metacell`` by computing a 2D UMAP
-    projection from the Euclidean skeleton fold distance between metacells. See the Julia
+    projection from the ``n_neighbors`` nearest neighbors of each metacell in
+    ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_metacells_2d_umap!>`__
     for details.
     """
@@ -215,8 +191,8 @@ def compute_metacells_3d_umap(
 ) -> None:
     """
     Compute and set ``vector_of_umap_u_per_metacell``, ``vector_of_umap_v_per_metacell`` and
-    ``vector_of_umap_w_per_metacell`` by computing a 3D UMAP projection from the Euclidean skeleton fold distance
-    between metacells. See the Julia
+    ``vector_of_umap_w_per_metacell`` by computing a 3D UMAP projection from the ``n_neighbors`` nearest neighbors of
+    each metacell in ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_metacells_3d_umap!>`__
     for details.
     """

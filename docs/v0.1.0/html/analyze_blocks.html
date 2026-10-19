@@ -229,15 +229,6 @@
 </li>
 
 <li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l3">
 <a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block">
 <code class="docutils literal notranslate">
 <span class="pre">compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block()
@@ -319,15 +310,6 @@
 </li>
 
 <li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_is_strong_per_gene_per_block">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_is_strong_per_gene_per_block()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l3">
 <a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_linear_fraction_per_gene_per_block">
 <code class="docutils literal notranslate">
 <span class="pre">compute_matrix_of_linear_fraction_per_gene_per_block()
@@ -346,27 +328,18 @@
 </li>
 
 <li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks">
+<a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks">
 <code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks()
+<span class="pre">compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks()
 </span>
 </code>
 </a>
 </li>
 
 <li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block">
+<a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block">
 <code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.analyze_blocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block()
+<span class="pre">compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block()
 </span>
 </code>
 </a>
@@ -1909,196 +1882,6 @@ for details.
 <strong>gene_fraction_regularization
 </strong> (
 <em>float
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>overwrite
-</strong> (
-<em>bool
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-</ul>
-
-</dd>
-
-<dt class="field-even">Return type
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-even">
-<p>None
-</p>
-
-</dd>
-
-</dl>
-
-</dd>
-</dl>
-
-
-<dl class="py function">
-
-<dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">
-
-<span class="sig-prename descclassname">
-<span class="pre">metacellspy.analyze_blocks.
-</span>
-</span>
-<span class="sig-name descname">
-<span class="pre">compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block
-</span>
-</span>
-<span class="sig-paren">(
-</span>
-<em class="sig-param">
-<span class="keyword-only-separator o">
-<abbr title="Keyword-only parameters separator (PEP 3102)">
-<span class="pre">*
-</span>
-</abbr>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">other_daf
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">base_daf
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">gene_fraction_regularization
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">is_relevant_gene_per_base_block
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">overwrite
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>
-<span class="sig-paren">)
-</span>
-<a class="reference internal" href="_modules/metacellspy/analyze_blocks.html#compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block">
-<span class="viewcode-link">
-<span class="pre">[source]
-</span>
-</span>
-</a>
-<a class="headerlink" href="#metacellspy.analyze_blocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block" title="Link to this definition">
-</a>
-</dt>
-
-<dd>
-<p>Compute and set
-
-<code class="docutils literal notranslate">
-<span class="pre">matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block
-</span>
-</code>.
-See the Julia
-
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_correlation_with_most_between_base_neighborhood_cells_and_punctuated_metacells_per_gene_per_base_block!">documentation
-</a>
-for details.
-</p>
-
-<dl class="field-list simple">
-
-<dt class="field-odd">Parameters
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-odd">
-<ul class="simple">
-
-<li>
-<p>
-<strong>other_daf
-</strong> (
-<em>DafWriter
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>base_daf
-</strong> (
-<em>DafReader
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>gene_fraction_regularization
-</strong> (
-<em>float
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>is_relevant_gene_per_base_block
-</strong> (
-<em>ndarray
 </em>
 <em> | 
 </em>
@@ -3970,152 +3753,6 @@ for details.
 
 <dl class="py function">
 
-<dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_is_strong_per_gene_per_block">
-
-<span class="sig-prename descclassname">
-<span class="pre">metacellspy.analyze_blocks.
-</span>
-</span>
-<span class="sig-name descname">
-<span class="pre">compute_matrix_of_is_strong_per_gene_per_block
-</span>
-</span>
-<span class="sig-paren">(
-</span>
-<em class="sig-param">
-<span class="n">
-<span class="pre">daf
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="keyword-only-separator o">
-<abbr title="Keyword-only parameters separator (PEP 3102)">
-<span class="pre">*
-</span>
-</abbr>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">min_strong_linear_fraction
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">overwrite
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>
-<span class="sig-paren">)
-</span>
-<a class="reference internal" href="_modules/metacellspy/analyze_blocks.html#compute_matrix_of_is_strong_per_gene_per_block">
-<span class="viewcode-link">
-<span class="pre">[source]
-</span>
-</span>
-</a>
-<a class="headerlink" href="#metacellspy.analyze_blocks.compute_matrix_of_is_strong_per_gene_per_block" title="Link to this definition">
-</a>
-</dt>
-
-<dd>
-<p>Compute and set 
-<code class="docutils literal notranslate">
-<span class="pre">matrix_of_is_strong_per_gene_per_block
-</span>
-</code>. See the Julia
-
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_is_strong_per_gene_per_block!">documentation
-</a>
-for details.
-</p>
-
-<dl class="field-list simple">
-
-<dt class="field-odd">Parameters
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-odd">
-<ul class="simple">
-
-<li>
-<p>
-<strong>daf
-</strong> (
-<em>DafWriter
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>min_strong_linear_fraction
-</strong> (
-<em>float
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>overwrite
-</strong> (
-<em>bool
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-</ul>
-
-</dd>
-
-<dt class="field-even">Return type
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-even">
-<p>None
-</p>
-
-</dd>
-
-</dl>
-
-</dd>
-</dl>
-
-
-<dl class="py function">
-
 <dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_linear_fraction_per_gene_per_block">
 
 <span class="sig-prename descclassname">
@@ -4381,14 +4018,14 @@ for details.
 
 <dl class="py function">
 
-<dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks">
+<dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks">
 
 <span class="sig-prename descclassname">
 <span class="pre">metacellspy.analyze_blocks.
 </span>
 </span>
 <span class="sig-name descname">
-<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks
+<span class="pre">compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks
 </span>
 </span>
 <span class="sig-paren">(
@@ -4423,31 +4060,25 @@ for details.
 </em>
 <span class="sig-paren">)
 </span>
-<a class="reference internal" href="_modules/metacellspy/analyze_blocks.html#compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks">
+<a class="reference internal" href="_modules/metacellspy/analyze_blocks.html#compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks">
 <span class="viewcode-link">
 <span class="pre">[source]
 </span>
 </span>
 </a>
-<a class="headerlink" href="#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks" title="Link to this definition">
+<a class="headerlink" href="#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks" title="Link to this definition">
 </a>
 </dt>
 
 <dd>
 <p>Compute and set 
 <code class="docutils literal notranslate">
-<span class="pre">matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks
+<span class="pre">matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks
 </span>
-</code>, the mean Euclidean skeleton
-genes fractions distance between the metacells of the blocks, by reducing
+</code>, the root mean square of the
+Euclidean skeleton genes fractions distance between the metacells of the blocks. See the Julia
 
-<code class="docutils literal notranslate">
-<span class="pre">matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block
-</span>
-</code> over the metacells of each block. See the
-Julia
-
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_between_blocks!">documentation
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks!">documentation
 </a>
 for details.
 </p>
@@ -4507,134 +4138,14 @@ for details.
 
 <dl class="py function">
 
-<dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block">
+<dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block">
 
 <span class="sig-prename descclassname">
 <span class="pre">metacellspy.analyze_blocks.
 </span>
 </span>
 <span class="sig-name descname">
-<span class="pre">compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block
-</span>
-</span>
-<span class="sig-paren">(
-</span>
-<em class="sig-param">
-<span class="n">
-<span class="pre">daf
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="keyword-only-separator o">
-<abbr title="Keyword-only parameters separator (PEP 3102)">
-<span class="pre">*
-</span>
-</abbr>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">overwrite
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>
-<span class="sig-paren">)
-</span>
-<a class="reference internal" href="_modules/metacellspy/analyze_blocks.html#compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block">
-<span class="viewcode-link">
-<span class="pre">[source]
-</span>
-</span>
-</a>
-<a class="headerlink" href="#metacellspy.analyze_blocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block" title="Link to this definition">
-</a>
-</dt>
-
-<dd>
-<p>Compute and set 
-<code class="docutils literal notranslate">
-<span class="pre">matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block
-</span>
-</code>, the mean Euclidean
-skeleton genes fractions distance between each metacell and the metacells of each block. See the Julia
-
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_mean_euclidean_skeleton_fold_distance_per_metacell_per_block!">documentation
-</a>
-for details.
-</p>
-
-<dl class="field-list simple">
-
-<dt class="field-odd">Parameters
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-odd">
-<ul class="simple">
-
-<li>
-<p>
-<strong>daf
-</strong> (
-<em>DafWriter
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>overwrite
-</strong> (
-<em>bool
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-</ul>
-
-</dd>
-
-<dt class="field-even">Return type
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-even">
-<p>None
-</p>
-
-</dd>
-
-</dl>
-
-</dd>
-</dl>
-
-
-<dl class="py function">
-
-<dt class="sig sig-object py" id="metacellspy.analyze_blocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block">
-
-<span class="sig-prename descclassname">
-<span class="pre">metacellspy.analyze_blocks.
-</span>
-</span>
-<span class="sig-name descname">
-<span class="pre">compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block
+<span class="pre">compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block
 </span>
 </span>
 <span class="sig-paren">(
@@ -4683,29 +4194,25 @@ for details.
 </em>
 <span class="sig-paren">)
 </span>
-<a class="reference internal" href="_modules/metacellspy/analyze_blocks.html#compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block">
+<a class="reference internal" href="_modules/metacellspy/analyze_blocks.html#compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block">
 <span class="viewcode-link">
 <span class="pre">[source]
 </span>
 </span>
 </a>
-<a class="headerlink" href="#metacellspy.analyze_blocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block" title="Link to this definition">
+<a class="headerlink" href="#metacellspy.analyze_blocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block" title="Link to this definition">
 </a>
 </dt>
 
 <dd>
 <p>Compute and set 
 <code class="docutils literal notranslate">
-<span class="pre">matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block
+<span class="pre">matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block
 </span>
-</code> and
+</code>, the root mean square of
+the Euclidean skeleton genes fractions distance between each metacell and the metacells of each block. See the Julia
 
-<code class="docutils literal notranslate">
-<span class="pre">matrix_of_most_correlated_quantile_per_gene_in_neighborhood_per_gene_per_block
-</span>
-</code>. See the Julia
-
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_most_correlated_gene_in_neighborhood_per_gene_per_block!">documentation
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_blocks.html#Metacells.AnalyzeBlocks.compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block!">documentation
 </a>
 for details.
 </p>

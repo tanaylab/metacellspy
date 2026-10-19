@@ -323,6 +323,62 @@
 </em>, 
 <em class="sig-param">
 <span class="n">
+<span class="pre">max_fold_gene_fraction_regularization
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">max_fold_min_significant_gene_UMIs
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">max_fold_confidence
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">max_fold_min_confidence_UMIs
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
 <span class="pre">prefix
 </span>
 </span>
@@ -332,6 +388,20 @@
 </span>
 <span class="default_value">
 <span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">rng
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">0
 </span>
 </span>
 </em>, 
@@ -424,6 +494,58 @@ for details.
 
 <li>
 <p>
+<strong>max_fold_gene_fraction_regularization
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>max_fold_min_significant_gene_UMIs
+</strong> (
+<em>int
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>max_fold_confidence
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>max_fold_min_confidence_UMIs
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
 <strong>prefix
 </strong> (
 <em>str
@@ -431,6 +553,15 @@ for details.
 <em> | 
 </em>
 <em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>rng
+</strong> (
+<em>int
 </em>)
 </p>
 </li>

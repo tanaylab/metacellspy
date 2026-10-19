@@ -160,9 +160,9 @@
 </li>
 
 <li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.analyze_metacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells">
+<a class="reference internal" href="#metacellspy.analyze_metacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell">
 <code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells()
+<span class="pre">compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell()
 </span>
 </code>
 </a>
@@ -181,15 +181,6 @@
 <a class="reference internal" href="#metacellspy.analyze_metacells.compute_matrix_of_log_linear_fraction_per_gene_per_metacell">
 <code class="docutils literal notranslate">
 <span class="pre">compute_matrix_of_log_linear_fraction_per_gene_per_metacell()
-</span>
-</code>
-</a>
-</li>
-
-<li class="toctree-l3">
-<a class="reference internal" href="#metacellspy.analyze_metacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells">
-<code class="docutils literal notranslate">
-<span class="pre">compute_matrix_of_max_skeleton_fold_distance_between_metacells()
 </span>
 </code>
 </a>
@@ -818,14 +809,14 @@ for details.
 
 <dl class="py function">
 
-<dt class="sig sig-object py" id="metacellspy.analyze_metacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells">
+<dt class="sig sig-object py" id="metacellspy.analyze_metacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell">
 
 <span class="sig-prename descclassname">
 <span class="pre">metacellspy.analyze_metacells.
 </span>
 </span>
 <span class="sig-name descname">
-<span class="pre">compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells
+<span class="pre">compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell
 </span>
 </span>
 <span class="sig-paren">(
@@ -860,6 +851,20 @@ for details.
 </em>, 
 <em class="sig-param">
 <span class="n">
+<span class="pre">n_neighbors
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
 <span class="pre">overwrite
 </span>
 </span>
@@ -874,24 +879,24 @@ for details.
 </em>
 <span class="sig-paren">)
 </span>
-<a class="reference internal" href="_modules/metacellspy/analyze_metacells.html#compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells">
+<a class="reference internal" href="_modules/metacellspy/analyze_metacells.html#compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell">
 <span class="viewcode-link">
 <span class="pre">[source]
 </span>
 </span>
 </a>
-<a class="headerlink" href="#metacellspy.analyze_metacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells" title="Link to this definition">
+<a class="headerlink" href="#metacellspy.analyze_metacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell" title="Link to this definition">
 </a>
 </dt>
 
 <dd>
 <p>Compute and set 
 <code class="docutils literal notranslate">
-<span class="pre">matrix_of_euclidean_skeleton_fold_distance_between_metacells
+<span class="pre">matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell
 </span>
 </code>. See the Julia
 
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_euclidean_skeleton_fold_distance_between_metacells!">documentation
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell!">documentation
 </a>
 for details.
 </p>
@@ -920,6 +925,19 @@ for details.
 <strong>gene_fraction_regularization
 </strong> (
 <em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>n_neighbors
+</strong> (
+<em>int
 </em>
 <em> | 
 </em>
@@ -1229,233 +1247,6 @@ for details.
 
 <dl class="py function">
 
-<dt class="sig sig-object py" id="metacellspy.analyze_metacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells">
-
-<span class="sig-prename descclassname">
-<span class="pre">metacellspy.analyze_metacells.
-</span>
-</span>
-<span class="sig-name descname">
-<span class="pre">compute_matrix_of_max_skeleton_fold_distance_between_metacells
-</span>
-</span>
-<span class="sig-paren">(
-</span>
-<em class="sig-param">
-<span class="n">
-<span class="pre">daf
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="keyword-only-separator o">
-<abbr title="Keyword-only parameters separator (PEP 3102)">
-<span class="pre">*
-</span>
-</abbr>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">gene_fraction_regularization
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">min_significant_gene_UMIs
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">fold_confidence
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">min_confidence_UMIs
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>, 
-<em class="sig-param">
-<span class="n">
-<span class="pre">overwrite
-</span>
-</span>
-<span class="o">
-<span class="pre">=
-</span>
-</span>
-<span class="default_value">
-<span class="pre">None
-</span>
-</span>
-</em>
-<span class="sig-paren">)
-</span>
-<a class="reference internal" href="_modules/metacellspy/analyze_metacells.html#compute_matrix_of_max_skeleton_fold_distance_between_metacells">
-<span class="viewcode-link">
-<span class="pre">[source]
-</span>
-</span>
-</a>
-<a class="headerlink" href="#metacellspy.analyze_metacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells" title="Link to this definition">
-</a>
-</dt>
-
-<dd>
-<p>Compute and set 
-<code class="docutils literal notranslate">
-<span class="pre">matrix_of_max_skeleton_fold_distance_between_metacells
-</span>
-</code>. See the Julia
-
-<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_matrix_of_max_skeleton_fold_distance_between_metacells!">documentation
-</a>
-for details.
-</p>
-
-<dl class="field-list simple">
-
-<dt class="field-odd">Parameters
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-odd">
-<ul class="simple">
-
-<li>
-<p>
-<strong>daf
-</strong> (
-<em>DafWriter
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>gene_fraction_regularization
-</strong> (
-<em>float
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>min_significant_gene_UMIs
-</strong> (
-<em>int
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>fold_confidence
-</strong> (
-<em>float
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>min_confidence_UMIs
-</strong> (
-<em>float
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-<li>
-<p>
-<strong>overwrite
-</strong> (
-<em>bool
-</em>
-<em> | 
-</em>
-<em>None
-</em>)
-</p>
-</li>
-
-</ul>
-
-</dd>
-
-<dt class="field-even">Return type
-<span class="colon">:
-</span>
-</dt>
-
-<dd class="field-even">
-<p>None
-</p>
-
-</dd>
-
-</dl>
-
-</dd>
-</dl>
-
-
-<dl class="py function">
-
 <dt class="sig sig-object py" id="metacellspy.analyze_metacells.compute_metacells_2d_umap">
 
 <span class="sig-prename descclassname">
@@ -1574,7 +1365,16 @@ for details.
 <span class="pre">vector_of_umap_y_per_metacell
 </span>
 </code> by computing a 2D UMAP
-projection from the Euclidean skeleton fold distance between metacells. See the Julia
+projection from the 
+<code class="docutils literal notranslate">
+<span class="pre">n_neighbors
+</span>
+</code> nearest neighbors of each metacell in
+
+<code class="docutils literal notranslate">
+<span class="pre">matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell
+</span>
+</code>. See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_metacells_2d_umap!">documentation
 </a>
@@ -1792,8 +1592,16 @@ for details.
 <code class="docutils literal notranslate">
 <span class="pre">vector_of_umap_w_per_metacell
 </span>
-</code> by computing a 3D UMAP projection from the Euclidean skeleton fold distance
-between metacells. See the Julia
+</code> by computing a 3D UMAP projection from the 
+<code class="docutils literal notranslate">
+<span class="pre">n_neighbors
+</span>
+</code> nearest neighbors of
+each metacell in 
+<code class="docutils literal notranslate">
+<span class="pre">matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell
+</span>
+</code>. See the Julia
 
 <a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html#Metacells.AnalyzeMetacells.compute_metacells_3d_umap!">documentation
 </a>

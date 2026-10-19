@@ -23,6 +23,7 @@ def compute_cells_projection(
     query_daf: DafWriter,
     atlas_daf: DafReader,
     gene_fraction_regularization: Optional[float] = None,
+    std_UMIs_regularization: Optional[float] = None,
     overwrite: Optional[bool] = None,
 ) -> None:
     """
@@ -36,6 +37,7 @@ def compute_cells_projection(
         atlas_daf=atlas_daf,
         **_given(
             gene_fraction_regularization=gene_fraction_regularization,
+            std_UMIs_regularization=std_UMIs_regularization,
             overwrite=overwrite,
         ),
     )
