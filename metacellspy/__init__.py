@@ -38,6 +38,7 @@ from .anndata_format import *
 from .compute_blocks import *
 from .compute_modules import *
 from .defaults import *
+from .focus import *
 from .gmara import *
 from .julia_import import *
 from .pipeline import *

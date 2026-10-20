@@ -19,3 +19,4 @@ API
   sharpen_metacells
   project_cells
   pipeline
+  focus

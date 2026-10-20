@@ -33,6 +33,7 @@ SUBMODULE_OF_MODULE = {
     "sharpen_metacells": "SharpenMetacells",
     "project_cells": "ProjectCells",
     "pipeline": "Pipeline",
+    "focus": "Focus",
 }
 
 #: The wrapper takes an ``int`` seed where Julia takes a random number generator.
