@@ -23,6 +23,7 @@ from .julia_import import jl
 
 __all__ = [
     "analyze_metacells",
+    "focus_metacells",
     "import_base_metacells",
     "prepare_metacells",
     "qc_metacells",
@@ -66,6 +67,29 @@ def prepare_metacells(daf: DafWriter, *, overwrite: Optional[bool] = None) -> No
     jl.Metacells.prepare_metacells_b(
         daf,
         **_given(
+            overwrite=overwrite,
+        ),
+    )
+
+
+def focus_metacells(
+    *,
+    full_daf: DafWriter,
+    focus_daf: DafWriter,
+    max_redundant_fold: Optional[float] = None,
+    overwrite: Optional[bool] = None,
+) -> None:
+    """
+    Reduce the metacells of ``full_daf`` to a non-redundant focus set in ``focus_daf``, which can then be analyzed and
+    sharpened like any other metacells. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.focus_metacells!>`__
+    for details.
+    """
+    jl.Metacells.focus_metacells_b(
+        full_daf=full_daf,
+        focus_daf=focus_daf,
+        **_given(
+            max_redundant_fold=max_redundant_fold,
             overwrite=overwrite,
         ),
     )

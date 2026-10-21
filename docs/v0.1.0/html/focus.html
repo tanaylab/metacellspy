@@ -184,6 +184,15 @@
 </a>
 </li>
 
+<li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.focus.copy_focus_metacells_data">
+<code class="docutils literal notranslate">
+<span class="pre">copy_focus_metacells_data()
+</span>
+</code>
+</a>
+</li>
+
 </ul>
 
 </li>
@@ -652,6 +661,145 @@ for details.
 <em> | 
 </em>
 <em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
+</p>
+
+</dd>
+
+</dl>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.focus.copy_focus_metacells_data">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.focus.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">copy_focus_metacells_data
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">full_daf
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">focus_daf
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">excluded_contract
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/focus.html#copy_focus_metacells_data">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.focus.copy_focus_metacells_data" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Copy the data of the 
+<code class="docutils literal notranslate">
+<span class="pre">full_daf
+</span>
+</code> into the 
+<code class="docutils literal notranslate">
+<span class="pre">focus_daf
+</span>
+</code>, restricted to the focus metacells and cells, except for
+the outputs of the 
+<code class="docutils literal notranslate">
+<span class="pre">excluded_contract
+</span>
+</code> (a Julia 
+<code class="docutils literal notranslate">
+<span class="pre">Contract
+</span>
+</code>, e.g. of 
+<code class="docutils literal notranslate">
+<span class="pre">prepare_metacells
+</span>
+</code>). See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/focus.html#Metacells.Focus.copy_focus_metacells_data!">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>full_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>focus_daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>excluded_contract
+</strong> (
+<em>Any
 </em>)
 </p>
 </li>

@@ -3,6 +3,7 @@ Reduce a large set of metacells to a smaller, non-redundant focus set. See the J
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/focus.html>`__ for details.
 """
 
+from typing import Any
 from typing import Optional
 
 from dafpy import DafReader
@@ -13,6 +14,7 @@ from .julia_import import jl
 
 __all__ = [
     "compute_focus_metacells",
+    "copy_focus_metacells_data",
 ]
 
 
@@ -54,4 +56,23 @@ def compute_focus_metacells(
             min_marker_quantile=min_marker_quantile,
             overwrite=overwrite,
         ),
+    )
+
+
+def copy_focus_metacells_data(
+    *,
+    full_daf: DafReader,
+    focus_daf: DafWriter,
+    excluded_contract: Any,
+) -> None:
+    """
+    Copy the data of the ``full_daf`` into the ``focus_daf``, restricted to the focus metacells and cells, except for
+    the outputs of the ``excluded_contract`` (a Julia ``Contract``, e.g. of ``prepare_metacells``). See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/focus.html#Metacells.Focus.copy_focus_metacells_data!>`__
+    for details.
+    """
+    jl.Metacells.copy_focus_metacells_data_b(
+        full_daf=full_daf,
+        focus_daf=focus_daf,
+        excluded_contract=excluded_contract,
     )
