@@ -25,6 +25,7 @@ __all__ = [
     "analyze_metacells",
     "focus_metacells",
     "import_base_metacells",
+    "prepare_atlas",
     "prepare_metacells",
     "qc_metacells",
     "sharpen_round",
@@ -137,6 +138,26 @@ def qc_metacells(
         daf=daf,
         score_daf=score_daf,
         **_given(
+            overwrite=overwrite,
+        ),
+    )
+
+
+def prepare_atlas(
+    daf: DafWriter,
+    *,
+    std_UMIs_regularization: Optional[float] = None,
+    overwrite: Optional[bool] = None,
+) -> None:
+    """
+    Prepare analyzed metacells to serve as the atlas that cells are projected onto. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_atlas!>`__
+    for details.
+    """
+    jl.Metacells.prepare_atlas_b(
+        daf,
+        **_given(
+            std_UMIs_regularization=std_UMIs_regularization,
             overwrite=overwrite,
         ),
     )

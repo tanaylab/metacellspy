@@ -98,6 +98,7 @@
     <span class="s2">"analyze_metacells"</span><span class="p">,</span>
     <span class="s2">"focus_metacells"</span><span class="p">,</span>
     <span class="s2">"import_base_metacells"</span><span class="p">,</span>
+    <span class="s2">"prepare_atlas"</span><span class="p">,</span>
     <span class="s2">"prepare_metacells"</span><span class="p">,</span>
     <span class="s2">"qc_metacells"</span><span class="p">,</span>
     <span class="s2">"sharpen_round"</span><span class="p">,</span>
@@ -224,6 +225,29 @@
         <span class="n">daf</span><span class="o">=</span><span class="n">daf</span><span class="p">,</span>
         <span class="n">score_daf</span><span class="o">=</span><span class="n">score_daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="prepare_atlas">
+<a class="viewcode-back" href="../../pipeline.html#metacellspy.pipeline.prepare_atlas">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_atlas</span><span class="p">(</span>
+    <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">std_UMIs_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Prepare analyzed metacells to serve as the atlas that cells are projected onto. See the Julia</span>
+<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/pipeline.html#Metacells.Pipeline.prepare_atlas!&gt;`__</span>
+<span class="sd">    for details.</span>
+<span class="sd">    """</span>
+    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">prepare_atlas_b</span><span class="p">(</span>
+        <span class="n">daf</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
+            <span class="n">std_UMIs_regularization</span><span class="o">=</span><span class="n">std_UMIs_regularization</span><span class="p">,</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span></div>
