@@ -15,6 +15,7 @@ __all__ = [
     "compute_cells_projection",
     "compute_matrix_of_correlation_between_neighborhood_cells_and_projected_metacells_per_gene_per_projected_block",
     "compute_vector_of_correlation_between_cells_and_projected_metacells",
+    "compute_vector_of_is_deviant_per_cell",
 ]
 
 
@@ -27,8 +28,8 @@ def compute_cells_projection(
     overwrite: Optional[bool] = None,
 ) -> None:
     """
-    Compute and set [``vector_of_projected_block_per_cell``] and ``vector_of_projected_modules_z_score_per_cell``. See
-    the Julia
+    Compute and set ``vector_of_projected_metacell_per_cell``, ``vector_of_projected_block_per_cell`` and
+    ``vector_of_projected_modules_z_score_per_cell``. See the Julia
     `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/project_cells.html#Metacells.ProjectCells.compute_cells_projection!>`__
     for details.
     """
@@ -88,6 +89,28 @@ def compute_vector_of_correlation_between_cells_and_projected_metacells(
         atlas_daf=atlas_daf,
         **_given(
             gene_fraction_regularization=gene_fraction_regularization,
+            overwrite=overwrite,
+        ),
+    )
+
+
+def compute_vector_of_is_deviant_per_cell(
+    *,
+    query_daf: DafWriter,
+    atlas_daf: DafReader,
+    rejected_fraction: Optional[float] = None,
+    overwrite: Optional[bool] = None,
+) -> None:
+    """
+    Compute and set ``vector_of_is_deviant_per_cell``. See the Julia
+    `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/project_cells.html#Metacells.ProjectCells.compute_vector_of_is_deviant_per_cell!>`__
+    for details.
+    """
+    jl.Metacells.compute_vector_of_is_deviant_per_cell_b(
+        query_daf=query_daf,
+        atlas_daf=atlas_daf,
+        **_given(
+            rejected_fraction=rejected_fraction,
             overwrite=overwrite,
         ),
     )
