@@ -185,6 +185,15 @@
 </li>
 
 <li class="toctree-l3">
+<a class="reference internal" href="#metacellspy.analyze_modules.compute_projected_modules_z_score_cutoff_per_metacell">
+<code class="docutils literal notranslate">
+<span class="pre">compute_projected_modules_z_score_cutoff_per_metacell()
+</span>
+</code>
+</a>
+</li>
+
+<li class="toctree-l3">
 <a class="reference internal" href="#metacellspy.analyze_modules.compute_stats_of_euclidean_modules_cells_distance_per_metacell">
 <code class="docutils literal notranslate">
 <span class="pre">compute_stats_of_euclidean_modules_cells_distance_per_metacell()
@@ -739,6 +748,177 @@ for details.
 
 <dd class="field-even">
 <p>float
+</p>
+
+</dd>
+
+</dl>
+
+</dd>
+</dl>
+
+
+<dl class="py function">
+
+<dt class="sig sig-object py" id="metacellspy.analyze_modules.compute_projected_modules_z_score_cutoff_per_metacell">
+
+<span class="sig-prename descclassname">
+<span class="pre">metacellspy.analyze_modules.
+</span>
+</span>
+<span class="sig-name descname">
+<span class="pre">compute_projected_modules_z_score_cutoff_per_metacell
+</span>
+</span>
+<span class="sig-paren">(
+</span>
+<em class="sig-param">
+<span class="keyword-only-separator o">
+<abbr title="Keyword-only parameters separator (PEP 3102)">
+<span class="pre">*
+</span>
+</abbr>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">atlas_daf
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">calibration_daf
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">rejected_fraction
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>, 
+<em class="sig-param">
+<span class="n">
+<span class="pre">overwrite
+</span>
+</span>
+<span class="o">
+<span class="pre">=
+</span>
+</span>
+<span class="default_value">
+<span class="pre">None
+</span>
+</span>
+</em>
+<span class="sig-paren">)
+</span>
+<a class="reference internal" href="_modules/metacellspy/analyze_modules.html#compute_projected_modules_z_score_cutoff_per_metacell">
+<span class="viewcode-link">
+<span class="pre">[source]
+</span>
+</span>
+</a>
+<a class="headerlink" href="#metacellspy.analyze_modules.compute_projected_modules_z_score_cutoff_per_metacell" title="Link to this definition">
+</a>
+</dt>
+
+<dd>
+<p>Compute and set 
+<code class="docutils literal notranslate">
+<span class="pre">vector_of_projected_modules_z_score_cutoff_per_metacell
+</span>
+</code>,
+
+<code class="docutils literal notranslate">
+<span class="pre">vector_of_projected_modules_z_score_cutoff_level_per_metacell
+</span>
+</code> and
+
+<code class="docutils literal notranslate">
+<span class="pre">vector_of_projected_modules_z_score_cutoff_n_cells_per_metacell
+</span>
+</code>. See the Julia
+
+<a class="reference external" href="https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_modules.html#Metacells.AnalyzeModules.compute_projected_modules_z_score_cutoff_per_metacell!">documentation
+</a>
+for details.
+</p>
+
+<dl class="field-list simple">
+
+<dt class="field-odd">Parameters
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-odd">
+<ul class="simple">
+
+<li>
+<p>
+<strong>atlas_daf
+</strong> (
+<em>DafWriter
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>calibration_daf
+</strong> (
+<em>DafReader
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>rejected_fraction
+</strong> (
+<em>float
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+<li>
+<p>
+<strong>overwrite
+</strong> (
+<em>bool
+</em>
+<em> | 
+</em>
+<em>None
+</em>)
+</p>
+</li>
+
+</ul>
+
+</dd>
+
+<dt class="field-even">Return type
+<span class="colon">:
+</span>
+</dt>
+
+<dd class="field-even">
+<p>None
 </p>
 
 </dd>

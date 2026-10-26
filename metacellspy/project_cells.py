@@ -98,7 +98,6 @@ def compute_vector_of_is_deviant_per_cell(
     *,
     query_daf: DafWriter,
     atlas_daf: DafReader,
-    rejected_fraction: Optional[float] = None,
     overwrite: Optional[bool] = None,
 ) -> None:
     """
@@ -110,7 +109,6 @@ def compute_vector_of_is_deviant_per_cell(
         query_daf=query_daf,
         atlas_daf=atlas_daf,
         **_given(
-            rejected_fraction=rejected_fraction,
             overwrite=overwrite,
         ),
     )
