@@ -3,11 +3,11 @@ Compute per-module data. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_modules.html>`__ for details.
 """
 
-from typing import Optional
-
 from dafpy import DafReader
 from dafpy import DafWriter
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _given
 from .julia_import import jl
 
@@ -27,9 +27,9 @@ __all__ = [
 def compute_matrix_of_cells_dispersion_per_metacell_per_module(
     daf: DafWriter,
     *,
-    normalized_UMIs_quantile: Optional[float] = None,
-    min_module_UMIs: Optional[int] = None,
-    overwrite: Optional[bool] = None,
+    normalized_UMIs_quantile: float | DefaultValue = DEFAULT,
+    min_module_UMIs: int | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_cells_dispersion_per_metacell_per_module``. See the Julia
@@ -49,7 +49,7 @@ def compute_matrix_of_cells_dispersion_per_metacell_per_module(
 def compute_matrix_of_n_genes_per_module_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_n_genes_per_module_per_block``. See the Julia
@@ -67,7 +67,7 @@ def compute_matrix_of_n_genes_per_module_per_block(
 def compute_projected_modules_z_score_cutoff(
     daf: DafReader,
     *,
-    rejected_fraction: Optional[float] = None,
+    rejected_fraction: float | DefaultValue = DEFAULT,
 ) -> float:
     """
     Compute a cutoff for the ``vector_of_projected_modules_z_score_per_cell`` of query cells projected onto this (atlas)
@@ -88,8 +88,8 @@ def compute_projected_modules_z_score_cutoff_per_metacell(
     *,
     atlas_daf: DafWriter,
     calibration_daf: DafReader,
-    rejected_fraction: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    rejected_fraction: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_projected_modules_z_score_cutoff_per_metacell``,
@@ -111,8 +111,8 @@ def compute_projected_modules_z_score_cutoff_per_metacell(
 def compute_stats_of_euclidean_modules_cells_distance_per_metacell(
     daf: DafWriter,
     *,
-    std_UMIs_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    std_UMIs_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_mean_euclidean_modules_cells_distance_per_metacell``,
@@ -133,7 +133,7 @@ def compute_stats_of_euclidean_modules_cells_distance_per_metacell(
 def compute_stats_of_linear_fraction_in_environment_cells_per_module_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_mean_linear_fraction_in_environment_cells_per_module_per_block`` and and set
@@ -152,7 +152,7 @@ def compute_stats_of_linear_fraction_in_environment_cells_per_module_per_block(
 def compute_stats_of_linear_fraction_in_neighborhood_cells_per_module_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_mean_linear_fraction_in_neighborhood_cells_per_module_per_block`` and and set
@@ -171,8 +171,8 @@ def compute_stats_of_linear_fraction_in_neighborhood_cells_per_module_per_block(
 def compute_tensor_of_mean_cells_z_score_per_block_per_module_per_metacell(
     daf: DafWriter,
     *,
-    std_UMIs_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    std_UMIs_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``tensor_of_mean_cells_z_score_per_block_per_module_per_metacell``. See the Julia
@@ -191,7 +191,7 @@ def compute_tensor_of_mean_cells_z_score_per_block_per_module_per_metacell(
 def compute_vector_of_n_modules_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_modules_per_block``. See the Julia

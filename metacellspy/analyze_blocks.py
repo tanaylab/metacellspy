@@ -7,11 +7,11 @@ Compute per-block data. See the Julia
 # look like duplicated code. The same disable is in that file, since the check needs both sides to report it.
 # pylint: disable=duplicate-code
 
-from typing import Optional
-
 from dafpy import DafReader
 from dafpy import DafWriter
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _given
 from .julia_import import jl
 
@@ -60,7 +60,7 @@ __all__ = [
 def compute_blocks_2d_umap_by_metacells(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_umap_x_per_block`` and ``vector_of_umap_y_per_block`` by taking the mean of the 2D UMAP
@@ -79,7 +79,7 @@ def compute_blocks_2d_umap_by_metacells(
 def compute_blocks_3d_umap_by_metacells(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_umap_u_per_block``, ``vector_of_umap_v_per_block`` and ``vector_of_umap_w_per_block`` by
@@ -98,7 +98,7 @@ def compute_blocks_3d_umap_by_metacells(
 def compute_matrix_of_UMIs_per_gene_per_block(  # pylint: disable=invalid-name
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_UMIs_per_gene_per_block``. See the Julia
@@ -116,7 +116,7 @@ def compute_matrix_of_UMIs_per_gene_per_block(  # pylint: disable=invalid-name
 def compute_matrix_of_confusion_by_closest_by_pertinent_markers_per_block_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_confusion_by_closest_by_pertinent_markers_per_block_per_block``. See the Julia
@@ -134,7 +134,7 @@ def compute_matrix_of_confusion_by_closest_by_pertinent_markers_per_block_per_bl
 def compute_matrix_of_confusion_by_closest_by_pertinent_markers_per_metacell_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_confusion_by_closest_by_pertinent_markers_per_metacell_per_block``. See the Julia
@@ -153,9 +153,9 @@ def compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_
     *,
     other_daf: DafWriter,
     base_daf: DafReader,
-    gene_fraction_regularization: Optional[float] = None,
-    bin: Optional[int] = None,  # pylint: disable=redefined-builtin
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    bin: int | None | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set
@@ -179,9 +179,9 @@ def compute_matrix_of_correlation_between_base_neighborhood_cells_and_projected_
     *,
     other_daf: DafWriter,
     base_daf: DafReader,
-    gene_fraction_regularization: Optional[float] = None,
-    bin: Optional[int] = None,  # pylint: disable=redefined-builtin
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    bin: int | None | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set
@@ -205,9 +205,9 @@ def compute_matrix_of_correlation_between_base_neighborhood_cells_and_punctuated
     *,
     other_daf: DafWriter,
     base_daf: DafReader,
-    gene_fraction_regularization: Optional[float] = None,
-    bin: Optional[int] = None,  # pylint: disable=redefined-builtin
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    bin: int | None | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set
@@ -230,8 +230,8 @@ def compute_matrix_of_correlation_between_base_neighborhood_cells_and_punctuated
 def compute_matrix_of_correlation_between_neighborhood_cells_and_punctuated_metacells_per_gene_per_block(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_correlation_between_neighborhood_cells_and_punctuated_metacells_per_gene_per_block``.
@@ -251,10 +251,10 @@ def compute_matrix_of_correlation_between_neighborhood_cells_and_punctuated_meta
 def compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block(
     daf: DafWriter,
     *,
-    min_gene_correlation: Optional[float] = None,
-    min_gene_correlation_quantile: Optional[float] = None,
-    genes_correlation_window: Optional[int] = None,
-    overwrite: Optional[bool] = None,
+    min_gene_correlation: float | DefaultValue = DEFAULT,
+    min_gene_correlation_quantile: float | DefaultValue = DEFAULT,
+    genes_correlation_window: int | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_block``. See the Julia
@@ -275,10 +275,10 @@ def compute_matrix_of_is_correlated_with_skeleton_in_environment_per_gene_per_bl
 def compute_matrix_of_is_correlated_with_skeleton_in_neighborhood_per_gene_per_block(
     daf: DafWriter,
     *,
-    min_gene_correlation: Optional[float] = None,
-    min_gene_correlation_quantile: Optional[float] = None,
-    genes_correlation_window: Optional[int] = None,
-    overwrite: Optional[bool] = None,
+    min_gene_correlation: float | DefaultValue = DEFAULT,
+    min_gene_correlation_quantile: float | DefaultValue = DEFAULT,
+    genes_correlation_window: int | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_correlated_with_skeleton_in_neighborhood_per_gene_per_block``. See the Julia
@@ -299,9 +299,9 @@ def compute_matrix_of_is_correlated_with_skeleton_in_neighborhood_per_gene_per_b
 def compute_matrix_of_is_environment_distinct_per_gene_per_block(
     daf: DafWriter,
     *,
-    min_distinct_gene_max_fraction: Optional[float] = None,
-    min_distinct_gene_mean_fold: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    min_distinct_gene_max_fraction: float | DefaultValue = DEFAULT,
+    min_distinct_gene_mean_fold: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_environment_distinct_per_gene_per_block``. See the Julia
@@ -321,10 +321,10 @@ def compute_matrix_of_is_environment_distinct_per_gene_per_block(
 def compute_matrix_of_is_environment_marker_per_gene_per_block(
     daf: DafWriter,
     *,
-    min_marker_gene_max_fraction: Optional[float] = None,
-    min_marker_gene_range_fold: Optional[float] = None,
-    min_marker_quantile: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
+    min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
+    min_marker_quantile: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_environment_marker_per_gene_per_block``. See the Julia
@@ -345,10 +345,10 @@ def compute_matrix_of_is_environment_marker_per_gene_per_block(
 def compute_matrix_of_is_environment_specific_per_gene_per_metacell(
     daf: DafWriter,
     *,
-    min_rare_gene_fold_factor: Optional[float] = None,
-    min_significant_gene_UMIs: Optional[int] = None,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    min_rare_gene_fold_factor: float | DefaultValue = DEFAULT,
+    min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_environment_specific_per_gene_per_metacell``. See the Julia
@@ -369,9 +369,9 @@ def compute_matrix_of_is_environment_specific_per_gene_per_metacell(
 def compute_matrix_of_is_in_environment_per_metacell_per_block(
     daf: DafWriter,
     *,
-    max_environment_metacell_relative_distance: Optional[float] = None,
-    environment_distance_base_quantile: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    max_environment_metacell_relative_distance: float | DefaultValue = DEFAULT,
+    environment_distance_base_quantile: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_in_environment_per_metacell_per_block``. See the Julia
@@ -391,14 +391,14 @@ def compute_matrix_of_is_in_environment_per_metacell_per_block(
 def compute_matrix_of_is_in_neighborhood_per_block_per_block(
     daf: DafWriter,
     *,
-    min_neighbour_confusion_fractions: Optional[float] = None,
-    min_blocks_in_neighborhood: Optional[int] = None,
-    min_metacells_in_neighborhood: Optional[int] = None,
-    min_total_UMIs_in_neighborhood: Optional[int] = None,
-    max_blocks_in_neighborhood: Optional[int] = None,
-    max_metacells_in_neighborhood: Optional[int] = None,
-    max_total_UMIs_in_neighborhood: Optional[int] = None,
-    overwrite: Optional[bool] = None,
+    min_neighbour_confusion_fractions: float | DefaultValue = DEFAULT,
+    min_blocks_in_neighborhood: int | DefaultValue = DEFAULT,
+    min_metacells_in_neighborhood: int | DefaultValue = DEFAULT,
+    min_total_UMIs_in_neighborhood: int | DefaultValue = DEFAULT,
+    max_blocks_in_neighborhood: int | DefaultValue = DEFAULT,
+    max_metacells_in_neighborhood: int | DefaultValue = DEFAULT,
+    max_total_UMIs_in_neighborhood: int | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_in_neighborhood_per_block_per_block``. See the Julia
@@ -423,9 +423,9 @@ def compute_matrix_of_is_in_neighborhood_per_block_per_block(
 def compute_matrix_of_is_neighborhood_distinct_per_gene_per_block(
     daf: DafWriter,
     *,
-    min_distinct_gene_max_fraction: Optional[float] = None,
-    min_distinct_gene_mean_fold: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    min_distinct_gene_max_fraction: float | DefaultValue = DEFAULT,
+    min_distinct_gene_mean_fold: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_neighborhood_distinct_per_gene_per_block``. See the Julia
@@ -445,10 +445,10 @@ def compute_matrix_of_is_neighborhood_distinct_per_gene_per_block(
 def compute_matrix_of_is_neighborhood_marker_per_gene_per_block(
     daf: DafWriter,
     *,
-    min_marker_gene_max_fraction: Optional[float] = None,
-    min_marker_gene_range_fold: Optional[float] = None,
-    min_marker_quantile: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
+    min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
+    min_marker_quantile: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_is_neighborhood_marker_per_gene_per_block``. See the Julia
@@ -469,7 +469,7 @@ def compute_matrix_of_is_neighborhood_marker_per_gene_per_block(
 def compute_matrix_of_linear_fraction_per_gene_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_linear_fraction_per_gene_per_block``. See the Julia
@@ -487,8 +487,8 @@ def compute_matrix_of_linear_fraction_per_gene_per_block(
 def compute_matrix_of_log_linear_fraction_per_gene_per_block(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_log_linear_fraction_per_gene_per_block``. See the Julia
@@ -507,7 +507,7 @@ def compute_matrix_of_log_linear_fraction_per_gene_per_block(
 def compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks``, the root mean square of the
@@ -526,8 +526,8 @@ def compute_matrix_of_rms_euclidean_skeleton_fold_distance_between_blocks(
 def compute_matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_rms_euclidean_skeleton_fold_distance_per_metacell_per_block``, the root mean square of
@@ -548,8 +548,8 @@ def compute_module_sharing_at_changed_base_blocks(
     *,
     other_daf: DafWriter,
     base_daf: DafReader,
-    min_changed_correlation: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    min_changed_correlation: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_mean_no_module_fraction_in_base_neighborhood_cells_at_improved_base_blocks_per_gene``,
@@ -571,8 +571,8 @@ def compute_module_sharing_at_changed_base_blocks(
 def compute_vector_of_block_closest_by_pertinent_markers_per_cell(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_block_closest_by_pertinent_markers_per_cell``. See the Julia
@@ -591,7 +591,7 @@ def compute_vector_of_block_closest_by_pertinent_markers_per_cell(
 def compute_vector_of_n_cells_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_cells_per_block``. See the Julia
@@ -609,7 +609,7 @@ def compute_vector_of_n_cells_per_block(
 def compute_vector_of_n_environment_cells_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_environment_cells_per_block``. See the Julia
@@ -627,7 +627,7 @@ def compute_vector_of_n_environment_cells_per_block(
 def compute_vector_of_n_environment_metacells_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_environment_metacells_per_block``. See the Julia
@@ -645,7 +645,7 @@ def compute_vector_of_n_environment_metacells_per_block(
 def compute_vector_of_n_metacells_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_metacells_per_block``. See the Julia
@@ -663,7 +663,7 @@ def compute_vector_of_n_metacells_per_block(
 def compute_vector_of_n_neighborhood_blocks_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_neighborhood_blocks_per_block``. See the Julia
@@ -681,7 +681,7 @@ def compute_vector_of_n_neighborhood_blocks_per_block(
 def compute_vector_of_n_neighborhood_cells_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     The total number of cells in the metacells of the blocks of the neighborhood centered at a block. See the Julia
@@ -699,7 +699,7 @@ def compute_vector_of_n_neighborhood_cells_per_block(
 def compute_vector_of_n_neighborhood_metacells_per_block(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_neighborhood_metacells_per_block``
@@ -718,7 +718,7 @@ def compute_vector_of_n_neighborhood_metacells_per_block(
 def compute_vector_of_total_UMIs_per_block(  # pylint: disable=invalid-name
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     The total UMIs of non-excluded genes per block. See the Julia
@@ -736,7 +736,7 @@ def compute_vector_of_total_UMIs_per_block(  # pylint: disable=invalid-name
 def compute_vector_of_total_environment_UMIs_per_block(  # pylint: disable=invalid-name
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_total_environment_UMIs_per_block``. See the Julia
@@ -754,7 +754,7 @@ def compute_vector_of_total_environment_UMIs_per_block(  # pylint: disable=inval
 def compute_vector_of_total_neighborhood_UMIs_per_block(  # pylint: disable=invalid-name
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_total_neighborhood_UMIs_per_block``. See the Julia
@@ -772,7 +772,7 @@ def compute_vector_of_total_neighborhood_UMIs_per_block(  # pylint: disable=inva
 def compute_vector_of_type_per_block_by_cells(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_type_per_block`` by using the type of the metacells grouped into each block. See the
@@ -791,7 +791,7 @@ def compute_vector_of_type_per_block_by_cells(
 def compute_vector_of_type_per_block_by_metacells(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_type_per_block`` by using the type of the metacells grouped into each block. See the
@@ -810,7 +810,7 @@ def compute_vector_of_type_per_block_by_metacells(
 def compute_vector_of_type_per_cell_by_blocks(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_type_per_cell`` by using the type of the blocks the metacells of the cells belong to.
@@ -829,7 +829,7 @@ def compute_vector_of_type_per_cell_by_blocks(
 def compute_vector_of_type_per_metacell_by_blocks(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_type_per_metacell`` by using the type of the blocks the metacells belong to. See the

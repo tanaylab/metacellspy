@@ -13,6 +13,8 @@ from dafpy import DafWriter
 from dafpy import PropertyKey
 from dafpy import StorageScalar
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _from_julia_array
 from .julia_import import _given
 from .julia_import import jl
@@ -38,12 +40,12 @@ __all__ = [
 CopyAnnData = Mapping[PropertyKey, Optional[Tuple[str, Optional[StorageScalar]]]]
 
 
-def _copy_anndata(copy_data: Optional[CopyAnnData]) -> Any:
+def _copy_anndata(copy_data: CopyAnnData | None | DefaultValue) -> Any:
     # A Python dictionary reaches Julia as a ``PyDict``, and the keyword it is passed to is declared
     # as a ``Union``, which Julia type-asserts rather than converts. Converting it here does work,
     # tuples and ``None`` included.
-    if copy_data is None:
-        return None
+    if copy_data is None or isinstance(copy_data, DefaultValue):
+        return copy_data
     return jl.convert(jl.Metacells.AnnDataFormat.CopyAnnData, copy_data)
 
 
@@ -51,12 +53,12 @@ def import_cells_h5ad(
     daf: DafWriter,
     *,
     cells_h5ad: str,
-    copy_data: Optional[CopyAnnData] = None,
-    ensembl_property: Optional[str] = None,
-    bestify: Optional[bool] = None,
-    min_sparse_saving_fraction: Optional[float] = None,
-    overwrite: Optional[bool] = None,
-    insist: Optional[bool] = None,
+    copy_data: CopyAnnData | None | DefaultValue = DEFAULT,
+    ensembl_property: str | None | DefaultValue = DEFAULT,
+    bestify: bool | DefaultValue = DEFAULT,
+    min_sparse_saving_fraction: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
+    insist: bool | DefaultValue = DEFAULT,
 ) -> Optional[np.ndarray]:
     """
     Import an ``AnnData`` based cells dataset into a destination ``daf`` data set, and return the ``metacell_name`` per
@@ -86,11 +88,11 @@ def import_metacells_h5ad(
     *,
     cells_h5ad: str,
     metacells_h5ad: str,
-    copy_data: Optional[CopyAnnData] = None,
-    bestify: Optional[bool] = None,
-    min_sparse_saving_fraction: Optional[float] = None,
-    overwrite: Optional[bool] = None,
-    insist: Optional[bool] = None,
+    copy_data: CopyAnnData | None | DefaultValue = DEFAULT,
+    bestify: bool | DefaultValue = DEFAULT,
+    min_sparse_saving_fraction: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
+    insist: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Import an ``AnnData`` based metacells dataset into a destination ``daf`` data set. See the Julia
@@ -114,7 +116,7 @@ def import_metacells_h5ad(
 def import_gene_masks_per_type(
     daf: DafWriter,
     *,
-    type_axis: Optional[str] = None,
+    type_axis: str | DefaultValue = DEFAULT,
 ) -> None:
     """
     Convert per-gene masks which name a type in their own name into a per-gene-per-type matrix. See the Julia
@@ -128,10 +130,10 @@ def import_type_colors_csv(
     daf: DafWriter,
     *,
     type_colors_csv: str,
-    axis: Optional[str] = None,
-    property: Optional[str] = None,  # pylint: disable=redefined-builtin
-    type_axis: Optional[str] = None,
-    overwrite: Optional[bool] = None,
+    axis: str | DefaultValue = DEFAULT,
+    property: str | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
+    type_axis: str | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Create a ``type_axis`` out of a csv file, which is the authority on which types there are, what they are called,

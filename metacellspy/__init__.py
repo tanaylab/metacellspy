@@ -7,9 +7,10 @@ The API is the same as the Julia one, with the following adaptations:
 
 * The Julia ``!`` suffix, marking a computation which modifies its data, is dropped from the name.
 
-* Every optional parameter defaults to ``None``, meaning "use whatever the Julia default is". The
-  Julia defaults are therefore never restated here, which matters because some of them are computed
-  from the values of the other parameters.
+* Every optional parameter defaults to ``DEFAULT``, meaning "use whatever the Julia default is", so
+  that ``None`` can be passed to explicitly mean Julia's ``nothing``. The Julia defaults are
+  therefore never restated here, which matters because some of them are computed from the values of
+  the other parameters.
 
 * The ``rng`` parameter is an ``int`` seed rather than a Julia random number generator. The default
   ``0`` means "use Julia's default generator", that is, do not force reproducible results.

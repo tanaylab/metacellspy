@@ -7,13 +7,13 @@ Compute per-gene data. See the Julia
 # look like duplicated code. The same disable is in that file, since the check needs both sides to report it.
 # pylint: disable=duplicate-code
 
-from typing import Optional
-
 import numpy as np
 import pandas as pd
 from dafpy import DafReader
 from dafpy import DafWriter
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _from_julia_frame
 from .julia_import import _given
 from .julia_import import _to_julia_array
@@ -35,8 +35,8 @@ __all__ = [
 def compute_gene_report(
     *,
     daf: DafReader,
-    base_daf: Optional[DafReader] = None,
-    regulators_count: Optional[int] = None,
+    base_daf: DafReader | None | DefaultValue = DEFAULT,
+    regulators_count: int | DefaultValue = DEFAULT,
 ) -> pd.DataFrame:
     """
     Return a per-marker-gene report as a ``DataFrame``, one row per marker gene, sorted by ``rank``. See the Julia
@@ -56,7 +56,7 @@ def compute_gene_report(
 def compute_skeleton_report(
     *,
     daf: DafReader,
-    base_daf: Optional[DafReader] = None,
+    base_daf: DafReader | None | DefaultValue = DEFAULT,
 ) -> pd.DataFrame:
     """
     Return a per-skeleton-gene report as a ``DataFrame``, one row per skeleton gene, sorted by the total number of
@@ -76,10 +76,10 @@ def compute_skeleton_report(
 def compute_vector_of_is_correlated_with_skeleton_per_gene(
     daf: DafWriter,
     *,
-    min_gene_correlation: Optional[float] = None,
-    min_gene_correlation_quantile: Optional[float] = None,
-    genes_correlation_window: Optional[int] = None,
-    overwrite: Optional[bool] = None,
+    min_gene_correlation: float | DefaultValue = DEFAULT,
+    min_gene_correlation_quantile: float | DefaultValue = DEFAULT,
+    genes_correlation_window: int | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_is_correlated_with_skeleton_per_gene``. See the Julia
@@ -100,10 +100,10 @@ def compute_vector_of_is_correlated_with_skeleton_per_gene(
 def compute_vector_of_is_marker_per_gene(
     daf: DafWriter,
     *,
-    min_marker_gene_max_fraction: Optional[float] = None,
-    min_marker_gene_range_fold: Optional[float] = None,
-    min_marker_quantile: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
+    min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
+    min_marker_quantile: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_is_marker_per_gene``. See the Julia
@@ -124,7 +124,7 @@ def compute_vector_of_is_marker_per_gene(
 def compute_vector_of_is_skeleton_per_gene(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_is_skeleton_per_gene``. See the Julia
@@ -142,7 +142,7 @@ def compute_vector_of_is_skeleton_per_gene(
 def compute_vector_of_marker_rank_per_gene(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_marker_rank_per_gene``. See the Julia
@@ -161,12 +161,12 @@ def fetch_gmara_vector_of_is_regulator_per_gene(
     daf: DafWriter,
     *,
     species: str,
-    namespace: Optional[str] = None,
-    name_property: Optional[str] = None,
-    version: Optional[str] = None,
-    cache_dir: Optional[str] = None,
-    timeout: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    namespace: str | DefaultValue = DEFAULT,
+    name_property: str | None | DefaultValue = DEFAULT,
+    version: str | DefaultValue = DEFAULT,
+    cache_dir: str | DefaultValue = DEFAULT,
+    timeout: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Fetch and set ``vector_of_is_regulator_per_gene`` from ``Gmara``. See the Julia
@@ -191,12 +191,12 @@ def fetch_gmara_vector_of_is_transcription_factor_per_gene(
     daf: DafWriter,
     *,
     species: str,
-    namespace: Optional[str] = None,
-    name_property: Optional[str] = None,
-    version: Optional[str] = None,
-    cache_dir: Optional[str] = None,
-    timeout: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    namespace: str | DefaultValue = DEFAULT,
+    name_property: str | None | DefaultValue = DEFAULT,
+    version: str | DefaultValue = DEFAULT,
+    cache_dir: str | DefaultValue = DEFAULT,
+    timeout: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Fetch and set ``vector_of_is_transcription_factor_per_gene`` from ``Gmara``. See the Julia

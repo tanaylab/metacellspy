@@ -17,6 +17,7 @@ from typing import Mapping
 from typing import Tuple
 
 import metacellspy as mc
+from metacellspy.julia_import import DEFAULT
 from metacellspy.julia_import import jl
 
 #: The Julia submodule each Python module wraps.
@@ -94,18 +95,16 @@ def test_keywords_match_julia() -> None:
         ), f"the keywords of {submodule}.{name} differ from the Julia ones"
 
 
-def test_optional_keywords_default_to_none() -> None:
-    # A default of ``None`` is what makes ``_given`` drop the keyword so that Julia applies its own
-    # default, which may be computed from the other keywords. The exceptions are the seed, and the
-    # two keywords whose Julia default is not ``nothing``, where ``None`` is a meaningful value.
-    exceptions = {SEED_KEYWORD, "improvement_half_life", "skipped_properties"}
+def test_optional_keywords_default_to_default() -> None:
+    # A default of ``DEFAULT`` is what makes ``_given`` drop the keyword so that Julia applies its own
+    # default, which may be computed from the other keywords. The exception is the seed.
     for submodule, name, wrapper in WRAPPERS:
         for keyword, parameter in inspect.signature(wrapper).parameters.items():
             if parameter.kind != inspect.Parameter.KEYWORD_ONLY:
                 continue
-            if parameter.default is inspect.Parameter.empty or keyword in exceptions:
+            if parameter.default is inspect.Parameter.empty or keyword == SEED_KEYWORD:
                 continue
-            assert parameter.default is None, f"{submodule}.{name} defaults {keyword} to {parameter.default!r}"
+            assert parameter.default is DEFAULT, f"{submodule}.{name} defaults {keyword} to {parameter.default!r}"
 
 
 def test_required_keywords_match_julia() -> None:

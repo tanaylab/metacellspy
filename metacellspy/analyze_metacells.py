@@ -3,13 +3,13 @@ Compute per-metacell data. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html>`__ for details.
 """
 
-from typing import Optional
-
 import numpy as np
 from dafpy import DafReader
 from dafpy import DafWriter
 from dafpy import Query
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _given
 from .julia_import import _rng
 from .julia_import import _to_julia_array
@@ -36,7 +36,7 @@ __all__ = [
 def compute_matrix_of_UMIs_per_gene_per_metacell(  # pylint: disable=invalid-name
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_UMIs_per_gene_per_metacell``. See the Julia
@@ -54,7 +54,7 @@ def compute_matrix_of_UMIs_per_gene_per_metacell(  # pylint: disable=invalid-nam
 def compute_matrix_of_correlation_between_markers_per_gene_per_gene(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_correlation_between_markers_per_gene_per_gene`` - the correlation between the log
@@ -73,9 +73,9 @@ def compute_matrix_of_correlation_between_markers_per_gene_per_gene(
 def compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells(
     daf: DafWriter,
     *,
-    metacells_subset: Optional[str | Query | np.ndarray] = None,
+    metacells_subset: str | Query | np.ndarray | None | DefaultValue = DEFAULT,
     matrix_name: str,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Correlate the marker genes by their log expression across a subset of the metacells (all of them when
@@ -96,9 +96,9 @@ def compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells(
 def compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    n_neighbors: Optional[int] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    n_neighbors: int | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia
@@ -118,7 +118,7 @@ def compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_meta
 def compute_matrix_of_linear_fraction_per_gene_per_metacell(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_linear_fraction_per_gene_per_metacell``. See the Julia
@@ -136,8 +136,8 @@ def compute_matrix_of_linear_fraction_per_gene_per_metacell(
 def compute_matrix_of_log_linear_fraction_per_gene_per_metacell(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_log_linear_fraction_per_gene_per_metacell``. See the Julia
@@ -156,11 +156,11 @@ def compute_matrix_of_log_linear_fraction_per_gene_per_metacell(
 def compute_metacells_2d_umap(
     daf: DafWriter,
     *,
-    prev_daf: Optional[DafReader] = None,
-    min_dist: Optional[float] = None,
-    n_neighbors: Optional[int] = None,
+    prev_daf: DafReader | None | DefaultValue = DEFAULT,
+    min_dist: float | DefaultValue = DEFAULT,
+    n_neighbors: int | DefaultValue = DEFAULT,
     rng: int = 0,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_umap_x_per_metacell`` and ``vector_of_umap_y_per_metacell`` by computing a 2D UMAP
@@ -184,10 +184,10 @@ def compute_metacells_2d_umap(
 def compute_metacells_3d_umap(
     daf: DafWriter,
     *,
-    min_dist: Optional[float] = None,
-    n_neighbors: Optional[int] = None,
+    min_dist: float | DefaultValue = DEFAULT,
+    n_neighbors: int | DefaultValue = DEFAULT,
     rng: int = 0,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_umap_u_per_metacell``, ``vector_of_umap_v_per_metacell`` and
@@ -210,8 +210,8 @@ def compute_metacells_3d_umap(
 def compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gene(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_correlation_between_cells_and_punctuated_metacells_per_gene``. See the Julia
@@ -230,8 +230,8 @@ def compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gen
 def compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene(
     daf: DafWriter,
     *,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene``. See the Julia
@@ -250,7 +250,7 @@ def compute_vector_of_correlation_between_cells_and_projected_punctuated_metacel
 def compute_vector_of_n_cells_per_metacell(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_n_cells_per_metacell``. See the Julia
@@ -268,7 +268,7 @@ def compute_vector_of_n_cells_per_metacell(
 def compute_vector_of_total_UMIs_per_metacell(  # pylint: disable=invalid-name
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_total_UMIs_per_metacell``. See the Julia
@@ -286,7 +286,7 @@ def compute_vector_of_total_UMIs_per_metacell(  # pylint: disable=invalid-name
 def compute_vector_of_type_per_cell_by_metacells(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_type_per_cell`` by using the type of the metacell each cell belongs to. See the Julia
@@ -304,7 +304,7 @@ def compute_vector_of_type_per_cell_by_metacells(
 def compute_vector_of_type_per_metacell_by_cells(
     daf: DafWriter,
     *,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_type_per_metacell`` by using the type of the cells grouped into each metacell. See the

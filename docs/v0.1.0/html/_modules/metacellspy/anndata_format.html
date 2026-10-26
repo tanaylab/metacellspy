@@ -86,6 +86,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropertyKey</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageScalar</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultValue</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_from_julia_array</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">jl</span>
@@ -111,12 +113,12 @@
 <span class="n">CopyAnnData</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">PropertyKey</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StorageScalar</span><span class="p">]]]]</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_copy_anndata</span><span class="p">(</span><span class="n">copy_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CopyAnnData</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_copy_anndata</span><span class="p">(</span><span class="n">copy_data</span><span class="p">:</span> <span class="n">CopyAnnData</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DefaultValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="c1"># A Python dictionary reaches Julia as a ``PyDict``, and the keyword it is passed to is declared</span>
     <span class="c1"># as a ``Union``, which Julia type-asserts rather than converts. Converting it here does work,</span>
     <span class="c1"># tuples and ``None`` included.</span>
-    <span class="k">if</span> <span class="n">copy_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">copy_data</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">copy_data</span><span class="p">,</span> <span class="n">DefaultValue</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">copy_data</span>
     <span class="k">return</span> <span class="n">jl</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">AnnDataFormat</span><span class="o">.</span><span class="n">CopyAnnData</span><span class="p">,</span> <span class="n">copy_data</span><span class="p">)</span>
 
 
@@ -126,12 +128,12 @@
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">cells_h5ad</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">copy_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CopyAnnData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">ensembl_property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">bestify</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">min_sparse_saving_fraction</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">insist</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">copy_data</span><span class="p">:</span> <span class="n">CopyAnnData</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">ensembl_property</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">bestify</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">min_sparse_saving_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">insist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set, and return the ``metacell_name`` per</span>
@@ -164,11 +166,11 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">cells_h5ad</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">metacells_h5ad</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">copy_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CopyAnnData</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">bestify</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">min_sparse_saving_fraction</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">insist</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">copy_data</span><span class="p">:</span> <span class="n">CopyAnnData</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">bestify</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">min_sparse_saving_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">insist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Import an ``AnnData`` based metacells dataset into a destination ``daf`` data set. See the Julia</span>
@@ -195,7 +197,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">import_gene_masks_per_type</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">type_axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">type_axis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convert per-gene masks which name a type in their own name into a per-gene-per-type matrix. See the Julia</span>
@@ -212,10 +214,10 @@
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">type_colors_csv</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="nb">property</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
-    <span class="n">type_axis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="nb">property</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>  <span class="c1"># pylint: disable=redefined-builtin</span>
+    <span class="n">type_axis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a ``type_axis`` out of a csv file, which is the authority on which types there are, what they are called,</span>

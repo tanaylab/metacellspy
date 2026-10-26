@@ -3,11 +3,11 @@ Project cells onto an atlas. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/project_cells.html>`__ for details.
 """
 
-from typing import Optional
-
 from dafpy import DafReader
 from dafpy import DafWriter
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _given
 from .julia_import import jl
 
@@ -23,9 +23,9 @@ def compute_cells_projection(
     *,
     query_daf: DafWriter,
     atlas_daf: DafReader,
-    gene_fraction_regularization: Optional[float] = None,
-    std_UMIs_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    std_UMIs_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_projected_metacell_per_cell``, ``vector_of_projected_block_per_cell`` and
@@ -48,10 +48,10 @@ def compute_matrix_of_correlation_between_neighborhood_cells_and_projected_metac
     *,
     query_daf: DafWriter,
     atlas_daf: DafReader,
-    gene_fraction_regularization: Optional[float] = None,
-    min_neighborhood_query_cells: Optional[int] = None,
-    overwrite: Optional[bool] = None,
-    bin: Optional[int] = None,  # pylint: disable=redefined-builtin
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    min_neighborhood_query_cells: int | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
+    bin: int | None | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
 ) -> None:
     """
     Compute and set
@@ -76,8 +76,8 @@ def compute_vector_of_correlation_between_cells_and_projected_metacells(
     *,
     query_daf: DafWriter,
     atlas_daf: DafReader,
-    gene_fraction_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set (in query) ``vector_of_correlation_between_cells_and_projected_metacells_per_gene``. See the Julia
@@ -98,7 +98,7 @@ def compute_vector_of_is_deviant_per_cell(
     *,
     query_daf: DafWriter,
     atlas_daf: DafReader,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_is_deviant_per_cell``. See the Julia

@@ -272,11 +272,20 @@ what each computation does.
 <li>
 <p>Every optional parameter defaults to 
 <code class="docutils literal notranslate">
+<span class="pre">DEFAULT
+</span>
+</code>, meaning “use whatever the Julia default is”, so
+that 
+<code class="docutils literal notranslate">
 <span class="pre">None
 </span>
-</code>, meaning “use whatever the Julia default is”. The
-Julia defaults are therefore never restated here, which matters because some of them are computed
-from the values of the other parameters.
+</code> can be passed to explicitly mean Julia’s 
+<code class="docutils literal notranslate">
+<span class="pre">nothing
+</span>
+</code>. The Julia defaults are
+therefore never restated here, which matters because some of them are computed from the values of
+the other parameters.
 </p>
 </li>
 

@@ -6,7 +6,6 @@ Run whole stages of the metacells pipeline. See the Julia
 from typing import Any
 from typing import Collection
 from typing import Iterator
-from typing import Optional
 from typing import Union
 
 import numpy as np
@@ -15,6 +14,8 @@ from dafpy import DafWriter
 from dafpy import StorageScalar
 from dafpy import wrap_daf
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _given
 from .julia_import import _rng
 from .julia_import import _to_julia_array
@@ -39,8 +40,8 @@ def import_base_metacells(
     cells_daf: DafWriter,
     metacells_daf: DafWriter,
     metacell_per_cell: np.ndarray,
-    empty_metacells: Optional[Union[StorageScalar, Collection[StorageScalar]]] = None,
-    overwrite: Optional[bool] = None,
+    empty_metacells: Union[StorageScalar, Collection[StorageScalar], None, DefaultValue] = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Bring in the base metacells the sharpening pipeline starts with. See the Julia
@@ -58,7 +59,7 @@ def import_base_metacells(
     )
 
 
-def prepare_metacells(daf: DafWriter, *, overwrite: Optional[bool] = None) -> None:
+def prepare_metacells(daf: DafWriter, *, overwrite: bool | DefaultValue = DEFAULT) -> None:
     """
     Aggregate the cells of each metacell into the metacell, and find the marker genes and how they correlate with
     each other. See the Julia
@@ -77,8 +78,8 @@ def focus_metacells(
     *,
     full_daf: DafWriter,
     focus_daf: DafWriter,
-    max_redundant_fold: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    max_redundant_fold: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Reduce the metacells of ``full_daf`` to a non-redundant focus set in ``focus_daf``, which can then be analyzed and
@@ -99,11 +100,11 @@ def focus_metacells(
 def analyze_metacells(
     daf: DafWriter,
     *,
-    prefix: Optional[str] = None,
-    prev_daf: Optional[DafReader] = None,
-    module_status: Optional[bool] = None,
+    prefix: str | DefaultValue = DEFAULT,
+    prev_daf: DafReader | None | DefaultValue = DEFAULT,
+    module_status: bool | DefaultValue = DEFAULT,
     rng: int = 0,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute more advanced properties based on the metacells, taking into account gene masks. See the Julia
@@ -126,7 +127,7 @@ def qc_metacells(
     *,
     daf: DafWriter,
     score_daf: DafReader,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Say how well the metacells describe the cells they were aggregated from, judged in the locations of the manifold
@@ -146,8 +147,8 @@ def qc_metacells(
 def prepare_atlas(
     daf: DafWriter,
     *,
-    std_UMIs_regularization: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    std_UMIs_regularization: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Prepare analyzed metacells to serve as the atlas that cells are projected onto. See the Julia
@@ -169,11 +170,11 @@ def sharpen_round(
     prev_daf: DafReader,
     score_daf: DafReader,
     sharpening_round: int,
-    metacells_prefix: Optional[str] = None,
-    blocks_prefix: Optional[str] = None,
-    module_status: Optional[bool] = None,
+    metacells_prefix: str | DefaultValue = DEFAULT,
+    blocks_prefix: str | DefaultValue = DEFAULT,
+    module_status: bool | DefaultValue = DEFAULT,
     rng: int = 0,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Run one round of sharpening: regroup the cells into new metacells, aggregate and analyze them, and score them
@@ -221,11 +222,11 @@ class SharpeningRound:  # pylint: disable=too-many-instance-attributes
         self,
         name: str,
         *,
-        metacells_prefix: Optional[str] = None,
-        blocks_prefix: Optional[str] = None,
-        module_status: Optional[bool] = None,
+        metacells_prefix: str | DefaultValue = DEFAULT,
+        blocks_prefix: str | DefaultValue = DEFAULT,
+        module_status: bool | DefaultValue = DEFAULT,
         rng: int = 0,
-        overwrite: Optional[bool] = None,
+        overwrite: bool | DefaultValue = DEFAULT,
     ) -> DafWriter:
         """
         Run this round, creating a repository with the ``name`` in the round's ``directory``, and return it. Any of the
@@ -256,11 +257,11 @@ def sharpening_rounds(
     base_daf: DafReader,
     score_daf: DafReader,
     directory: str,
-    metacells_prefix: Optional[str] = None,
-    blocks_prefix: Optional[str] = None,
-    module_status: Optional[bool] = None,
+    metacells_prefix: str | DefaultValue = DEFAULT,
+    blocks_prefix: str | DefaultValue = DEFAULT,
+    module_status: bool | DefaultValue = DEFAULT,
     rng: int = 0,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> Iterator[SharpeningRound]:
     """
     Iterate on rounds of sharpening, starting from the ``initial_daf`` metacells. Each round is a

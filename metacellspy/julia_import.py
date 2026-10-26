@@ -10,6 +10,8 @@ importing this package, since importing it imports ``dafpy``, which starts Julia
 from typing import Any
 from typing import Optional
 
+from dafpy.julia_import import DEFAULT
+from dafpy.julia_import import DefaultValue  # pylint: disable=unused-import
 from dafpy.julia_import import _from_julia_array  # pylint: disable=unused-import
 from dafpy.julia_import import _from_julia_frame  # pylint: disable=unused-import
 from dafpy.julia_import import _given  # pylint: disable=unused-import
@@ -35,8 +37,8 @@ def _rng(rng: Optional[int]) -> Any:
     Convert a random number generator seed to a Julia one (for internal use).
 
     A zero seed means "use Julia's default generator", that is, do not force reproducible results. It is returned as
-    ``None`` so that ``_given`` drops it and Julia applies its own default.
+    ``DEFAULT`` so that ``_given`` drops it and Julia applies its own default.
     """
     if rng is None or rng == 0:
-        return None
+        return DEFAULT
     return jl.Random.MersenneTwister(rng)

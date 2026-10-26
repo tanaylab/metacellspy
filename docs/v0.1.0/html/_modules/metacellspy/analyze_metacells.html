@@ -76,13 +76,13 @@
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_metacells.html&gt;`__ for details.</span>
 <span class="sd">"""</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafReader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Query</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultValue</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_given</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_rng</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_julia_array</span>
@@ -111,7 +111,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_UMIs_per_gene_per_metacell</span><span class="p">(</span>  <span class="c1"># pylint: disable=invalid-name</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_UMIs_per_gene_per_metacell``. See the Julia</span>
@@ -132,7 +132,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_correlation_between_markers_per_gene_per_gene</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_correlation_between_markers_per_gene_per_gene`` - the correlation between the log</span>
@@ -154,9 +154,9 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_correlation_per_gene_per_gene_of_subset_of_metacells</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">metacells_subset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Query</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">metacells_subset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Query</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
     <span class="n">matrix_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Correlate the marker genes by their log expression across a subset of the metacells (all of them when</span>
@@ -180,9 +180,9 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">n_neighbors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_knn_euclidean_skeleton_fold_distance_per_metacell_per_metacell``. See the Julia</span>
@@ -205,7 +205,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_linear_fraction_per_gene_per_metacell</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_linear_fraction_per_gene_per_metacell``. See the Julia</span>
@@ -226,8 +226,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_matrix_of_log_linear_fraction_per_gene_per_metacell</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``matrix_of_log_linear_fraction_per_gene_per_metacell``. See the Julia</span>
@@ -249,11 +249,11 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_metacells_2d_umap</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">prev_daf</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DafReader</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">min_dist</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">n_neighbors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">prev_daf</span><span class="p">:</span> <span class="n">DafReader</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">min_dist</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
     <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_umap_x_per_metacell`` and ``vector_of_umap_y_per_metacell`` by computing a 2D UMAP</span>
@@ -280,10 +280,10 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_metacells_3d_umap</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">min_dist</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">n_neighbors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">min_dist</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
     <span class="n">rng</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_umap_u_per_metacell``, ``vector_of_umap_v_per_metacell`` and</span>
@@ -309,8 +309,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_correlation_between_cells_and_punctuated_metacells_per_gene</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_correlation_between_cells_and_punctuated_metacells_per_gene``. See the Julia</span>
@@ -332,8 +332,8 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">gene_fraction_regularization</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_correlation_between_cells_and_projected_punctuated_metacells_per_gene``. See the Julia</span>
@@ -355,7 +355,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_n_cells_per_metacell</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_n_cells_per_metacell``. See the Julia</span>
@@ -376,7 +376,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_total_UMIs_per_metacell</span><span class="p">(</span>  <span class="c1"># pylint: disable=invalid-name</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_total_UMIs_per_metacell``. See the Julia</span>
@@ -397,7 +397,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_type_per_cell_by_metacells</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_type_per_cell`` by using the type of the metacell each cell belongs to. See the Julia</span>
@@ -418,7 +418,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_vector_of_type_per_metacell_by_cells</span><span class="p">(</span>
     <span class="n">daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute and set ``vector_of_type_per_metacell`` by using the type of the cells grouped into each metacell. See the</span>

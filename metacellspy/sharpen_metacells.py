@@ -3,12 +3,13 @@ Sharpen the metacells by re-grouping the cells. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html>`__ for details.
 """
 
-from typing import Optional
 from typing import Sequence
 
 from dafpy import DafReader
 from dafpy import DafWriter
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _given
 from .julia_import import _rng
 from .julia_import import jl
@@ -26,7 +27,7 @@ def compute_matrix_of_n_cells_per_prev_block_per_block(
     *,
     other_daf: DafWriter,
     prev_daf: DafReader,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_n_cells_per_prev_block_per_block``. See the Julia
@@ -46,7 +47,7 @@ def compute_matrix_of_n_cells_per_prev_block_type_per_block_type(
     *,
     other_daf: DafWriter,
     prev_daf: DafReader,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_n_cells_per_prev_block_type_per_block_type``. See the Julia
@@ -66,7 +67,7 @@ def compute_matrix_of_n_cells_per_prev_metacell_type_per_metacell_type(
     *,
     other_daf: DafWriter,
     prev_daf: DafReader,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``matrix_of_n_cells_per_prev_metacell_type_per_metacell_type``. See the Julia
@@ -87,9 +88,9 @@ def compute_vector_of_global_flow_order_per_type(
     daf_per_round: Sequence[DafReader],
     *,
     output_daf: DafWriter,
-    restarts: Optional[int] = None,
+    restarts: int | DefaultValue = DEFAULT,
     rng: int = 0,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Compute and set ``vector_of_global_flow_order_per_type``, a global order of the types minimizing the total weighted
@@ -113,25 +114,27 @@ def sharpen_metacells(
     *,
     sharp_daf: DafWriter,
     prev_daf: DafReader,
-    prefix: Optional[str] = None,
-    min_cells_in_metacell: Optional[int] = None,
-    max_cells_in_metacell: Optional[int] = None,
-    target_cell_total_UMIs_quantile: Optional[float] = None,
-    min_metacell_total_UMIs: Optional[int] = None,
-    min_migration_likelihood: Optional[float] = None,
-    max_cells_dispersion_in_metacell: Optional[float] = None,
-    min_cells_dispersion_in_metacell: Optional[float] = None,
-    normalized_UMIs_quantile: Optional[float] = None,
-    min_module_UMIs: Optional[int] = None,
-    kmeans_rounds: Optional[int] = None,
+    prefix: str | DefaultValue = DEFAULT,
+    min_cells_in_metacell: int | DefaultValue = DEFAULT,
+    max_cells_in_metacell: int | DefaultValue = DEFAULT,
+    target_cell_total_UMIs_quantile: float | DefaultValue = DEFAULT,
+    min_metacell_total_UMIs: int | DefaultValue = DEFAULT,
+    min_migration_likelihood: float | DefaultValue = DEFAULT,
+    max_cells_dispersion_in_metacell: float | DefaultValue = DEFAULT,
+    min_cells_dispersion_in_metacell: float | DefaultValue = DEFAULT,
+    normalized_UMIs_quantile: float | DefaultValue = DEFAULT,
+    min_module_UMIs: int | DefaultValue = DEFAULT,
+    kmeans_rounds: int | DefaultValue = DEFAULT,
     sharpening_round: int,
-    improvement_half_life: Optional[int] = 2,
-    gene_fraction_regularization: Optional[float] = None,
-    std_UMIs_regularization: Optional[float] = None,
-    min_outlier_fold: Optional[float] = None,
-    outlier_UMIs_regularization: Optional[float] = None,
+    improvement_half_life: int | None | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    std_UMIs_regularization: float | DefaultValue = DEFAULT,
+    min_outlier_fold: float | DefaultValue = DEFAULT,
+    outlier_UMIs_regularization: float | DefaultValue = DEFAULT,
+    outlier_min_significant_UMIs: int | DefaultValue = DEFAULT,
+    max_modules_z_score: float | DefaultValue = DEFAULT,
     rng: int = 0,
-    overwrite: Optional[bool] = None,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Given a ``prev_daf`` metacells repository with a blocks structure and local gene modules that describe the cell
@@ -144,8 +147,8 @@ def sharpen_metacells(
         sharp_daf=sharp_daf,
         prev_daf=prev_daf,
         sharpening_round=sharpening_round,
-        improvement_half_life=improvement_half_life,
         **_given(
+            improvement_half_life=improvement_half_life,
             prefix=prefix,
             min_cells_in_metacell=min_cells_in_metacell,
             max_cells_in_metacell=max_cells_in_metacell,
@@ -161,6 +164,8 @@ def sharpen_metacells(
             std_UMIs_regularization=std_UMIs_regularization,
             min_outlier_fold=min_outlier_fold,
             outlier_UMIs_regularization=outlier_UMIs_regularization,
+            outlier_min_significant_UMIs=outlier_min_significant_UMIs,
+            max_modules_z_score=max_modules_z_score,
             rng=_rng(rng),
             overwrite=overwrite,
         ),

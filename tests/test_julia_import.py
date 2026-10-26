@@ -7,6 +7,7 @@ Test the Julia environment this package adds on top of the one ``dafpy`` sets up
 import dafpy as dp
 
 import metacellspy as mc
+from metacellspy.julia_import import DEFAULT
 from metacellspy.julia_import import _rng
 from metacellspy.julia_import import jl
 
@@ -31,8 +32,8 @@ def test_both_julia_packages_are_imported() -> None:
 
 def test_zero_seed_means_the_julia_default() -> None:
     # Zero is dropped by ``_given``, so Julia uses its own generator and the results are not reproducible.
-    assert _rng(0) is None
-    assert _rng(None) is None
+    assert _rng(0) is DEFAULT
+    assert _rng(None) is DEFAULT
 
 
 def test_non_zero_seed_becomes_a_generator() -> None:

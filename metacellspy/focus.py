@@ -4,11 +4,12 @@ Reduce a large set of metacells to a smaller, non-redundant focus set. See the J
 """
 
 from typing import Any
-from typing import Optional
 
 from dafpy import DafReader
 from dafpy import DafWriter
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _given
 from .julia_import import jl
 
@@ -22,17 +23,17 @@ def compute_focus_metacells(
     *,
     full_daf: DafReader,
     focus_daf: DafWriter,
-    max_redundant_fold: Optional[float] = None,
-    n_neighbors: Optional[int] = None,
-    gene_fraction_regularization: Optional[float] = None,
-    max_fold_gene_fraction_regularization: Optional[float] = None,
-    max_fold_min_significant_gene_UMIs: Optional[int] = None,
-    max_fold_confidence: Optional[float] = None,
-    max_fold_min_confidence_UMIs: Optional[float] = None,
-    min_marker_gene_max_fraction: Optional[float] = None,
-    min_marker_gene_range_fold: Optional[float] = None,
-    min_marker_quantile: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    max_redundant_fold: float | DefaultValue = DEFAULT,
+    n_neighbors: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    max_fold_gene_fraction_regularization: float | DefaultValue = DEFAULT,
+    max_fold_min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    max_fold_confidence: float | DefaultValue = DEFAULT,
+    max_fold_min_confidence_UMIs: float | DefaultValue = DEFAULT,
+    min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
+    min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
+    min_marker_quantile: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
     Choose the focus metacells of the ``full_daf``, and create the focus axes and skeleton genes mask of the

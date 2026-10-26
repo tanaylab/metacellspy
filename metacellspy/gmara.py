@@ -9,11 +9,12 @@ from typing import Any
 from typing import Dict
 from typing import FrozenSet
 from typing import List
-from typing import Optional
 
 import numpy as np
 from dafpy import DafWriter
 
+from .julia_import import DEFAULT
+from .julia_import import DefaultValue
 from .julia_import import _from_julia_array
 from .julia_import import _given
 from .julia_import import _to_julia_array
@@ -138,10 +139,10 @@ def empty_gmara_cache() -> None:
 def fetch_gmara_ensembl_genes(
     *,
     species: str,
-    namespace: Optional[str] = None,
-    version: Optional[str] = None,
-    cache_dir: Optional[str] = None,
-    timeout: Optional[float] = None,
+    namespace: str | DefaultValue = DEFAULT,
+    version: str | DefaultValue = DEFAULT,
+    cache_dir: str | DefaultValue = DEFAULT,
+    timeout: float | DefaultValue = DEFAULT,
 ) -> GmaraEnsemblGenes:
     """
     Fetch the mappings of gene names to EnsemblGenes of some ``version`` of Gmara for some ``species``. See the Julia
@@ -163,11 +164,11 @@ def fetch_gmara_ensembl_genes(
 def gmara_genes(
     *,
     species: str,
-    namespace: Optional[str] = None,
-    list: Optional[str] = None,  # pylint: disable=redefined-builtin
-    version: Optional[str] = None,
-    cache_dir: Optional[str] = None,
-    timeout: Optional[float] = None,
+    namespace: str | DefaultValue = DEFAULT,
+    list: str | None | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
+    version: str | DefaultValue = DEFAULT,
+    cache_dir: str | DefaultValue = DEFAULT,
+    timeout: float | DefaultValue = DEFAULT,
 ) -> AbstractSet[str]:
     """
     Return the set of names of a ``version`` of a ``list`` in a ``namespace`` of genes of some ``species``. See the
@@ -192,11 +193,11 @@ def gmara_genes_mask(
     *,
     names: np.ndarray,
     species: str,
-    namespace: Optional[str] = None,
-    list: Optional[str] = None,  # pylint: disable=redefined-builtin
-    version: Optional[str] = None,
-    cache_dir: Optional[str] = None,
-    timeout: Optional[float] = None,
+    namespace: str | DefaultValue = DEFAULT,
+    list: str | None | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
+    version: str | DefaultValue = DEFAULT,
+    cache_dir: str | DefaultValue = DEFAULT,
+    timeout: float | DefaultValue = DEFAULT,
 ) -> np.ndarray:
     """
     Return a mask with, for each of the ``names`` in the ``namespace``, whether it is in some ``version`` of a Gmara
@@ -222,7 +223,7 @@ def normalize_gene_name(
     name: str,
     *,
     namespace: str,
-    validate: Optional[bool] = None,
+    validate: bool | DefaultValue = DEFAULT,
 ) -> str:
     """
     Normalize a gene name in some namespace. See the Julia
@@ -241,14 +242,14 @@ def set_gmara_genes_mask(
     daf: DafWriter,
     *,
     species: str,
-    namespace: Optional[str] = None,
-    list: Optional[str] = None,  # pylint: disable=redefined-builtin
-    version: Optional[str] = None,
-    name_property: Optional[str] = None,
-    mask_property: Optional[str] = None,
-    cache_dir: Optional[str] = None,
-    timeout: Optional[float] = None,
-    overwrite: Optional[bool] = None,
+    namespace: str | DefaultValue = DEFAULT,
+    list: str | None | DefaultValue = DEFAULT,  # pylint: disable=redefined-builtin
+    version: str | DefaultValue = DEFAULT,
+    name_property: str | None | DefaultValue = DEFAULT,
+    mask_property: str | None | DefaultValue = DEFAULT,
+    cache_dir: str | DefaultValue = DEFAULT,
+    timeout: float | DefaultValue = DEFAULT,
+    overwrite: bool | DefaultValue = DEFAULT,
 ) -> int:
     """
     Set a gene property mask in ``daf`` based on some ``version`` of a Gmara ``list`` of some ``namespace`` for some
