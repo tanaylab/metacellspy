@@ -78,7 +78,6 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -110,7 +109,7 @@
 <span class="c1">#: ``AnnData`` names them. See the Julia</span>
 <span class="c1">#: `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.CopyAnnData&gt;`__</span>
 <span class="c1">#: for details.</span>
-<span class="n">CopyAnnData</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">PropertyKey</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StorageScalar</span><span class="p">]]]]</span>
+<span class="n">CopyAnnData</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">PropertyKey</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">StorageScalar</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_copy_anndata</span><span class="p">(</span><span class="n">copy_data</span><span class="p">:</span> <span class="n">CopyAnnData</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">DefaultValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
@@ -134,7 +133,7 @@
     <span class="n">min_sparse_saving_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
     <span class="n">insist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Import an ``AnnData`` based cells dataset into a destination ``daf`` data set, and return the ``metacell_name`` per</span>
 <span class="sd">    cell it holds, which is not imported. See the Julia</span>

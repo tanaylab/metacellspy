@@ -6,7 +6,6 @@ Run whole stages of the metacells pipeline. See the Julia
 from typing import Any
 from typing import Collection
 from typing import Iterator
-from typing import Union
 
 import numpy as np
 from dafpy import DafReader
@@ -40,7 +39,7 @@ def import_base_metacells(
     cells_daf: DafWriter,
     metacells_daf: DafWriter,
     metacell_per_cell: np.ndarray,
-    empty_metacells: Union[StorageScalar, Collection[StorageScalar], None, DefaultValue] = DEFAULT,
+    empty_metacells: StorageScalar | Collection[StorageScalar] | None | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """

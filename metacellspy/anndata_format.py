@@ -5,7 +5,6 @@ Import ``AnnData`` based data sets. See the Julia
 
 from typing import Any
 from typing import Mapping
-from typing import Optional
 from typing import Tuple
 
 import numpy as np
@@ -37,7 +36,7 @@ __all__ = [
 #: ``AnnData`` names them. See the Julia
 #: `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/anndata_format.html#Metacells.AnnDataFormat.CopyAnnData>`__
 #: for details.
-CopyAnnData = Mapping[PropertyKey, Optional[Tuple[str, Optional[StorageScalar]]]]
+CopyAnnData = Mapping[PropertyKey, Tuple[str, StorageScalar | None] | None]
 
 
 def _copy_anndata(copy_data: CopyAnnData | None | DefaultValue) -> Any:
@@ -59,7 +58,7 @@ def import_cells_h5ad(
     min_sparse_saving_fraction: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
     insist: bool | DefaultValue = DEFAULT,
-) -> Optional[np.ndarray]:
+) -> np.ndarray | None:
     """
     Import an ``AnnData`` based cells dataset into a destination ``daf`` data set, and return the ``metacell_name`` per
     cell it holds, which is not imported. See the Julia
