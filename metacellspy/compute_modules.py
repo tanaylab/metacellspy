@@ -26,7 +26,7 @@ def compute_blocks_modules(
     min_strong_cells: int | DefaultValue = DEFAULT,
     kmeans_rounds: int | DefaultValue = DEFAULT,
     module_status: bool | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """

@@ -13,7 +13,7 @@ The API is the same as the Julia one, with the following adaptations:
   the other parameters.
 
 * The ``rng`` parameter is an ``int`` seed rather than a Julia random number generator. The default
-  ``0`` means "use Julia's default generator", that is, do not force reproducible results.
+  ``DEFAULT`` means "use Julia's default generator", that is, do not force reproducible results.
 
 * The computations which return a data frame return a ``pandas.DataFrame``.
 

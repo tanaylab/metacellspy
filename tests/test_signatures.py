@@ -18,6 +18,7 @@ from typing import Tuple
 
 import metacellspy as mc
 from metacellspy.julia_import import DEFAULT
+from metacellspy.julia_import import DefaultValue
 from metacellspy.julia_import import jl
 
 #: The Julia submodule each Python module wraps.
@@ -97,12 +98,12 @@ def test_keywords_match_julia() -> None:
 
 def test_optional_keywords_default_to_default() -> None:
     # A default of ``DEFAULT`` is what makes ``_given`` drop the keyword so that Julia applies its own
-    # default, which may be computed from the other keywords. The exception is the seed.
+    # default, which may be computed from the other keywords.
     for submodule, name, wrapper in WRAPPERS:
         for keyword, parameter in inspect.signature(wrapper).parameters.items():
             if parameter.kind != inspect.Parameter.KEYWORD_ONLY:
                 continue
-            if parameter.default is inspect.Parameter.empty or keyword == SEED_KEYWORD:
+            if parameter.default is inspect.Parameter.empty:
                 continue
             assert parameter.default is DEFAULT, f"{submodule}.{name} defaults {keyword} to {parameter.default!r}"
 
@@ -125,8 +126,7 @@ def test_seed_replaces_the_random_number_generator() -> None:
         if SEED_KEYWORD not in _julia_keywords(submodule, name):
             continue
         parameter = inspect.signature(wrapper).parameters[SEED_KEYWORD]
-        assert parameter.annotation is int, f"{submodule}.{name} does not take an int seed"
-        assert parameter.default == 0, f"{submodule}.{name} does not default the seed to 0"
+        assert parameter.annotation == int | DefaultValue, f"{submodule}.{name} does not take an int seed"
 
 
 def test_every_wrapper_is_exported() -> None:

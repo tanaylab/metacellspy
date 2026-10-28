@@ -103,7 +103,7 @@ def analyze_metacells(
     prefix: str | DefaultValue = DEFAULT,
     prev_daf: DafReader | None | DefaultValue = DEFAULT,
     module_status: bool | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -173,7 +173,7 @@ def sharpen_round(
     metacells_prefix: str | DefaultValue = DEFAULT,
     blocks_prefix: str | DefaultValue = DEFAULT,
     module_status: bool | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -225,7 +225,7 @@ class SharpeningRound:  # pylint: disable=too-many-instance-attributes
         metacells_prefix: str | DefaultValue = DEFAULT,
         blocks_prefix: str | DefaultValue = DEFAULT,
         module_status: bool | DefaultValue = DEFAULT,
-        rng: int = 0,
+        rng: int | DefaultValue = DEFAULT,
         overwrite: bool | DefaultValue = DEFAULT,
     ) -> DafWriter:
         """
@@ -260,7 +260,7 @@ def sharpening_rounds(
     metacells_prefix: str | DefaultValue = DEFAULT,
     blocks_prefix: str | DefaultValue = DEFAULT,
     module_status: bool | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> Iterator[SharpeningRound]:
     """

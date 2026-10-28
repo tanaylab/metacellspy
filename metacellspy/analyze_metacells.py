@@ -159,7 +159,7 @@ def compute_metacells_2d_umap(
     prev_daf: DafReader | None | DefaultValue = DEFAULT,
     min_dist: float | DefaultValue = DEFAULT,
     n_neighbors: int | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -186,7 +186,7 @@ def compute_metacells_3d_umap(
     *,
     min_dist: float | DefaultValue = DEFAULT,
     n_neighbors: int | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """

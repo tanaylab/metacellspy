@@ -89,7 +89,7 @@ def compute_vector_of_global_flow_order_per_type(
     *,
     output_daf: DafWriter,
     restarts: int | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -134,7 +134,7 @@ def sharpen_metacells(
     outlier_UMIs_regularization: float | DefaultValue = DEFAULT,
     outlier_min_significant_UMIs: int | DefaultValue = DEFAULT,
     max_modules_z_score: float | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """

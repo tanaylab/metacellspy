@@ -26,7 +26,7 @@ def compute_metacells_blocks(
     max_fold_confidence: float | DefaultValue = DEFAULT,
     max_fold_min_confidence_UMIs: float | DefaultValue = DEFAULT,
     prefix: str | DefaultValue = DEFAULT,
-    rng: int = 0,
+    rng: int | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """

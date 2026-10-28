@@ -11,10 +11,9 @@ import builtins
 import os
 import tomllib
 from typing import Any
-from typing import Optional
 
 from dafpy.julia_import import DEFAULT
-from dafpy.julia_import import DefaultValue  # pylint: disable=unused-import
+from dafpy.julia_import import DefaultValue
 from dafpy.julia_import import _from_julia_array  # pylint: disable=unused-import
 from dafpy.julia_import import _from_julia_frame  # pylint: disable=unused-import
 from dafpy.julia_import import _given  # pylint: disable=unused-import
@@ -49,13 +48,13 @@ if _METACELLSPY_GLUE is None:
             jl.seval("import " + package)
 
 
-def _rng(rng: Optional[int]) -> Any:
+def _rng(rng: int | DefaultValue) -> Any:
     """
     Convert a random number generator seed to a Julia one (for internal use).
 
-    A zero seed means "use Julia's default generator", that is, do not force reproducible results. It is returned as
-    ``DEFAULT`` so that ``_given`` drops it and Julia applies its own default.
+    A ``DEFAULT`` seed means "use Julia's default generator", that is, do not force reproducible results. It is
+    returned as is, so that ``_given`` drops it and Julia applies its own default.
     """
-    if rng is None or rng == 0:
+    if isinstance(rng, DefaultValue):
         return DEFAULT
     return jl.Random.MersenneTwister(rng)
