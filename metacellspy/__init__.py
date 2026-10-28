@@ -30,6 +30,8 @@ __author__ = "Oren Ben-Kiki"
 __email__ = "oren@ben-kiki.org"
 __version__ = "0.1.0"
 
+import os as _os
+
 from .analyze_blocks import *
 from .analyze_cells import *
 from .analyze_genes import *
@@ -45,3 +47,10 @@ from .julia_import import *
 from .pipeline import *
 from .project_cells import *
 from .sharpen_metacells import *
+
+# If ``METACELLS_TRACE_COMPILE`` is set, each public function records what Julia compiles while it runs (see
+# ``dafpy.compile_tracing``).
+if _os.environ.get("METACELLS_TRACE_COMPILE"):
+    from dafpy.compile_tracing import wrap_package as _wrap_package
+
+    _wrap_package(__name__)
