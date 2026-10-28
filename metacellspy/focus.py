@@ -33,6 +33,8 @@ def compute_focus_metacells(
     min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
     min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
     min_marker_quantile: float | DefaultValue = DEFAULT,
+    marker_min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    marker_gene_fraction_regularization: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -55,6 +57,8 @@ def compute_focus_metacells(
             min_marker_gene_max_fraction=min_marker_gene_max_fraction,
             min_marker_gene_range_fold=min_marker_gene_range_fold,
             min_marker_quantile=min_marker_quantile,
+            marker_min_significant_gene_UMIs=marker_min_significant_gene_UMIs,
+            marker_gene_fraction_regularization=marker_gene_fraction_regularization,
             overwrite=overwrite,
         ),
     )

@@ -103,6 +103,8 @@ def compute_vector_of_is_marker_per_gene(
     min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
     min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
     min_marker_quantile: float | DefaultValue = DEFAULT,
+    min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -116,6 +118,8 @@ def compute_vector_of_is_marker_per_gene(
             min_marker_gene_max_fraction=min_marker_gene_max_fraction,
             min_marker_gene_range_fold=min_marker_gene_range_fold,
             min_marker_quantile=min_marker_quantile,
+            min_significant_gene_UMIs=min_significant_gene_UMIs,
+            gene_fraction_regularization=gene_fraction_regularization,
             overwrite=overwrite,
         ),
     )
@@ -142,6 +146,8 @@ def compute_vector_of_is_skeleton_per_gene(
 def compute_vector_of_marker_rank_per_gene(
     daf: DafWriter,
     *,
+    min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -152,6 +158,8 @@ def compute_vector_of_marker_rank_per_gene(
     jl.Metacells.compute_vector_of_marker_rank_per_gene_b(
         daf,
         **_given(
+            min_significant_gene_UMIs=min_significant_gene_UMIs,
+            gene_fraction_regularization=gene_fraction_regularization,
             overwrite=overwrite,
         ),
     )

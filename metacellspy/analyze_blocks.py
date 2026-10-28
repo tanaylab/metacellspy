@@ -301,6 +301,8 @@ def compute_matrix_of_is_environment_distinct_per_gene_per_block(
     *,
     min_distinct_gene_max_fraction: float | DefaultValue = DEFAULT,
     min_distinct_gene_mean_fold: float | DefaultValue = DEFAULT,
+    min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -313,6 +315,8 @@ def compute_matrix_of_is_environment_distinct_per_gene_per_block(
         **_given(
             min_distinct_gene_max_fraction=min_distinct_gene_max_fraction,
             min_distinct_gene_mean_fold=min_distinct_gene_mean_fold,
+            min_significant_gene_UMIs=min_significant_gene_UMIs,
+            gene_fraction_regularization=gene_fraction_regularization,
             overwrite=overwrite,
         ),
     )
@@ -324,6 +328,8 @@ def compute_matrix_of_is_environment_marker_per_gene_per_block(
     min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
     min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
     min_marker_quantile: float | DefaultValue = DEFAULT,
+    min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -337,6 +343,8 @@ def compute_matrix_of_is_environment_marker_per_gene_per_block(
             min_marker_gene_max_fraction=min_marker_gene_max_fraction,
             min_marker_gene_range_fold=min_marker_gene_range_fold,
             min_marker_quantile=min_marker_quantile,
+            min_significant_gene_UMIs=min_significant_gene_UMIs,
+            gene_fraction_regularization=gene_fraction_regularization,
             overwrite=overwrite,
         ),
     )
@@ -425,6 +433,8 @@ def compute_matrix_of_is_neighborhood_distinct_per_gene_per_block(
     *,
     min_distinct_gene_max_fraction: float | DefaultValue = DEFAULT,
     min_distinct_gene_mean_fold: float | DefaultValue = DEFAULT,
+    min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -437,6 +447,8 @@ def compute_matrix_of_is_neighborhood_distinct_per_gene_per_block(
         **_given(
             min_distinct_gene_max_fraction=min_distinct_gene_max_fraction,
             min_distinct_gene_mean_fold=min_distinct_gene_mean_fold,
+            min_significant_gene_UMIs=min_significant_gene_UMIs,
+            gene_fraction_regularization=gene_fraction_regularization,
             overwrite=overwrite,
         ),
     )
@@ -448,6 +460,8 @@ def compute_matrix_of_is_neighborhood_marker_per_gene_per_block(
     min_marker_gene_max_fraction: float | DefaultValue = DEFAULT,
     min_marker_gene_range_fold: float | DefaultValue = DEFAULT,
     min_marker_quantile: float | DefaultValue = DEFAULT,
+    min_significant_gene_UMIs: int | DefaultValue = DEFAULT,
+    gene_fraction_regularization: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -461,6 +475,8 @@ def compute_matrix_of_is_neighborhood_marker_per_gene_per_block(
             min_marker_gene_max_fraction=min_marker_gene_max_fraction,
             min_marker_gene_range_fold=min_marker_gene_range_fold,
             min_marker_quantile=min_marker_quantile,
+            min_significant_gene_UMIs=min_significant_gene_UMIs,
+            gene_fraction_regularization=gene_fraction_regularization,
             overwrite=overwrite,
         ),
     )
