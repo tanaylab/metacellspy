@@ -76,7 +76,6 @@
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_modules.html&gt;`__ for details.</span>
 <span class="sd">"""</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafReader</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafWriter</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.julia_import</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT</span>
@@ -87,8 +86,6 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">"compute_matrix_of_cells_dispersion_per_metacell_per_module"</span><span class="p">,</span>
     <span class="s2">"compute_matrix_of_n_genes_per_module_per_block"</span><span class="p">,</span>
-    <span class="s2">"compute_projected_modules_z_score_cutoff"</span><span class="p">,</span>
-    <span class="s2">"compute_projected_modules_z_score_cutoff_per_metacell"</span><span class="p">,</span>
     <span class="s2">"compute_stats_of_euclidean_modules_cells_distance_per_metacell"</span><span class="p">,</span>
     <span class="s2">"compute_stats_of_linear_fraction_in_environment_cells_per_module_per_block"</span><span class="p">,</span>
     <span class="s2">"compute_stats_of_linear_fraction_in_neighborhood_cells_per_module_per_block"</span><span class="p">,</span>
@@ -137,56 +134,6 @@
     <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_matrix_of_n_genes_per_module_per_block_b</span><span class="p">(</span>
         <span class="n">daf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
-        <span class="p">),</span>
-    <span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="compute_projected_modules_z_score_cutoff">
-<a class="viewcode-back" href="../../analyze_modules.html#metacellspy.analyze_modules.compute_projected_modules_z_score_cutoff">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_projected_modules_z_score_cutoff</span><span class="p">(</span>
-    <span class="n">daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">rejected_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute a cutoff for the ``vector_of_projected_modules_z_score_per_cell`` of query cells projected onto this (atlas)</span>
-<span class="sd">    ``daf``. See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_modules.html#Metacells.AnalyzeModules.compute_projected_modules_z_score_cutoff&gt;`__</span>
-<span class="sd">    for details.</span>
-<span class="sd">    """</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_projected_modules_z_score_cutoff</span><span class="p">(</span>
-        <span class="n">daf</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">rejected_fraction</span><span class="o">=</span><span class="n">rejected_fraction</span><span class="p">,</span>
-        <span class="p">),</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="compute_projected_modules_z_score_cutoff_per_metacell">
-<a class="viewcode-back" href="../../analyze_modules.html#metacellspy.analyze_modules.compute_projected_modules_z_score_cutoff_per_metacell">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_projected_modules_z_score_cutoff_per_metacell</span><span class="p">(</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">atlas_daf</span><span class="p">:</span> <span class="n">DafWriter</span><span class="p">,</span>
-    <span class="n">calibration_daf</span><span class="p">:</span> <span class="n">DafReader</span><span class="p">,</span>
-    <span class="n">rejected_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">DefaultValue</span> <span class="o">=</span> <span class="n">DEFAULT</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Compute and set ``vector_of_projected_modules_z_score_cutoff_per_metacell``,</span>
-<span class="sd">    ``vector_of_projected_modules_z_score_cutoff_level_per_metacell`` and</span>
-<span class="sd">    ``vector_of_projected_modules_z_score_cutoff_n_cells_per_metacell``. See the Julia</span>
-<span class="sd">    `documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/analyze_modules.html#Metacells.AnalyzeModules.compute_projected_modules_z_score_cutoff_per_metacell!&gt;`__</span>
-<span class="sd">    for details.</span>
-<span class="sd">    """</span>
-    <span class="n">jl</span><span class="o">.</span><span class="n">Metacells</span><span class="o">.</span><span class="n">compute_projected_modules_z_score_cutoff_per_metacell_b</span><span class="p">(</span>
-        <span class="n">atlas_daf</span><span class="o">=</span><span class="n">atlas_daf</span><span class="p">,</span>
-        <span class="n">calibration_daf</span><span class="o">=</span><span class="n">calibration_daf</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">_given</span><span class="p">(</span>
-            <span class="n">rejected_fraction</span><span class="o">=</span><span class="n">rejected_fraction</span><span class="p">,</span>
             <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span></div>

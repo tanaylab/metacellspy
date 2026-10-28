@@ -76,6 +76,10 @@
 <span class="sd">`documentation &lt;https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html&gt;`__ for details.</span>
 <span class="sd">"""</span>
 
+<span class="c1"># Some computations here take the same keywords as ones in ``project_cells.py``, which makes the shared wrapping idiom</span>
+<span class="c1"># look like duplicated code. The same disable is in that file, since the check needs both sides to report it.</span>
+<span class="c1"># pylint: disable=duplicate-code</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dafpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DafReader</span>

@@ -3,6 +3,10 @@ Sharpen the metacells by re-grouping the cells. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/sharpen_metacells.html>`__ for details.
 """
 
+# Some computations here take the same keywords as ones in ``project_cells.py``, which makes the shared wrapping idiom
+# look like duplicated code. The same disable is in that file, since the check needs both sides to report it.
+# pylint: disable=duplicate-code
+
 from typing import Sequence
 
 from dafpy import DafReader

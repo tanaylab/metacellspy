@@ -3,6 +3,10 @@ Project cells onto an atlas. See the Julia
 `documentation <https://tanaylab.github.io/Metacells.jl/v0.1.0/project_cells.html>`__ for details.
 """
 
+# Some computations here take the same keywords as ones in ``sharpen_metacells.py``, which makes the shared wrapping
+# idiom look like duplicated code. The same disable is in that file, since the check needs both sides to report it.
+# pylint: disable=duplicate-code
+
 from dafpy import DafReader
 from dafpy import DafWriter
 
@@ -98,6 +102,11 @@ def compute_vector_of_is_deviant_per_cell(
     *,
     query_daf: DafWriter,
     atlas_daf: DafReader,
+    min_outlier_fold: float | DefaultValue = DEFAULT,
+    min_foreign_outlier_fold: float | DefaultValue = DEFAULT,
+    outlier_UMIs_regularization: float | DefaultValue = DEFAULT,
+    outlier_min_significant_UMIs: int | DefaultValue = DEFAULT,
+    max_modules_z_score: float | DefaultValue = DEFAULT,
     overwrite: bool | DefaultValue = DEFAULT,
 ) -> None:
     """
@@ -109,6 +118,11 @@ def compute_vector_of_is_deviant_per_cell(
         query_daf=query_daf,
         atlas_daf=atlas_daf,
         **_given(
+            min_outlier_fold=min_outlier_fold,
+            min_foreign_outlier_fold=min_foreign_outlier_fold,
+            outlier_UMIs_regularization=outlier_UMIs_regularization,
+            outlier_min_significant_UMIs=outlier_min_significant_UMIs,
+            max_modules_z_score=max_modules_z_score,
             overwrite=overwrite,
         ),
     )
